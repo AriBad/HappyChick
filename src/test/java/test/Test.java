@@ -34,8 +34,8 @@ public class Test {
 	}
    
    	public static void main(String[] args) {
-		/*System.out.println("Bienvenue dans votre poulailler dont vous allez être poule en chef. \nVous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. \nVous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité");
-		poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
+		System.out.println("Bienvenue dans votre poulailler dont vous allez être poule en chef. \nVous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. \nVous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité");
+		/*poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
 
 		
 		HashMap<Poule, Integer> map = new HashMap();
@@ -70,8 +70,10 @@ public class Test {
 		
    		poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
 		HashMap<Poule, Integer> map = new HashMap();
+		
 		for (int i = 0 ; i < 15 ; i++) {
-			
+			System.out.println("Etat du poulailler : "+poulailler);
+			System.out.println("\nIl y a les poules suivantes dans le poulailler"+poulailler.getListePoules()+"\n");
          	int nbOeufs = poulailler.getOeufs();
          	boolean ajouterPoule = true;
          	do {
@@ -85,7 +87,7 @@ public class Test {
                      }
                   }
                   System.out.println(0 + " - Ne pas ajouter de poules");
-                  couveuse = saisieInt("");
+                  couveuse = saisieInt("Choisir un nombre");
                   if (couveuse != 0) {
                      nbOeufsCouves = saisieInt("Combien d'oeufs à couver ? (entre 2 et 8)");
                      map.put(poulailler.getPouleById(couveuse), nbOeufsCouves); 
