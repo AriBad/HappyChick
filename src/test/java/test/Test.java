@@ -1,6 +1,7 @@
 package test;
 import java.util.Scanner;
 import java.util.Map;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -95,7 +96,7 @@ public class Test {
                } else {
                   ajouterPoule = false;
                }
-            } while (ajouterPoule=true);
+            } while (ajouterPoule);
             
          
          
@@ -106,7 +107,7 @@ public class Test {
             }
             System.out.println(nourriture + "portions de nourriture achetées");
             nbOeufs = nbOeufs - (2* nourriture);
-            Activite activite = Activite.valueOf(saisieString("Saisissez l'activité sur cette saison parmi : " + Activite.values()));
+            Activite activite = Activite.valueOf(saisieString("Saisissez l'activité sur cette saison parmi : " + Arrays.toString(Activite.values())) );
             
             boolean amelioSecu = saisieBoolean("Voulez-vous améliorer la sécurité ? Cela coute 20 oeufs (true/false)");
             if  (amelioSecu && nbOeufs >= 20) {
