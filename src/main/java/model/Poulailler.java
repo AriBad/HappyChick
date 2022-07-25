@@ -61,6 +61,16 @@ public class Poulailler {
 		this.saison = saison;
 	}
 	
+	public Poule getPouleById(int id) {
+		//TODO
+		for(Poule p : listePoules) {
+			if(p.getId() == id) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	public void step(Activite a, int portionNourriture, Map<Poule, Integer> poulesCouveuses, boolean agrandir, boolean securiser) {
 		echangeNourriture(portionNourriture);
 		saison= Saison.saisonSuivante(saison);

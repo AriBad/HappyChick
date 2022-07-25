@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import model.Activite;
+import model.Etat;
 import model.Poulailler;
 import model.Poule;
 import model.Saison;
@@ -32,7 +33,7 @@ public class Test {
 	}
    
    	public static void main(String[] args) {
-		System.out.println("Bienvenue dans votre poulailler dont vous allez être poule en chef. \nVous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. \nVous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité");
+		/*System.out.println("Bienvenue dans votre poulailler dont vous allez être poule en chef. \nVous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. \nVous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité");
 		poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
 
 		
@@ -57,31 +58,46 @@ public class Test {
 		System.out.println("Une saison s'est écoulée, nous sommes maintenant en " + poulailler.getSaison() + " " + poulailler.getAnnee());
 		
 		poulailler.step(Activite.Tricot, 5, map, false, false);
+		
+		
 
 	} //Erreur maternage à résoudre, les oeufs sont couvés mais n'éclosent pas
 	
-}
+}*/
 		
 		
 		
-		
-		
-		
-		/*		for (int i = 0 ; i < 15 ; i++) {
+   		poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
+		HashMap<Poule, Integer> map = new HashMap();
+		for (int i = 0 ; i < 15 ; i++) {
+			
          	int nbOeufs = poulailler.getOeufs();
-         	int nbCouveuses = saisieInt("Vous avez " + poulailler.getNbPoule() + " poules ainsi que " + nbOeufs + " oeufs. Combien de poules doivent couver un oeuf pour cette saison ?");
-         	if (nbCouveuses > poulailler.getNbPoule()) {
-               nbCouveuses = poulailler.getNbPoule();
-               System.out.println("Vous n'avez pas assez d'oeufs ! ");
-            }
-            if (nbCouveuses > poulailler.getOeufs()) {
-               nbCouveuses = poulailler.getOeufs();
-               System.out.println("Vous n'avez pas assez d'oeufs ! ");
-            }
-            System.out.println(nbCouveuses + " couveuses pour cette saison;");
+         	boolean ajouterPoule = true;
+         	do {
+               if ( nbOeufs > 0 ) {
+                  int couveuse;
+                  int nbOeufsCouves = 0;
+                  System.out.println("Souhaitez-vous ajouter une poule à couver ? Poules disponibles : ");
+                  for (Poule p : poulailler.getListePoules()) {
+                     if ( p.isFemelle() && !p.isPoussin() && p.getEtat() == Etat.Liberte) {
+                        System.out.println(p.getId() + " - " + p.toStringCouveuse());
+                     }
+                  }
+                  System.out.println(0 + " - Ne pas ajouter de poules");
+                  couveuse = saisieInt("");
+                  if (couveuse != 0) {
+                     nbOeufsCouves = saisieInt("Combien d'oeufs à couver ? (entre 2 et 8)");
+                     map.put(poulailler.getPouleById(couveuse), nbOeufsCouves); 
+                     nbOeufs -= nbOeufsCouves;
+                  } else {
+                     ajouterPoule = false;
+                  }
+               } else {
+                  ajouterPoule = false;
+               }
+            } while (ajouterPoule=true);
             
-           
-//            nbOeufs = nbOeufs - nbCouveuses;
+         
          
          	int nourriture = saisieInt("Vous avez " + nbOeufs + " oeufs disponibles, combien voulez-vous acheter de nourriture ? (2 oeufs = une portion de nourriture)");
          	if (nourriture > nbOeufs /2) {
@@ -94,22 +110,24 @@ public class Test {
             
             boolean amelioSecu = saisieBoolean("Voulez-vous améliorer la sécurité ? Cela coute 20 oeufs (true/false)");
             if  (amelioSecu && nbOeufs >= 20) {
-               System.out.println("Sécurité améliorée !");
-               nbOeufs -= 20;
+            	System.out.println("Poulailler va etre securiser avec succès !");
+            	nbOeufs -= poulailler.getPrixAugmenterSecurite();
             }
             else {
-               System.out.println("Sécurité non améliorée.");
+               System.out.println("pas d'agrandissement");
+               amelioSecu=false;
             }
             
             boolean agrandir = saisieBoolean("Voulez-vous agrandir le poulailler ? Cela coute 20 oeufs (true/false)");
             if  (amelioSecu && nbOeufs >= 20) {
-               System.out.println("Poulailler agrandi avec succès !");
-               nbOeufs -= 20;
+               System.out.println("Poulailler va etre agrandie avec succès !");
+               nbOeufs -= poulailler.getPrixAgrandir();
             }
             else {
-               System.out.println("Sécurité non agrandie.");
+               System.out.println("taille non agrandie.");
+               agrandir= false;
             }
-            
+            poulailler.step(activite, nourriture, map, agrandir, amelioSecu);
        	}
 		
 		
@@ -117,7 +135,7 @@ public class Test {
    
 }
 
-   date = 0000-00-00
+  /* date = 0000-00-00
    saison = 1 = Automne / Printemps
    Poulailler = (taille = 100m²)
    Securite = 0
@@ -147,10 +165,9 @@ public class Test {
    Le joueur doit choisir :
   1. les poules qui vont couver => 
   2. les activités pour la saison suivante =>
-  3. les poules qui vont partir en voyage =>
+  3. les poules qui vont partir en voyage =>*/
   
    
    
    
    
-*/

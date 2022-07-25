@@ -37,6 +37,10 @@ public class Poule {
 				+ poussin + ", femelle=" + femelle + ", oeufsCouves=" + oeufsCouves
 				+ ", etat=" + etat + ", Nombre de saisons Sans Manger=" + saisonSansManger + "]";
 	}
+	
+	public String toStringCouveuse() {
+		return "Poule [id=" + id + ", prenom=" + prenom + ", age=" + age + ", bonheur=" + bonheur + ", temperament="+ this.getTemperament()+"]";
+	}
 
 
 
@@ -306,6 +310,26 @@ public class Poule {
 
 	public void setEtat(Etat etat) {
 		this.etat = etat;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public int getSaisonSansManger() {
+		return saisonSansManger;
+	}
+
+	public void setSaisonSansManger(int saisonSansManger) {
+		this.saisonSansManger = saisonSansManger;
+	}
+
+	public CauseMort getCauseMort() {
+		return causeMort;
 	}
 }
 
