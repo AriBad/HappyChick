@@ -102,13 +102,13 @@ public class Test {
             
          
          
-         	int nourriture = saisieInt("Vous avez " + nbOeufs + " oeufs disponibles, combien voulez-vous acheter de nourriture ? (2 oeufs = une portion de nourriture)");
-         	if (nourriture > nbOeufs /2) {
-               nourriture = nbOeufs /2;
+         	int nourriture = saisieInt("Vous avez " + nbOeufs + " oeufs disponibles, combien voulez-vous acheter de nourriture ? (50 oeufs = une portion de nourriture)");
+         	if (nourriture > nbOeufs /50) {
+               nourriture = nbOeufs /50;
                System.out.println("Vous n'avez pas assez d'oeufs ! ");
             }
             System.out.println(nourriture + "portions de nourriture achetées");
-            nbOeufs = nbOeufs - (2* nourriture);
+            nbOeufs = nbOeufs - (50* nourriture);
             Activite activite = Activite.valueOf(saisieString("Saisissez l'activité sur cette saison parmi : " + Arrays.toString(Activite.values())) );
             
             boolean amelioSecu = saisieBoolean("Voulez-vous améliorer la sécurité ? Cela coute 20 oeufs (true/false)");
