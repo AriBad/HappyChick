@@ -198,6 +198,13 @@ public class Poulailler {
 		}
 		return cpt;
 	}
+
+	@Override
+	public String toString() {
+		return "Poulailler [securite=" + securite + ", taille=" + taille + ", nourriture=" + nourriture + ", oeufs="
+				+ oeufs + ", annee=" + annee + ", saison=" + saison + ", nbMort=" + nbMort + ", activiteSaison="
+				+ activiteSaison + ", listePoules=" + listePoules + ", poulesMortes=" + poulesMortes + "]";
+	}
 	
 //	S'il y a plus ou autant de portion de nouriture que de poule --> pas de problème, sinon x (nb de poule - nb de portion) 
 	//   poules ne pondent pas d'oeufs (si le probleme persiste une autre saison les poules meurent)
