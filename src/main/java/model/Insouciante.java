@@ -5,7 +5,7 @@ import java.util.Arrays;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity
+
 @DiscriminatorValue("insouciante")
 public class Insouciante extends Temperament {
 

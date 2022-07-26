@@ -6,11 +6,23 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
+@Entity
 @Embeddable
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Temperament {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Integer id;
 	protected Poule poule;
 	protected Poulailler poulailler;
 	
