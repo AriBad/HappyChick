@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public abstract class Temperament {
 	
 	protected Poule poule;

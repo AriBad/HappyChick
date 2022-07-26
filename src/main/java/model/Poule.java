@@ -5,8 +5,23 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="temperament",columnDefinition = "ENUM('insouciante','maman_poule','psychopathe','serieuse')")
 public class Poule {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
 	protected static Integer cpt = 0;
 	protected String prenom;
@@ -16,14 +31,26 @@ public class Poule {
 	protected double maternage;
 	protected double predation;
 	protected double maladie;
+	
+	@Embedded
 	protected Activite activite;
+	
 	protected boolean poussin;
 	protected boolean femelle;
+	
+	@Embedded
 	protected Temperament temperament;
+	
+	@Embedded
 	protected Poulailler poulailler;
+	
 	protected int oeufsCouves;
+	
+	@Embedded
 	protected Etat etat;
 	protected int saisonSansManger;
+	
+	@Embedded
 	protected CauseMort causeMort;
 	private static List<String> prenomsFilles = new ArrayList();
 	private static List<String> prenomsGarcons = new ArrayList();
