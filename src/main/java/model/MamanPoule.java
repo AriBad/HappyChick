@@ -3,6 +3,11 @@ package model;
 import java.util.Arrays;
 import java.util.Random;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("maman_poule")
 public class MamanPoule extends Temperament {
 
 	public MamanPoule(Poule poule, Poulailler poulailler) {

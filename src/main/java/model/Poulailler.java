@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+
+@Entity
 public class Poulailler {
 
 	protected int securite;
@@ -12,9 +16,14 @@ public class Poulailler {
 	protected int nourriture;
 	protected int oeufs;
 	protected int annee;
+	
+	@Embedded
 	protected Saison saison;
 	protected int nbMort=0;
+	
+	@Embedded
 	protected Activite activiteSaison;
+	
 	List<Poule> listePoules = new ArrayList();
 	List<Poule> poulesMortes = new ArrayList();
 	
