@@ -70,7 +70,9 @@ public class Poule {
 	}
 
 
-
+public Poule() {
+	// TODO Auto-generated constructor stub
+}
 	public Poule(String prenom, boolean femelle, Poulailler poulailler) {
 		super();
 		this.prenom = prenom;

@@ -14,7 +14,9 @@ public abstract class Temperament {
 	protected Poule poule;
 	protected Poulailler poulailler;
 	
-	
+	public Temperament() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Temperament(Poule poule, Poulailler poulailler) {
 		this.poule= poule;

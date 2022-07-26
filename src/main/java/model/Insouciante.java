@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 @DiscriminatorValue("insouciante")
 public class Insouciante extends Temperament {
 
-
+public Insouciante() {
+	// TODO Auto-generated constructor stub
+}
 	public Insouciante(Poule poule, Poulailler poulailler) {
 		super(poule, poulailler);
 		// TODO Auto-generated constructor stub

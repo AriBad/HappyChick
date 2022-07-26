@@ -27,6 +27,9 @@ public class Poulailler {
 	List<Poule> listePoules = new ArrayList();
 	List<Poule> poulesMortes = new ArrayList();
 	
+	public Poulailler() {
+		// TODO Auto-generated constructor stub
+	}
 	public Poulailler(int securite, int taille, int nourriture, int oeufs, int annee, Saison saison) {
 		this.securite = securite;
 		this.taille = taille;

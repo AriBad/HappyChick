@@ -12,10 +12,14 @@ public class Serieuse extends Temperament {
 	
 	private static List<Poule> listSerieuses;
 	
+	
 	public Serieuse(Poule poule, Poulailler poulailler) {
 		super(poule, poulailler);
 		// TODO Auto-generated constructor stub
 		
+	}
+	public Serieuse() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	public void majBonheur() { // Pour le moment, le poids pour la densité et le nombre de morts sont à 0.1. C'est à changer.
