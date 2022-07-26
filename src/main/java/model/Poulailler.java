@@ -37,6 +37,24 @@ public class Poulailler {
 	List<Poule> listePoules = new ArrayList();
 	List<Poule> poulesMortes = new ArrayList();
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Activite getActiviteSaison() {
+		return activiteSaison;
+	}
+	public void setActiviteSaison(Activite activiteSaison) {
+		this.activiteSaison = activiteSaison;
+	}
+	public List<Poule> getPoulesMortes() {
+		return poulesMortes;
+	}
+	public void setPoulesMortes(List<Poule> poulesMortes) {
+		this.poulesMortes = poulesMortes;
+	}
 	public Poulailler() {
 		// TODO Auto-generated constructor stub
 	}
