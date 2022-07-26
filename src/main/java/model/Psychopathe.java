@@ -6,7 +6,7 @@ import java.util.Random;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity
+
 @DiscriminatorValue("psychopathe")
 public class Psychopathe extends Temperament {
 

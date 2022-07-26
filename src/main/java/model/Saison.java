@@ -2,7 +2,6 @@ package model;
 
 import javax.persistence.Embeddable;
 
-@Embeddable
 public enum Saison {
 	Automne, Hiver, Printemps, Eté;
 	

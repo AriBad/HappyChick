@@ -5,23 +5,33 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
+
 public class Poulailler {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Integer id;
 	protected int securite;
 	protected int taille;
 	protected int nourriture;
 	protected int oeufs;
 	protected int annee;
-	
-	@Embedded
 	protected Saison saison;
 	protected int nbMort=0;
 	
-	@Embedded
+	@Enumerated(EnumType.STRING)
+	@Column(columnDefinition = "ENUM('SortieGenerale', 'Danse', 'Tricot', 'Escrime')")
 	protected Activite activiteSaison;
 	
 	List<Poule> listePoules = new ArrayList();

@@ -5,9 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,14 +19,12 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="temperament",columnDefinition = "ENUM('insouciante','maman_poule','psychopathe','serieuse')")
+
 public class Poule {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
-	protected static Integer cpt = 0;
 	protected String prenom;
 	protected double age;
 	protected double bonheur;
@@ -32,31 +33,34 @@ public class Poule {
 	protected double predation;
 	protected double maladie;
 	
-	@Embedded
-	protected Activite activite;
+
+
+	protected transient Activite activite;
 	
 	protected boolean poussin;
 	protected boolean femelle;
 	
-	@Embedded
+	@Column(columnDefinition = "ENUM('insouciante','maman_poule','psychopathe','serieuse')")
+	//@Embedded
 	protected Temperament temperament;
 	
-	@Embedded
-	protected Poulailler poulailler;
+
+	protected transient Poulailler poulailler;
 	
 	protected int oeufsCouves;
 	
-	@Embedded
+	@Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('Couvaison', 'Maternage', 'Liberte')")
 	protected Etat etat;
 	protected int saisonSansManger;
 	
-	@Embedded
+	@Enumerated(EnumType.STRING)
+	@Column(columnDefinition = "ENUM('Faim', 'Meurtre', 'Predation', 'Maladie', 'Age')")
 	protected CauseMort causeMort;
+	
 	private static List<String> prenomsFilles = new ArrayList();
 	private static List<String> prenomsGarcons = new ArrayList();
 	
-
-
 
 	@Override
 	public String toString() {
@@ -80,7 +84,6 @@ public Poule() {
 		this.poussin = true;
 		this.femelle = femelle;
 		this.poulailler = poulailler;
-		this.id=++this.cpt;
 		this.etat=Etat.Liberte;
 		saisonSansManger = 0;
 		Collections.addAll(prenomsFilles, "Adélaïde", "Perle", "Lolita", "Marie-Thérèse", "Clémence", "Prune");
