@@ -24,9 +24,9 @@ public class Psychopathe extends Temperament {
 
 	public void majBonheur() { // Pour le moment, le poids pour la densité et le nombre de morts sont à 0.1. C'est à changer.  
 		double bonheur;
-		if (Arrays.toString(poule.getActivite().values())=="Danse") {
+		if ((poulailler.getActiviteSaison()==Activite.Danse) ) {
 			bonheur= poule.getBonheur()+20 + 0.1*poulailler.getNbMort()+0.1*poulailler.getNbPoule();// -0.1*nb de saison sans mort.e.s --> A ajouter après !
-		} else if (Arrays.toString(poule.getActivite().values())=="SortieGenerale") {
+		} else if (poulailler.getActiviteSaison()==Activite.SortieGenerale)  {
 			bonheur= poule.getBonheur()+10 - 0.1*poulailler.getNbMort()+0.1*poulailler.getNbPoule();
 		} else {
 			bonheur= poule.getBonheur()+8 - 0.1*poulailler.getNbMort()+0.1*poulailler.getNbPoule();

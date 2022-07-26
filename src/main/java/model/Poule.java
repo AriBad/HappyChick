@@ -33,10 +33,6 @@ public class Poule {
 	protected double predation;
 	protected double maladie;
 	
-
-
-	protected transient Activite activite;
-	
 	protected boolean poussin;
 	protected boolean femelle;
 	
@@ -225,18 +221,9 @@ public Poule() {
 		}
 		return false;
 	} 
-	
-	// getter et setters
-	public Activite getActivite() {
-		return activite;
-	}
 
 	public void setCauseMort(CauseMort cause) {
 		causeMort = cause;
-	}
-
-	public void setActivite(Activite activite) {
-		this.activite = activite;
 	}
 
 	public double getBonheur() {
