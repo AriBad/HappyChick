@@ -1,5 +1,10 @@
 package test;
 import java.util.Scanner;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import java.util.Map;
 import java.util.Arrays;
 import java.util.Collections;
@@ -131,6 +136,23 @@ public class Test {
                agrandir= false;
             }
             poulailler.step(activite, nourriture, map, agrandir, amelioSecu);
+            
+            
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceJPA");
+
+            EntityManager em = emf.createEntityManager();
+
+            em.getTransaction().begin();
+
+            em.persist(poulailler);
+
+            em.getTransaction().commit();
+
+
+            em.close();
+
+            emf.close(); 
+            
        	}
 		
 		
