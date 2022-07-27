@@ -1,10 +1,8 @@
 package model;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
 
 
 @DiscriminatorValue("psychopathe")

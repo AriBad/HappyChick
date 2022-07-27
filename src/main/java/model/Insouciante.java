@@ -1,9 +1,6 @@
 package model;
 
-import java.util.Arrays;
-
 import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
 
 
 @DiscriminatorValue("insouciante")
