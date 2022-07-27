@@ -18,9 +18,6 @@ public class Psychopathe extends Temperament {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void majVariables() {
-		//TODO
-	}
 
 	public void majBonheur() { // Pour le moment, le poids pour la densité et le nombre de morts sont à 0.1. C'est à changer.  
 		double bonheur;
@@ -37,10 +34,6 @@ public class Psychopathe extends Temperament {
 
 	public void majPredation() {
 		poule.setPredation( 0.05 * (1/poulailler.getSecurite()) );
-	}
-
-	public void genererStats() {
-		//TODO
 	}
 
 	public void tuerPoule() {

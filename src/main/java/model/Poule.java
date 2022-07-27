@@ -129,7 +129,7 @@ public Poule() {
 			//System.out.println("La poule "+this.prenom+"(id="+this.id+") est passée à l'âge adulte.");
 		}
 		if (femelle && !poussin) {
-			temperament.majVariables();
+			temperament.majVariables(this);
 		}
 	}
 

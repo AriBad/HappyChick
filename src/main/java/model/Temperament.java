@@ -1,43 +1,35 @@
 package model;
 
-import java.security.PermissionCollection;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 
 @Entity
-@Embeddable
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Temperament {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Integer id;
-	protected Poule poule;
-	protected Poulailler poulailler;
+	private Integer id;
+	@OneToMany(mappedBy = "temperament")
+	protected List<Poule> poule;
+
 	
-	public Temperament() {
-		// TODO Auto-generated constructor stub
-	}
 	
-	public Temperament(Poule poule, Poulailler poulailler) {
-		this.poule= poule;
-		this.poulailler=poulailler;
-		poule.setBonheur(50);
+	
+	public Temperament(){
+
+		//gerer coté poule.adulte
+		//poule.setBonheur(50);
 		
 	}
 
-	public void majVariables() {
+	public void majVariables(Poule poule) {
 		majBonheur();
 		majMaternage();
 		majPredation();

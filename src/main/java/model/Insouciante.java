@@ -16,12 +16,7 @@ public Insouciante() {
 		super(poule, poulailler);
 		// TODO Auto-generated constructor stub
 	}
-	public void majVariables() {
-		//TODO
-	}
-	public void genererStats() {
-		//TODO
-	}
+
 
 	public void majBonheur() { // Pour le moment, le poids pour la densité et le nombre de morts sont à 0.1. C'est à changer.
 		double bonheur; // Ajouter le fait que la poule psychopathe augmente le bonheur des autres
