@@ -17,7 +17,7 @@ public abstract class Temperament {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@OneToMany(mappedBy = "temperament")
-	protected List<Poule> poule;
+	protected List<Poule> poules;
 
 	
 	
@@ -59,6 +59,14 @@ public abstract class Temperament {
 		
 	}
 	
+	public List<Poule> getPoules() {
+		return poules;
+	}
+
+	public void setPoules(List<Poule> poules) {
+		this.poules = poules;
+	}
+
 	public void majMaternage(Poule poule) {
 		poule.maternage=0.6;
 	}
