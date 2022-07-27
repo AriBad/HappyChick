@@ -30,47 +30,47 @@ public abstract class Temperament {
 	}
 
 	public void majVariables(Poule poule) {
-		majBonheur();
-		majMaternage();
-		majPredation();
-		majMaladie();
-		majPonte();
+		majBonheur(poule);
+		majMaternage(poule);
+		majPredation(poule);
+		majMaladie(poule);
+		majPonte(poule);
 		
 	}
 	
 
-	public void genererVariablesBase() {
-		this.majMaternage();
-		this.majPonte();
+	public void genererVariablesBase(Poule poule) {
+		this.majMaternage(poule);
+		this.majPonte(poule);
 	}
 	
-	protected abstract void majPredation();
+	protected abstract void majPredation(Poule poule);
 
-	protected abstract void majBonheur();
+	protected abstract void majBonheur(Poule poule);
 	
-	public void majPonte() {
-		if (this.poule.getEtat()==Etat.Liberte) {
+	public void majPonte(Poule poule) {
+		if (poule.getEtat()==Etat.Liberte) {
 			Random r = new Random();
 			int alea = r.nextInt(10) + 20;
 			poule.setPonte((poule.getBonheur()/100)*(3/(1+poule.getAge()))*alea);
 		} else {
-			this.poule.setPonte(0);
+			poule.setPonte(0);
 		}
 		
 	}
 	
-	public void majMaternage() {
+	public void majMaternage(Poule poule) {
 		poule.maternage=0.6;
 	}
 	
 	
-	public void majMaladie (){
+	public void majMaladie (Poule poule){
 		
 		if (poule.getEtat() == Etat.Couvaison ){
-		poule.setMaladie((0.5*(poulailler.getNbPoule()/poulailler.getTaille())*(1-(poule.getBonheur()/100)))*5);
+		poule.setMaladie((0.5*(poule.getPoulailler().getNbPoule()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100)))*5);
 		}
 		else {
-		poule.setMaladie((0.5*(poulailler.getNbPoule()/poulailler.getTaille())*(1-(poule.getBonheur()/100))));
+		poule.setMaladie((0.5*(poule.getPoulailler().getNbPoule()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100))));
 		}
 	}	
 	// Il faut ajouter un booleen pour dire si la poule couve ou si la poule materne (elle ne peux pas pondre mais elle ne couve pas (est-ce quon fait une difference ?))
