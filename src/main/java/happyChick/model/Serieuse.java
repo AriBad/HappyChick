@@ -1,4 +1,4 @@
-package model;
+package happyChick.model;
 
 import java.util.List;
 

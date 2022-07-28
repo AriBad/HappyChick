@@ -5,16 +5,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import happyChick.model.Activite;
+import happyChick.model.Etat;
+import happyChick.model.Poulailler;
+import happyChick.model.Poule;
+import happyChick.model.Saison;
+
 import java.util.Map;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-
-import model.Activite;
-import model.Etat;
-import model.Poulailler;
-import model.Poule;
-import model.Saison;
 
 public class Test {
    
