@@ -3,15 +3,9 @@ package happyChick.context;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import gEvent.dao.IDAOCompte;
-import gEvent.dao.IDAOEvenement;
-import gEvent.dao.IDAOIntervenant;
-import gEvent.dao.IDAOParticipation;
-import gEvent.dao.IDAOPrestation;
-import gEvent.dao.IDAOSpectateur;
-import happyChick.IDAO.IDAOPoulailler;
-import happyChick.IDAO.IDAOPoule;
-import happyChick.IDAO.IDAOTemperament;
+import happyChick.dao.IDAOPoulailler;
+import happyChick.dao.IDAOPoule;
+import happyChick.dao.IDAOTemperament;
 
 public class Singleton {
 	

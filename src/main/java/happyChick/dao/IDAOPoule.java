@@ -1,4 +1,4 @@
-package happyChick.IDAO;
+package happyChick.dao;
 
 import happyChick.model.Poule;
 
