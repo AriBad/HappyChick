@@ -12,6 +12,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import happyChick.context.Singleton;
 
 @Entity
 
@@ -32,7 +35,7 @@ public class Poule {
 	protected boolean femelle;
 	
 	@Column(columnDefinition = "ENUM('insouciante','maman_poule','psychopathe','serieuse')")
-	//@Embedded
+	@ManyToOne
 	protected Temperament temperament;
 	
 
@@ -158,19 +161,19 @@ public Poule() {
 			Random r = new Random();
 			int alea = r.nextInt(10); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
 			if (alea==0 || alea==1 || alea==2) {
-				this.temperament = new Serieuse(this, this.poulailler);
+				this.temperament = Singleton.getInstance().getSerieuse();
 				System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue serieuse.");
 			} else if (alea==3 || alea==4 || alea==5) {
-				this.temperament = new MamanPoule(this, this.poulailler);
+				this.temperament = Singleton.getInstance().getMamanPoule();
 				System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Maman Poule.");
 			} else if (alea==6 || alea==7 || alea==8) {
-				this.temperament = new Insouciante(this, this.poulailler);
+				this.temperament = Singleton.getInstance().getInsouciante();
 				System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Insouciante.");
 			} else if (alea==9) {
-				this.temperament = new Psychopathe(this, this.poulailler);
+				this.temperament = Singleton.getInstance().getInsouciante();;
 				System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Psychopathe.");
 			}
-			temperament.genererVariablesBase();
+			temperament.genererVariablesBase(this);
 		}
 	}
 	
