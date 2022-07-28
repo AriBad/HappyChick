@@ -4,6 +4,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import happyChick.dao.DAOPoule;
+import happyChick.dao.DAOTemperament;
 import happyChick.dao.IDAOPoulailler;
 import happyChick.dao.IDAOPoule;
 import happyChick.dao.IDAOTemperament;
