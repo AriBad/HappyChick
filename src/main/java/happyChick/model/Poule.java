@@ -172,9 +172,10 @@ public Poule() {
 				this.temperament = Singleton.getInstance().getInsouciante();
 				System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Insouciante.");
 			} else if (alea==9) {
-				this.temperament = Singleton.getInstance().getInsouciante();;
+				this.temperament = Singleton.getInstance().getPsychopathe();
 				System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Psychopathe.");
 			}
+			this.temperament.getPoules().add(this);
 			temperament.genererVariablesBase(this);
 		}
 	}
