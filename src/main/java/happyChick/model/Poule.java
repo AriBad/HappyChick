@@ -70,6 +70,8 @@ public class Poule {
 
 public Poule() {
 	// TODO Auto-generated constructor stub
+	Collections.addAll(prenomsFilles, "Adélaïde", "Perle", "Lolita", "Marie-Thérèse", "Clémence", "Prune");
+	Collections.addAll(prenomsGarcons,"Edouard", "Abricot", "Persée", "Jordan", "Thésée", "Ulysse");
 }
 	public Poule(String prenom, boolean femelle, Poulailler poulailler) {
 		super();

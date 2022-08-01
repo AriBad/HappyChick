@@ -75,11 +75,9 @@ public class Test {
    			Singleton.getInstance().setPsychopathe((Psychopathe) daoTemperament.findById(3));
    			Singleton.getInstance().setMamanPoule((MamanPoule) daoTemperament.findById(4));
    			
-   			poulailler = daoPoulailler.findById(1);
-   			//System.out.println(poulailler.getListePoules());
+   			poulailler = daoPoulailler.findByIdWithPoules(1);
    		}
    		
-   		System.out.println("On teste la création de la BDD");
    		
 		System.out.println("Bienvenue dans votre poulailler dont vous allez être poule en chef. \nVous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. \nVous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité");
 		/*poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
@@ -173,7 +171,10 @@ public class Test {
                agrandir= false;
             }
             poulailler.step(activite, nourriture, map, agrandir, amelioSecu);
-            
+            daoPoulailler.save(poulailler);
+            for (Poule p : poulailler.getListePoules()) {
+            	daoPoule.save(p);
+            }
        	}
 		
 		

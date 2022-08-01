@@ -74,6 +74,24 @@ public class DAOPoulailler implements IDAOPoulailler {
 	}
 
 	@Override
+	public Poulailler findByIdWithPoules(Integer id) {
+		Poulailler poulailler=null;
+		EntityManager em = null;
+		try {
+
+			em = Singleton.getInstance().getEmf().createEntityManager();
+			poulailler = (Poulailler) em.createQuery("SELECT p from Poulailler p join fetch p.listePoules where p.id=:id").setParameter("id", id).getSingleResult();
+		}catch(Exception e) {e.printStackTrace();}
+		finally {
+			if(em!=null) 
+			{
+				em.close();
+			}
+		}
+		return poulailler;
+	}
+	
+	@Override
 	public void delete(Integer id) {
 
 		EntityManager em = null;
