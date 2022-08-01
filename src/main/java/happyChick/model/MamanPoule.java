@@ -3,7 +3,9 @@ package happyChick.model;
 import java.util.Random;
 
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+@Entity
 @DiscriminatorValue("maman_poule")
 public class MamanPoule extends Temperament {
 

@@ -18,9 +18,9 @@ public class Singleton {
 	
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceJPA");
 	
-	private IDAOPoule daoCompte = new DAOPoule();
-	private IDAOPoulailler daoEvenement= new DAOPoulailler();
-	private IDAOTemperament daoParticipation = new DAOTemperament();	
+	private IDAOPoule daoPoule = new DAOPoule();
+	private IDAOPoulailler daoPoulailler= new DAOPoulailler();
+	private IDAOTemperament daoTemperament = new DAOTemperament();	
 	private Serieuse serieuse = new Serieuse();
 	private MamanPoule mamanPoule = new MamanPoule();
 	private Insouciante insouciante = new Insouciante();
@@ -99,43 +99,6 @@ public class Singleton {
 	}
 
 
-
-	public IDAOPoule getDaoCompte() {
-		return daoCompte;
-	}
-
-
-
-	public void setDaoCompte(IDAOPoule daoCompte) {
-		this.daoCompte = daoCompte;
-	}
-
-
-
-	public IDAOPoulailler getDaoEvenement() {
-		return daoEvenement;
-	}
-
-
-
-	public void setDaoEvenement(IDAOPoulailler daoEvenement) {
-		this.daoEvenement = daoEvenement;
-	}
-
-
-
-	public IDAOTemperament getDaoParticipation() {
-		return daoParticipation;
-	}
-
-
-
-	public void setDaoParticipation(IDAOTemperament daoParticipation) {
-		this.daoParticipation = daoParticipation;
-	}
-
-
-
 	public EntityManagerFactory getEmf() {
 		return emf;
 	}
@@ -146,14 +109,42 @@ public class Singleton {
 		this.emf = emf;
 	}
 
-	
-	
-	
 
 
-	
-	
-	
+	public IDAOPoule getDaoPoule() {
+		return daoPoule;
+	}
+
+
+
+	public void setDaoPoule(IDAOPoule daoPoule) {
+		this.daoPoule = daoPoule;
+	}
+
+
+
+	public IDAOPoulailler getDaoPoulailler() {
+		return daoPoulailler;
+	}
+
+
+
+	public void setDaoPoulailler(IDAOPoulailler daoPoulailler) {
+		this.daoPoulailler = daoPoulailler;
+	}
+
+
+
+	public IDAOTemperament getDaoTemperament() {
+		return daoTemperament;
+	}
+
+
+
+	public void setDaoTemperament(IDAOTemperament daoTemperament) {
+		this.daoTemperament = daoTemperament;
+	}
+
 	
 
 }

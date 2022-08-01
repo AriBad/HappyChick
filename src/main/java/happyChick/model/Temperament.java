@@ -3,13 +3,18 @@ package happyChick.model;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type_compte", columnDefinition = "ENUM('insouciante','maman_poule', 'psychopathe', 'serieuse')")
 public abstract class Temperament {
 	
 	
@@ -23,9 +28,6 @@ public abstract class Temperament {
 	
 	
 	public Temperament(){
-
-		//gerer coté poule.adulte
-		//poule.setBonheur(50);
 		
 	}
 
@@ -42,6 +44,7 @@ public abstract class Temperament {
 	public void genererVariablesBase(Poule poule) {
 		this.majMaternage(poule);
 		this.majPonte(poule);
+		poule.setBonheur(50);
 	}
 	
 	protected abstract void majPredation(Poule poule);

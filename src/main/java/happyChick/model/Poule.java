@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,12 +35,11 @@ public class Poule {
 	protected boolean poussin;
 	protected boolean femelle;
 	
-	@Column(columnDefinition = "ENUM('insouciante','maman_poule','psychopathe','serieuse')")
 	@ManyToOne
 	protected Temperament temperament;
 	
-
-	protected transient Poulailler poulailler;
+	@ManyToOne
+	protected Poulailler poulailler;
 	
 	protected int oeufsCouves;
 	
@@ -52,8 +52,8 @@ public class Poule {
 	@Column(columnDefinition = "ENUM('Faim', 'Meurtre', 'Predation', 'Maladie', 'Age')")
 	protected CauseMort causeMort;
 	
-	private static List<String> prenomsFilles = new ArrayList();
-	private static List<String> prenomsGarcons = new ArrayList();
+	transient private static List<String> prenomsFilles = new ArrayList();
+	transient private static List<String> prenomsGarcons = new ArrayList();
 	
 
 	@Override

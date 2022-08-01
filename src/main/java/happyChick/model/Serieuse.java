@@ -3,8 +3,9 @@ package happyChick.model;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-
+@Entity
 @DiscriminatorValue("serieuse")
 public class Serieuse extends Temperament {
 	

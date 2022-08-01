@@ -1,15 +1,19 @@
 package test;
 import java.util.Scanner;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
+import happyChick.context.Singleton;
+import happyChick.dao.IDAOPoulailler;
+import happyChick.dao.IDAOPoule;
+import happyChick.dao.IDAOTemperament;
 import happyChick.model.Activite;
 import happyChick.model.Etat;
+import happyChick.model.Insouciante;
+import happyChick.model.MamanPoule;
 import happyChick.model.Poulailler;
 import happyChick.model.Poule;
+import happyChick.model.Psychopathe;
 import happyChick.model.Saison;
+import happyChick.model.Serieuse;
 
 import java.util.Map;
 import java.util.Arrays;
@@ -18,7 +22,6 @@ import java.util.HashMap;
 
 public class Test {
    
-   static Poulailler poulailler;
    
    	public static int saisieInt(String msg) {
 		Scanner sc = new Scanner(System.in);
@@ -39,6 +42,45 @@ public class Test {
 	}
    
    	public static void main(String[] args) {
+   		Poulailler poulailler;
+   		//On teste la création de la partie, et le load
+   		IDAOPoulailler daoPoulailler = Singleton.getInstance().getDaoPoulailler();
+   		IDAOPoule daoPoule = Singleton.getInstance().getDaoPoule();
+   		IDAOTemperament daoTemperament = Singleton.getInstance().getDaoTemperament();
+   		
+   		if ( saisieInt("1) Créer une Partie     2) Charger une partie") == 1 ) {
+   			//on save les temperament, et on les manage
+   			Singleton.getInstance().setInsouciante( (Insouciante) daoTemperament.save(Singleton.getInstance().getInsouciante()));
+   			Singleton.getInstance().setSerieuse( (Serieuse) daoTemperament.save(Singleton.getInstance().getSerieuse()));
+   			Singleton.getInstance().setPsychopathe( (Psychopathe) daoTemperament.save(Singleton.getInstance().getPsychopathe()));
+   			Singleton.getInstance().setMamanPoule( (MamanPoule) daoTemperament.save(Singleton.getInstance().getMamanPoule()));
+   			
+   			poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
+   			poulailler= daoPoulailler.save(poulailler);
+   			
+   		    Poule p1 = new Poule ("Marlene",true,poulailler);
+   	        Poule p2 = new Poule ("Clara",true,poulailler);
+   	        Poule p3 = new Poule ("Jane",true,poulailler);
+   	        Poule p4 = new Poule ("Luna",true,poulailler);
+   	        Poule p5 = new Poule ("Marc",false,poulailler);
+   	        Collections.addAll(poulailler.getListePoules(),p1,p2,p3,p4,p5);
+   			
+   			for (Poule p : poulailler.getListePoules()) {
+   				daoPoule.save(p);
+   			}
+   		}
+   		else {
+   			Singleton.getInstance().setInsouciante((Insouciante) daoTemperament.findById(1));
+   			Singleton.getInstance().setSerieuse((Serieuse) daoTemperament.findById(2));
+   			Singleton.getInstance().setPsychopathe((Psychopathe) daoTemperament.findById(3));
+   			Singleton.getInstance().setMamanPoule((MamanPoule) daoTemperament.findById(4));
+   			
+   			poulailler = daoPoulailler.findById(1);
+   			//System.out.println(poulailler.getListePoules());
+   		}
+   		
+   		System.out.println("On teste la création de la BDD");
+   		
 		System.out.println("Bienvenue dans votre poulailler dont vous allez être poule en chef. \nVous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. \nVous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité");
 		/*poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
 
@@ -70,12 +112,7 @@ public class Test {
 	} //Erreur maternage à résoudre, les oeufs sont couvés mais n'éclosent pas
 	
 }*/
-		
-		
-		
-   		poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
 		HashMap<Poule, Integer> map = new HashMap();
-		
 		for (int i = 0 ; i < 15 ; i++) {
 			System.out.println("Etat du poulailler : "+poulailler);
 			System.out.println("\nIl y a les poules suivantes dans le poulailler"+poulailler.getListePoules()+"\n");
@@ -136,22 +173,6 @@ public class Test {
                agrandir= false;
             }
             poulailler.step(activite, nourriture, map, agrandir, amelioSecu);
-            
-            
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceJPA");
-
-            EntityManager em = emf.createEntityManager();
-
-            em.getTransaction().begin();
-
-            em.persist(poulailler);
-
-            em.getTransaction().commit();
-
-
-            em.close();
-
-            emf.close(); 
             
        	}
 		

@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 
@@ -32,8 +33,10 @@ public class Poulailler {
 	@Column(columnDefinition = "ENUM('SortieGenerale', 'Danse', 'Tricot', 'Escrime')")
 	protected Activite activiteSaison;
 	
+	@OneToMany(mappedBy="poulailler")
 	List<Poule> listePoules = new ArrayList();
-	List<Poule> poulesMortes = new ArrayList();
+	
+	transient private List<Poule> poulesMortes = new ArrayList();
 	
 	public Integer getId() {
 		return id;
@@ -50,9 +53,11 @@ public class Poulailler {
 	public List<Poule> getPoulesMortes() {
 		return poulesMortes;
 	}
+	
 	public void setPoulesMortes(List<Poule> poulesMortes) {
 		this.poulesMortes = poulesMortes;
 	}
+	
 	public Poulailler() {
 		// TODO Auto-generated constructor stub
 	}
@@ -63,13 +68,6 @@ public class Poulailler {
 		this.oeufs = oeufs;
 		this.annee = annee;
 		this.saison = saison;
-		
-	    Poule p1 = new Poule ("Marlene",true,this);
-        Poule p2 = new Poule ("Clara",true,this);
-        Poule p3 = new Poule ("Jane",true,this);
-        Poule p4 = new Poule ("Luna",true,this);
-        Poule p5 = new Poule ("Marc",false,this);
-        Collections.addAll(listePoules,p1,p2,p3,p4,p5);
 	}
 	
 	public void indiquerMort(Poule p, CauseMort cause) {
