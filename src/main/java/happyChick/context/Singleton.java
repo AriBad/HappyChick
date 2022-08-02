@@ -13,6 +13,7 @@ import happyChick.model.Insouciante;
 import happyChick.model.MamanPoule;
 import happyChick.model.Psychopathe;
 import happyChick.model.Serieuse;
+import happyChick.tools.JsonNameParser;
 
 public class Singleton {
 	
@@ -25,15 +26,14 @@ public class Singleton {
 	private MamanPoule mamanPoule = new MamanPoule();
 	private Insouciante insouciante = new Insouciante();
 	private Psychopathe psychopathe = new Psychopathe();
+	JsonNameParser nameParser = new JsonNameParser();
 	
 	
 	private static Singleton instance;
 
 	
 	private Singleton() {}
-	
-	
-	
+
 	public static Singleton getInstance() {
 		if(instance == null) 
 		{
@@ -42,9 +42,14 @@ public class Singleton {
 		
 		return instance;
 	}
-
 	
+	public JsonNameParser getNameParser() {
+		return nameParser;
+	}
 
+	public void setNameParser(JsonNameParser nameParser) {
+		this.nameParser = nameParser;
+	}
 
 	public Serieuse getSerieuse() {
 		return serieuse;

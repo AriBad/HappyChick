@@ -52,9 +52,6 @@ public class Poule {
 	@Column(columnDefinition = "ENUM('Faim', 'Meurtre', 'Predation', 'Maladie', 'Age')")
 	protected CauseMort causeMort;
 	
-	transient private static List<String> prenomsFilles = new ArrayList();
-	transient private static List<String> prenomsGarcons = new ArrayList();
-	
 
 	@Override
 	public String toString() {
@@ -68,11 +65,10 @@ public class Poule {
 	}
 
 
-public Poule() {
-	// TODO Auto-generated constructor stub
-	Collections.addAll(prenomsFilles, "Adélaïde", "Perle", "Lolita", "Marie-Thérèse", "Clémence", "Prune");
-	Collections.addAll(prenomsGarcons,"Edouard", "Abricot", "Persée", "Jordan", "Thésée", "Ulysse");
-}
+	public Poule() {
+		// TODO Auto-generated constructor stub
+	
+	}
 	public Poule(String prenom, boolean femelle, Poulailler poulailler) {
 		super();
 		this.prenom = prenom;
@@ -81,10 +77,7 @@ public Poule() {
 		this.femelle = femelle;
 		this.poulailler = poulailler;
 		this.etat=Etat.Liberte;
-		saisonSansManger = 0;
-		Collections.addAll(prenomsFilles, "Adélaïde", "Perle", "Lolita", "Marie-Thérèse", "Clémence", "Prune");
-		Collections.addAll(prenomsGarcons,"Edouard", "Abricot", "Persée", "Jordan", "Thésée", "Ulysse");
-		
+		saisonSansManger = 0;		
 	}
 
 
@@ -204,12 +197,10 @@ public Poule() {
 		Random r = new Random();
 		Poule p;
 		if (r.nextDouble()<0.1) {
-			Collections.shuffle(prenomsGarcons);
-			p = new Poule(prenomsGarcons.get(1), false, this.poulailler);
+			p = new Poule(Singleton.getInstance().getNameParser().genererNomCoq(), false, this.poulailler);
 			
 		} else {
-			Collections.shuffle(prenomsFilles);
-			p = new Poule(prenomsFilles.get(1), true, this.poulailler);
+			p = new Poule(Singleton.getInstance().getNameParser().genererNomPoule(), true, this.poulailler);
 		}
 		poulailler.indiquerNaissance(p);
 		System.out.println("La poule "+p.prenom+"(id="+p.id+") est né !!!.");

@@ -14,6 +14,7 @@ import happyChick.model.Poule;
 import happyChick.model.Psychopathe;
 import happyChick.model.Saison;
 import happyChick.model.Serieuse;
+import happyChick.tools.JsonNameParser;
 
 import java.util.Map;
 import java.util.Arrays;
