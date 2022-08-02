@@ -1,5 +1,6 @@
 package happyChick.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -14,7 +15,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type_compte", columnDefinition = "ENUM('insouciante','maman_poule', 'psychopathe', 'serieuse')")
+@DiscriminatorColumn(name="type_compte", columnDefinition = "ENUM('insouciante','maman_poule', 'psychopathe', 'serieuse', 'pyromane')")
 public abstract class Temperament {
 	
 	
@@ -22,7 +23,7 @@ public abstract class Temperament {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@OneToMany(mappedBy = "temperament")
-	protected List<Poule> poules;
+	protected List<Poule> poules = new ArrayList();
 
 	
 	

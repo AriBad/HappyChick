@@ -12,6 +12,7 @@ import happyChick.model.MamanPoule;
 import happyChick.model.Poulailler;
 import happyChick.model.Poule;
 import happyChick.model.Psychopathe;
+import happyChick.model.Pyromane;
 import happyChick.model.Saison;
 import happyChick.model.Serieuse;
 import happyChick.tools.JsonNameParser;
@@ -55,6 +56,7 @@ public class Test {
    			Singleton.getInstance().setSerieuse( (Serieuse) daoTemperament.save(Singleton.getInstance().getSerieuse()));
    			Singleton.getInstance().setPsychopathe( (Psychopathe) daoTemperament.save(Singleton.getInstance().getPsychopathe()));
    			Singleton.getInstance().setMamanPoule( (MamanPoule) daoTemperament.save(Singleton.getInstance().getMamanPoule()));
+   			Singleton.getInstance().setPyromane( (Pyromane) daoTemperament.save(Singleton.getInstance().getPyromane()));
    			
    			poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
    			poulailler= daoPoulailler.save(poulailler);
@@ -78,39 +80,7 @@ public class Test {
    			
    			poulailler = daoPoulailler.findByIdWithPoules(1);
    		}
-   		
-   		
-		System.out.println("Bienvenue dans votre poulailler dont vous allez être poule en chef. \nVous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. \nVous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité");
-		/*poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
 
-		
-		HashMap<Poule, Integer> map = new HashMap();
-		System.out.println("Vous ne pouvez encore rien faire en cette saison");
-		poulailler.step(null, 5, map, false, false);
-		
-		System.out.println("\n--------------------------------- \n");
-		System.out.println("Une saison s'est écoulée, nous sommes maintenant en " + poulailler.getSaison() + " " + poulailler.getAnnee());
-		map.put(poulailler.getListePoules().get(0), 5);
-		map.put(poulailler.getListePoules().get(1), 5);
-		poulailler.step(Activite.Danse, 7, map, false, false);
-		System.out.println("\n--------------------------------- \n");
-		System.out.println("Une saison s'est écoulée, nous sommes maintenant en " + poulailler.getSaison() + " " + poulailler.getAnnee());
-		map.clear();
-		poulailler.step(Activite.Escrime, 7, map, false, false);
-		System.out.println("\n--------------------------------- \n");
-		System.out.println("Une saison s'est écoulée, nous sommes maintenant en " + poulailler.getSaison() + " " + poulailler.getAnnee());
-		
-		poulailler.step(Activite.SortieGenerale, 7, map, false, false);
-		System.out.println("\n--------------------------------- \n");
-		System.out.println("Une saison s'est écoulée, nous sommes maintenant en " + poulailler.getSaison() + " " + poulailler.getAnnee());
-		
-		poulailler.step(Activite.Tricot, 5, map, false, false);
-		
-		
-
-	} //Erreur maternage à résoudre, les oeufs sont couvés mais n'éclosent pas
-	
-}*/
 		HashMap<Poule, Integer> map = new HashMap();
 		for (int i = 0 ; i < 15 ; i++) {
 			System.out.println("Etat du poulailler : "+poulailler);
@@ -172,10 +142,14 @@ public class Test {
                agrandir= false;
             }
             poulailler.step(activite, nourriture, map, agrandir, amelioSecu);
+            
             daoPoulailler.save(poulailler);
             for (Poule p : poulailler.getListePoules()) {
             	daoPoule.save(p);
             }
+            
+            map.clear();
+   
        	}
 		
 		
