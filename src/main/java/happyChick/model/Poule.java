@@ -31,30 +31,30 @@ public class Poule {
 	protected double maternage;
 	protected double predation;
 	protected double maladie;
-	
+
 	protected boolean poussin;
 	protected boolean femelle;
-	
+
 	@ManyToOne
 	protected Temperament temperament;
-	
+
 	@ManyToOne
 	protected Poulailler poulailler;
-	
+
 	protected int oeufsCouves;
-	
+
 	@Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "ENUM('Couvaison', 'Maternage', 'Liberte')")
+	@Column(columnDefinition = "ENUM('Couvaison', 'Maternage', 'Liberte')")
 	protected Etat etat;
 	protected int saisonSansManger;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition = "ENUM('Faim', 'Meurtre', 'Predation', 'Maladie', 'Age')")
 	protected CauseMort causeMort;
-	
+
 	transient private static List<String> prenomsFilles = new ArrayList();
 	transient private static List<String> prenomsGarcons = new ArrayList();
-	
+
 
 	@Override
 	public String toString() {
@@ -62,17 +62,17 @@ public class Poule {
 				+ poussin + ", femelle=" + femelle + ", oeufsCouves=" + oeufsCouves
 				+ ", etat=" + etat + ", Nombre de saisons Sans Manger=" + saisonSansManger + "]";
 	}
-	
+
 	public String toStringCouveuse() {
 		return "Poule [id=" + id + ", prenom=" + prenom + ", age=" + age + ", bonheur=" + bonheur + ", temperament="+ this.getTemperament()+"]";
 	}
 
 
-public Poule() {
-	// TODO Auto-generated constructor stub
-	Collections.addAll(prenomsFilles, "Adélaïde", "Perle", "Lolita", "Marie-Thérèse", "Clémence", "Prune");
-	Collections.addAll(prenomsGarcons,"Edouard", "Abricot", "Persée", "Jordan", "Thésée", "Ulysse");
-}
+	public Poule() {
+		// TODO Auto-generated constructor stub
+		Collections.addAll(prenomsFilles, "Adélaïde", "Perle", "Lolita", "Marie-Thérèse", "Clémence", "Prune");
+		Collections.addAll(prenomsGarcons,"Edouard", "Abricot", "Persée", "Jordan", "Thésée", "Ulysse");
+	}
 	public Poule(String prenom, boolean femelle, Poulailler poulailler) {
 		super();
 		this.prenom = prenom;
@@ -84,7 +84,7 @@ public Poule() {
 		saisonSansManger = 0;
 		Collections.addAll(prenomsFilles, "Adélaïde", "Perle", "Lolita", "Marie-Thérèse", "Clémence", "Prune");
 		Collections.addAll(prenomsGarcons,"Edouard", "Abricot", "Persée", "Jordan", "Thésée", "Ulysse");
-		
+
 	}
 
 
@@ -93,8 +93,8 @@ public Poule() {
 	public void step(boolean nourriture, int oeufsCouves) {
 		System.out.println("OEUF COUVES : " + oeufsCouves);
 		System.out.println(this);
-		
-		  if (etat == Etat.Couvaison) { //c'est quoi le souci ?  en gros, si elle materne et qu'elle vient juste d'être libre, on donnera à l'user l'option de la faire couver. Mais du coup elle passera pas par le else if. Elle recevra des oeufs à couver, mais elle couvera pas.
+
+		if (etat == Etat.Couvaison) { //c'est quoi le souci ?  en gros, si elle materne et qu'elle vient juste d'être libre, on donnera à l'user l'option de la faire couver. Mais du coup elle passera pas par le else if. Elle recevra des oeufs à couver, mais elle couvera pas.
 			oeufsEclos(this.oeufsCouves);
 			this.oeufsCouves=0;
 			etat = etat.Maternage;
@@ -110,18 +110,18 @@ public Poule() {
 		} else if (etat == Etat.Maternage) {
 			etat = etat.Liberte;
 		} // c'est mieux comme ça je pense ? nop x) en gros là la poule qui maternait à la saison d'avant pourra pas couver' --> oui mais tant pis, on dit qu'il lui faut une pause d'une saison
-		  
-		
-		
+
+
+
 		if (nourriture) {
 			manger();
 		} else {
 			saisonSansManger ++;
 		}
-		
+
 		grandir();
 	}
-	
+
 	public void grandir() {
 		this.age+=0.25;
 		if (this.age==0.25) {
@@ -138,7 +138,7 @@ public Poule() {
 		this.saisonSansManger=0;
 		System.out.println("La poule "+this.prenom+"(id="+this.id+") a mangé.");
 	}
-	
+
 	public void mort() {
 		Random r = new Random();
 		if ( r.nextDouble() < maladie ) {
@@ -160,26 +160,47 @@ public Poule() {
 	public void passageAdulte() {
 		this.poussin=false;
 		if (this.femelle) {
-			Random r = new Random();
-			int alea = r.nextInt(10); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
-			if (alea==0 || alea==1 || alea==2) {
-				this.temperament = Singleton.getInstance().getSerieuse();
-				System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue serieuse.");
-			} else if (alea==3 || alea==4 || alea==5) {
-				this.temperament = Singleton.getInstance().getMamanPoule();
-				System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Maman Poule.");
-			} else if (alea==6 || alea==7 || alea==8) {
-				this.temperament = Singleton.getInstance().getInsouciante();
-				System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Insouciante.");
-			} else if (alea==9) {
-				this.temperament = Singleton.getInstance().getPsychopathe();
-				System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Psychopathe.");
+			if (this.poulailler.getSecurite()>5 && Singleton.getInstance().getPyromane().getPoules().size()<5) {
+				Random r = new Random();
+				int alea = r.nextInt(11); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
+				if (alea==0 || alea==1 || alea==2) {
+					this.temperament = Singleton.getInstance().getSerieuse();
+					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue serieuse.");
+				} else if (alea==3 || alea==4 || alea==5) {
+					this.temperament = Singleton.getInstance().getMamanPoule();
+					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Maman Poule.");
+				} else if (alea==6 || alea==7 || alea==8) {
+					this.temperament = Singleton.getInstance().getInsouciante();
+					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Insouciante.");
+				} else if (alea==9) {
+					this.temperament = Singleton.getInstance().getPsychopathe();
+					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Psychopathe.");
+				} else if (alea==10) {
+					this.temperament = Singleton.getInstance().getPyromane();
+					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Pyromane.");
+				}
+			} else {
+				Random r = new Random();
+				int alea = r.nextInt(10); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
+				if (alea==0 || alea==1 || alea==2) {
+					this.temperament = Singleton.getInstance().getSerieuse();
+					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue serieuse.");
+				} else if (alea==3 || alea==4 || alea==5) {
+					this.temperament = Singleton.getInstance().getMamanPoule();
+					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Maman Poule.");
+				} else if (alea==6 || alea==7 || alea==8) {
+					this.temperament = Singleton.getInstance().getInsouciante();
+					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Insouciante.");
+				} else if (alea==9) {
+					this.temperament = Singleton.getInstance().getPsychopathe();
+					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Psychopathe.");
+				}
 			}
 			this.temperament.getPoules().add(this);
 			temperament.genererVariablesBase(this);
 		}
 	}
-	
+
 	public int oeufsPondus() {
 		int pondus=(int) (ponte);
 		if (etat == Etat.Liberte) {
@@ -187,7 +208,7 @@ public Poule() {
 			return (int) (ponte);
 		} else {return 0;}
 	}
-	
+
 	public int oeufsEclos(int oeufsCouves) {
 		int oeufsEclos;
 		//System.out.println("\n\nON EST DANS LE CALCUL DES OEUFS ECLOS !!!");
@@ -199,23 +220,23 @@ public Poule() {
 		}
 		return oeufsEclos;
 	}
-	
+
 	public void naissance() {
 		Random r = new Random();
 		Poule p;
 		if (r.nextDouble()<0.1) {
 			Collections.shuffle(prenomsGarcons);
 			p = new Poule(prenomsGarcons.get(1), false, this.poulailler);
-			
+
 		} else {
 			Collections.shuffle(prenomsFilles);
 			p = new Poule(prenomsFilles.get(1), true, this.poulailler);
 		}
 		poulailler.indiquerNaissance(p);
 		System.out.println("La poule "+p.prenom+"(id="+p.id+") est né !!!.");
-		
+
 	}
-	
+
 	public boolean isCoq() {
 		if ( (!femelle) && (!poussin) ) {
 			return true;
@@ -315,7 +336,7 @@ public Poule() {
 	public void setFemelle(boolean femelle) {
 		this.femelle = femelle;
 	}
-	
+
 	public int getOeufsCouves() {
 		return oeufsCouves;
 	}
@@ -331,7 +352,7 @@ public Poule() {
 	public void setEtat(Etat etat) {
 		this.etat = etat;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}

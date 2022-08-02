@@ -47,9 +47,20 @@ public abstract class Temperament {
 		poule.setBonheur(50);
 	}
 	
-	protected abstract void majPredation(Poule poule);
+	public void majPredation(Poule poule) {
+		poule.setPredation( 0.5 * (1/poule.getPoulailler().getSecurite()) );
+	}
 
-	protected abstract void majBonheur(Poule poule);
+	public void majBonheur(Poule poule) { // Pour le moment, le poids pour la densité et le nombre de morts sont à 0.1. C'est à changer.  
+		double bonheur;
+		if (poule.getPoulailler().getActiviteSaison()==Activite.SortieGenerale)  {
+			bonheur= poule.getBonheur()+10 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoule();
+		} else {
+			bonheur= poule.getBonheur()+8 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoule();
+		}
+		if (bonheur >100) {bonheur=100;}
+		poule.setBonheur(bonheur);
+	}
 	
 	public void majPonte(Poule poule) {
 		if (poule.getEtat()==Etat.Liberte) {

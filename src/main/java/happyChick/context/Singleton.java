@@ -12,6 +12,7 @@ import happyChick.dao.IDAOTemperament;
 import happyChick.model.Insouciante;
 import happyChick.model.MamanPoule;
 import happyChick.model.Psychopathe;
+import happyChick.model.Pyromane;
 import happyChick.model.Serieuse;
 
 public class Singleton {
@@ -25,6 +26,7 @@ public class Singleton {
 	private MamanPoule mamanPoule = new MamanPoule();
 	private Insouciante insouciante = new Insouciante();
 	private Psychopathe psychopathe = new Psychopathe();
+	private Pyromane pyromane = new Pyromane();
 	
 	
 	private static Singleton instance;
@@ -56,7 +58,15 @@ public class Singleton {
 		this.serieuse = serieuse;
 	}
 
+	public Pyromane getPyromane() {
+		return pyromane;
+	}
 
+
+
+	public void setPyromane(Pyromane pyromane) {
+		this.pyromane = pyromane;
+	}
 
 	public MamanPoule getMamanPoule() {
 		return mamanPoule;
