@@ -34,9 +34,6 @@ public class MamanPoule extends Temperament {
 	poule.setMaladie((0.5*(poule.getPoulailler().getNbPoule()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100))));
 	}
 	
-	public void majPredation(Poule poule) {
-		poule.setPredation( 0.5 * (1/poule.getPoulailler().getSecurite()) );
-	}
 	
 	public void majPonte(Poule poule) {
 		Random r = new Random();
