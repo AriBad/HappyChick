@@ -1,4 +1,7 @@
 <style>
+div{
+	
+}
 #header {
 	border: solid black 1px;
 
@@ -15,53 +18,91 @@
 
 ul {
     list-style-type:none;
+	
 }
+
+
 #menuleft{
 	display:flex;
 	width:25%;
 	flex-direction: column;
+	background-color: orange;
+	border : solid rgb(51, 14, 91) 5px;
+	/* height: 80%;
+	overflow: scroll-y; */
 }
 #poulailler{
-	border : solid brown 2px;
+	/* border : solid rgb(136, 16, 16) 2px; */
+	margin: 5%;
 }
 #poules{
-		border : solid brown 2px;
+		/* border : solid brown 2px; */
+		margin: 5%;
 }
 #main{
 	display:flex;
 width : 60%;
 	flex-direction: column;
 align-items:center;
-justify-content:center;
+justify-content: space-around;
+background-color: rgb(57, 62, 72);
 }
 #screen{
 	display:flex;
-border : solid brown 2px;
+	border : solid rgb(144, 60, 60) 5px;
+	
 }
 #console{
 display:flex;
-border : solid brown 2px;
+/* border : solid brown 2px; */
+background-color: rgb(217, 133, 182);
+width:90%;
+height: 45%;
+padding: 2%;
+border-radius: 5%;
+border: solid rgb(165, 42, 149) 5px;
 }
 #menuright{
 	display:flex;
 	width:15%;
 	flex-direction: column;
-	border : solid brown 2px;
+	border : solid rgb(51, 14, 91) 5px;
+	background-color: rgb(98, 176, 126);
+	font-family: 'Times New Roman', Times, serif;
 }
 #profil{
 	display:flex;
+	margin: 5%;
+	background-color: rgb(175, 28, 28);
+	border-radius: 3%;
+	padding: 2%;
+	color: lightgray
 }
 #accueil{
 	display:flex;
+	margin-top: 25%;
+	margin-bottom: 25%;
 }
+
+#accueil ul {
+	line-height: 30px;
+}
+
 #recap{
 	display:flex;
-	border : solid brown 2px;
+	/* border : solid brown 2px; */
+	height:50%;
+	margin: 5%;
+	background-color: rgb(38, 32, 32);
+	color: rgb(205, 207, 189);
+	border-radius: 3%;
+	padding: 2%;
+	font-family: Arial, Helvetica, sans-serif;
 }
 </style>
 
 <div id="header">
-<img src="img/header.png" width="1600" height=auto>
+<img src="img/header.png" width=100% height=auto>
 </div>
 
 <div id="center">
@@ -89,62 +130,62 @@ border : solid brown 2px;
 		<table>
 
 		<tr>
-			<td> <img src="img/poussin.png" width="auto" height=200></td>
+			<td> <img src="img/poussin.png" width="auto" height=100></td>
 			<td>
 			<ul>
-				<li>Nombre :</li>
+				<li><strong>poussins : </strong> n individus</li>
 			</ul>
 			</td>
 		</tr>
 		<tr>
-			<td><img src="img/PouleInsouciante.png" width="auto" height=200></td>
+			<td><img src="img/PouleInsouciante.png" width="auto" height=100></td>
 			<td>
 				<ul>
-				<li>Nombre :</li>
-				<li>Bonheur moyen :</li>
-				<li>Nombre de poules qui couvent :</li>
-				<li>Nombre de poules qui maternent:</li>
+			<li><strong>Insouciantes : </strong> n poules</li>
+			<li>Bonheur moyen : x %</li>
+			<li>Couveuses : n poules</li>
+			<li>Maternantes: n poules</li>
 			</ul>
 		</td>
 		</tr>
 		<tr>
-			<td><img src="img/PouleSerieuse.png" width="auto" height=200></td>
+			<td><img src="img/PouleSerieuse.png" width="auto" height=100></td>
 			<td>
 				<ul>
-				<li>Nombre :</li>
-				<li>Bonheur moyen :</li>
-				<li>Nombre de poules qui couvent :</li>
-				<li>Nombre de poules qui maternent:</li>
+				<li><strong>Serieuses : </strong> n poules</li>
+				<li>Bonheur moyen : x %</li>
+				<li>Couveuses : n poules</li>
+				<li>Maternantes: n poules</li>
 			</ul></td>
 		</tr>
 		<tr>
-			<td><img src="img/MamanPoule.png" width="auto" height=200></td>
+			<td><img src="img/MamanPoule.png" width="auto" height=100></td>
 			<td>
 				<ul>
-				<li>Nombre :</li>
-				<li>Bonheur moyen :</li>
-				<li>Nombre de poules qui couvent :</li>
-				<li>Nombre de poules qui maternent:</li>
+				<li><strong>Mamans Poule : </strong> n poules</li>
+				<li>Bonheur moyen : x %</li>
+				<li>Couveuses : n poules</li>
+				<li>Maternantes: n poules</li>
 			</ul></td>
 		</tr>
 		<tr>
-			<td><img src="img/PoulePsychopathe.png" width="auto" height=200></td>
+			<td><img src="img/PoulePsychopathe.png" width="auto" height=100></td>
 			<td>
 				<ul>
-				<li>Nombre :</li>
-				<li>Bonheur moyen :</li>
-				<li>Nombre de poules qui couvent :</li>
-				<li>Nombre de poules qui maternent:</li>
+				<li><strong>Psychopathes : </strong> n poules</li>
+				<li>Bonheur moyen : x %</li>
+				<li>Couveuses : n poules</li>
+				<li>Maternantes: n poules</li>
 			</ul></td>
 		</tr>
 		<tr>
-			<td><img src="img/PoulePyromane.png" width="auto" height=200></td>
+			<td><img src="img/PoulePyromane.png" width="auto" height=100></td>
 			<td>
 				<ul>
-				<li>Nombre :</li>
-				<li>Bonheur moyen :</li>
-				<li>Nombre de poules qui couvent :</li>
-				<li>Nombre de poules qui maternent:</li>
+				<li><strong>Pyromanes : </strong> n poules</li>
+				<li>Bonheur moyen : x %</li>
+				<li>Couveuses : n poules</li>
+				<li>Maternantes: n poules</li>
 			</ul></td>
 		</tr>
 	</table>
@@ -153,7 +194,7 @@ border : solid brown 2px;
 <div id="main">
 
 <div id="screen">
-<img src="img/poullailer_niveau_1.png" width="800" height=auto>
+<img src="img/poullailer_niveau_1.png" width="650" height=auto>
 </div>
 <div id="console">
 	Bienvenue dans votre poulailler dont vous allez être poule en chef. Vous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. Vous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité.
@@ -178,7 +219,7 @@ border : solid brown 2px;
 			<ul>
 				<li><a href="#">Accueil</a></li>
 				<li><a href="#">Détail des Poules </a></li>
-				<li><a href="#">Saison stats</a></li>
+				<li><a href="#">Historique de la saison dernière</a></li>
 				<li><a href="#">Guide</a></li>
 				<li><a href="#">Trophées</a></li>
 			</ul>
@@ -189,5 +230,5 @@ border : solid brown 2px;
 </div>
 </div>
 <div id="footer">
-	<img src="img/footer.png" width="800" height=auto>
+	<img src="img/footer.png" width=100% height=auto>
 </div>
