@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ public abstract class Temperament {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@OneToMany(mappedBy = "temperament")
+	@OneToMany(mappedBy = "temperament", fetch = FetchType.EAGER)
 	protected List<Poule> poules = new ArrayList();
 
 	
@@ -96,6 +97,4 @@ public abstract class Temperament {
 		poule.setMaladie((0.5*(poule.getPoulailler().getNbPoule()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100))));
 		}
 	}	
-	// Il faut ajouter un booleen pour dire si la poule couve ou si la poule materne (elle ne peux pas pondre mais elle ne couve pas (est-ce quon fait une difference ?))
-	// avec ce boolen on pourra faire un if pour savoir si la poule couve -- est-ce qu'on met le boolean dans temperament ou dans poule ? 
 }

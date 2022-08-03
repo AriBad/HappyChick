@@ -6,7 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("Pyromane")
+@DiscriminatorValue("pyromane")
 public class Pyromane extends Temperament {
 
 	public Pyromane() {

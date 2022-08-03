@@ -71,12 +71,14 @@ public class Test {
    			for (Poule p : poulailler.getListePoules()) {
    				daoPoule.save(p);
    			}
+   			poulailler = daoPoulailler.findByIdWithPoules(poulailler.getId());
    		}
    		else {
    			Singleton.getInstance().setInsouciante((Insouciante) daoTemperament.findById(1));
    			Singleton.getInstance().setSerieuse((Serieuse) daoTemperament.findById(2));
    			Singleton.getInstance().setPsychopathe((Psychopathe) daoTemperament.findById(3));
    			Singleton.getInstance().setMamanPoule((MamanPoule) daoTemperament.findById(4));
+   			Singleton.getInstance().setPyromane((Pyromane) daoTemperament.findById(5));
    			
    			poulailler = daoPoulailler.findByIdWithPoules(1);
    		}
@@ -142,11 +144,10 @@ public class Test {
                agrandir= false;
             }
             poulailler.step(activite, nourriture, map, agrandir, amelioSecu);
-            
-            daoPoulailler.save(poulailler);
             for (Poule p : poulailler.getListePoules()) {
             	daoPoule.save(p);
             }
+            poulailler = daoPoulailler.findByIdWithPoules(poulailler.getId());
             
             map.clear();
    
