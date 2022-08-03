@@ -17,7 +17,7 @@ public class JsonNameParser {
 	public List<String> nomPoules = new ArrayList();
 	public static List<String> nomCoqs = new ArrayList();
 	
-	public void JsonNameParser() {
+	public JsonNameParser() {
 		
 		try {
 			/*URL url = new URL("https://opendata.paris.fr/api/records/1.0/search/?dataset=liste_des_prenoms&q=&facet=sexe&facet=annee&facet=prenoms");

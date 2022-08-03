@@ -25,10 +25,6 @@ public class Insouciante extends Temperament {
 		poule.setBonheur(bonheur);
 	}
 
-	public void majMaternage(Poule poule) {
-
-	}
-
 	public void majPredation(Poule poule) {
 		poule.setPredation( 0.75 * (1/poule.getPoulailler().getSecurite()) );
 	}
