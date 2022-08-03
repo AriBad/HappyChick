@@ -1,206 +1,254 @@
 <style>
-div{
+	
+/* content{
+	padding: 0%;
+} */
+
+ul {
+list-style-type:none;
+
 
 }
+
+/* Header, center et Footer */
+
 #header {
-	border: solid black 1px;
+border: solid black 1px;
+height: 10%;
 
 }
 #center{
-	border: solid black 1px;
-	display : flex;
+border: solid black 1px;
+display : flex;
+height: 80%;
 
 }
 #footer{
-
+	height: 10%;
 }
 
-ul {
-    list-style-type:none;
 
-}
-
+/* Menu à Gauche */
 
 #menuleft{
-	display:flex;
-	width:25%;
-	flex-direction: column;
-	background-color: orange;
-	border : solid rgb(51, 14, 91) 5px;
-	/* height: 80%;
-	overflow: scroll-y; */
+display:flex;
+width:25%;
+flex-direction: column;
+background-color: orange;
+border : solid rgb(51, 14, 91) 5px;
+height: 100%;
+
 }
 #poulailler{
-	/* border : solid rgb(136, 16, 16) 2px; */
-	margin: 5%;
+/* border : solid rgb(136, 16, 16) 2px; */
+margin: 5%;
 }
 #poules{
-		/* border : solid brown 2px; */
-		margin: 5%;
+	/* border : solid brown 2px; */
+	margin: 5%;
+	overflow: auto;
 }
+
+/* Style du centre / la page principale */
+
 #main{
-	display:flex;
+display:flex;
 width : 60%;
-	flex-direction: column;
+flex-direction: column;
 align-items:center;
 justify-content: space-around;
 background-color: rgb(57, 62, 72);
 }
+
+#poulailler_et_recap{
+	display: flex;
+	background-color: rgb(217, 133, 182);
+	border: solid rgb(165, 42, 149) 5px;
+	border-radius: 2%;
+	width: 90%;
+	height: 40%;
+}
+
+
 #screen{
-	display:flex;
-	border : solid rgb(144, 60, 60) 5px;
+display:flex;
+padding: 2%;
 
 }
 #console{
 display:flex;
-/* border : solid brown 2px; */
-background-color: rgb(217, 133, 182);
-width:90%;
-height: 45%;
+overflow: scroll-y;
 padding: 2%;
-border-radius: 5%;
-border: solid rgb(165, 42, 149) 5px;
-}
-#menuright{
-	display:flex;
-	width:15%;
-	flex-direction: column;
-	border : solid rgb(51, 14, 91) 5px;
-	background-color: rgb(98, 176, 126);
-	font-family: 'Times New Roman', Times, serif;
-}
-#profil{
-	display:flex;
-	margin: 5%;
-	background-color: rgb(175, 28, 28);
-	border-radius: 3%;
-	padding: 2%;
-	color: lightgray
-}
-#accueil{
-	display:flex;
-	margin-top: 25%;
-	margin-bottom: 25%;
+align-items:center;
+justify-content: center;
+overflow: auto;
+
+
 }
 
-#accueil ul {
-	line-height: 30px;
+
+#choix_param{
+background-color: rgb(110, 104, 104);
+color: rgb(205, 207, 189);
+border: solid rgb(205, 207, 189) 3px;
+border-radius: 2%;
+width: 90%;
+height: 45%;
+}
+
+/* Menu sur la droite */
+
+#menuright{
+display:flex;
+width:15%;
+flex-direction: column;
+border : solid rgb(51, 14, 91) 5px;
+background-color: rgb(98, 176, 126);
+font-family: 'Times New Roman', Times, serif;
+height: 100%;
+justify-content: space-around;
+}
+
+#profil{
+display:flex;
+margin: 5%;
+background-color: rgb(175, 28, 28);
+border-radius: 3%;
+padding: 2%;
+color: lightgray
+}
+
+#menu{
+display:flex;
+/* margin-top: 5%;
+margin-bottom: 5%; */
+}
+
+#menu ul {
+line-height: 30px;
 }
 
 #recap{
-	display:flex;
-	/* border : solid brown 2px; */
-	height:50%;
-	margin: 5%;
-	background-color: rgb(38, 32, 32);
-	color: rgb(205, 207, 189);
-	border-radius: 3%;
-	padding: 2%;
-	font-family: Arial, Helvetica, sans-serif;
+display:flex;
+/* border : solid brown 2px; */
+height:50%;
+margin: 5%;
+background-color: rgb(38, 32, 32);
+color: rgb(205, 207, 189);
+border-radius: 3%;
+padding: 2%;
+font-family: Arial, Helvetica, sans-serif;
+overflow: auto;
 }
+
 </style>
 
 <div id="header">
-<img src="img/header.png" width=100% height=auto>
-
+<img src="img/header.png" width=100% height=100%>
 </div>
 
 <div id="center">
 <div id="menuleft">
-	<div id="poulailler">
-		<table>
-		<tr>
-			<td><img src="img/poullailer_niveau_1.png" width="120" height=auto></td>
-			<td  rowspan="2"><ul>
-				<li>Saison :</li>
-				<li>Année :</li>
-				<li>Nombre d'oeufs :</li>
-				<li>Nombre de poules :</li>
-				<li>Niveau de sécurit :</li>
-				<li>taille de poulailler :</li>
-			</ul></td>
-		</tr>
-		<tr><td>
-			Nom du poulailler
-			</td>
-		</tr>
-	</table>
-	</div>
-	<div id="poules">
-		<table>
+<div id="poulailler">
+	<table>
+	<tr>
+		<td><img src="img/poullailer_niveau_1.png" width="120" height=auto></td>
+		<td  rowspan="2"><ul>
+			<li>Saison :</li>
+			<li>Année :</li>
+			<li>Nombre d'oeufs :</li>
+			<li>Nombre de poules :</li>
+			<li>Niveau de sécurit :</li>
+			<li>taille de poulailler :</li>
+		</ul></td>
+	</tr>
+	<tr><td>
+		Nom du poulailler
+		</td>
+	</tr>
+</table>
+</div>
+<div id="poules">
+	<table>
 
-		<tr>
-			<td> <img src="img/poussin.png" width="auto" height=100></td>
-			<td>
+	<tr>
+		<td> <img src="img/poussin.png" width="auto" height=100></td>
+		<td>
+		<ul>
+			<li><strong>poussins : </strong> n individus</li>
+		</ul>
+		</td>
+	</tr>
+	<tr>
+		<td><img src="img/PouleInsouciante.png" width="auto" height=100></td>
+		<td>
 			<ul>
-				<li><strong>poussins : </strong> n individus</li>
-			</ul>
-			</td>
-		</tr>
-		<tr>
-			<td><img src="img/PouleInsouciante.png" width="auto" height=100></td>
-			<td>
-				<ul>
-			<li><strong>Insouciantes : </strong> n poules</li>
+		<li><strong>Insouciantes : </strong> n poules</li>
+		<li>Bonheur moyen : x %</li>
+		<li>Couveuses : n poules</li>
+		<li>Maternantes: n poules</li>
+		</ul>
+	</td>
+	</tr>
+	<tr>
+		<td><img src="img/PouleSerieuse.png" width="auto" height=100></td>
+		<td>
+			<ul>
+			<li><strong>Serieuses : </strong> n poules</li>
 			<li>Bonheur moyen : x %</li>
 			<li>Couveuses : n poules</li>
 			<li>Maternantes: n poules</li>
-			</ul>
-		</td>
-		</tr>
-		<tr>
-			<td><img src="img/PouleSerieuse.png" width="auto" height=100></td>
-			<td>
-				<ul>
-				<li><strong>Serieuses : </strong> n poules</li>
-				<li>Bonheur moyen : x %</li>
-				<li>Couveuses : n poules</li>
-				<li>Maternantes: n poules</li>
-			</ul></td>
-		</tr>
-		<tr>
-			<td><img src="img/MamanPoule.png" width="auto" height=100></td>
-			<td>
-				<ul>
-				<li><strong>Mamans Poule : </strong> n poules</li>
-				<li>Bonheur moyen : x %</li>
-				<li>Couveuses : n poules</li>
-				<li>Maternantes: n poules</li>
-			</ul></td>
-		</tr>
-		<tr>
-			<td><img src="img/PoulePsychopathe.png" width="auto" height=100></td>
-			<td>
-				<ul>
-				<li><strong>Psychopathes : </strong> n poules</li>
-				<li>Bonheur moyen : x %</li>
-				<li>Couveuses : n poules</li>
-				<li>Maternantes: n poules</li>
-			</ul></td>
-		</tr>
-		<tr>
-			<td><img src="img/PoulePyromane.png" width="auto" height=100></td>
-			<td>
-				<ul>
-				<li><strong>Pyromanes : </strong> n poules</li>
-				<li>Bonheur moyen : x %</li>
-				<li>Couveuses : n poules</li>
-				<li>Maternantes: n poules</li>
-			</ul></td>
-		</tr>
-	</table>
-	</div>
-	</div>
+		</ul></td>
+	</tr>
+	<tr>
+		<td><img src="img/MamanPoule.png" width="auto" height=100></td>
+		<td>
+			<ul>
+			<li><strong>Mamans Poule : </strong> n poules</li>
+			<li>Bonheur moyen : x %</li>
+			<li>Couveuses : n poules</li>
+			<li>Maternantes: n poules</li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td><img src="img/PoulePsychopathe.png" width="auto" height=100></td>
+		<td>
+			<ul>
+			<li><strong>Psychopathes : </strong> n poules</li>
+			<li>Bonheur moyen : x %</li>
+			<li>Couveuses : n poules</li>
+			<li>Maternantes: n poules</li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td><img src="img/PoulePyromane.png" width="auto" height=100></td>
+		<td>
+			<ul>
+			<li><strong>Pyromanes : </strong> n poules</li>
+			<li>Bonheur moyen : x %</li>
+			<li>Couveuses : n poules</li>
+			<li>Maternantes: n poules</li>
+		</ul></td>
+	</tr>
+</table>
+</div>
+</div>
 <div id="main">
 
+	<div id="poulailler_et_recap">
 <div id="screen">
-<img src="img/poullailer_niveau_1.png" width="650" height=auto>
+<img src="img/poullailer_niveau_1.png" width=100% height=auto>
 </div>
 <div id="console">
-	Bienvenue dans votre poulailler dont vous allez être poule en chef. Vous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. Vous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité.
+Bienvenue dans votre poulailler dont vous allez être poule en chef. Vous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. Vous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité.
+</div>
+</div>
+<div id="choix_param">
+
 </div>
 </div>
 <div id="menuright">
+<div id="menu">
 	<div id="profil">
 		<table>
 			<tr>
@@ -214,7 +262,6 @@ border: solid rgb(165, 42, 149) 5px;
 			</tr>
 		</table>
 	</div>
-	<div id="accueil">
 
 			<ul>
 				<li><a href="#">Accueil</a></li>
@@ -225,10 +272,10 @@ border: solid rgb(165, 42, 149) 5px;
 			</ul>
 	</div>
 <div id="recap">
-	récap saison
+récap saison
 </div>
 </div>
 </div>
 <div id="footer">
-	<img src="img/footer.png" width=100% height=auto>
+<img src="img/footer.png" width=100% height=100%>
 </div>
