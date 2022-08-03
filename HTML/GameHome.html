@@ -1,7 +1,7 @@
 <style>
-	
+
 /* content{
-	padding: 0%;
+padding: 0%;
 } */
 
 ul {
@@ -14,7 +14,7 @@ list-style-type:none;
 
 #header {
 border: solid black 1px;
-height: 10%;
+height: 18%;
 
 }
 #center{
@@ -24,7 +24,7 @@ height: 80%;
 
 }
 #footer{
-	height: 10%;
+height: 2%;
 }
 
 
@@ -41,12 +41,16 @@ height: 100%;
 }
 #poulailler{
 /* border : solid rgb(136, 16, 16) 2px; */
-margin: 5%;
+padding: 2%;
+/* background-color: rgb(175, 28, 28); */
+/* border-radius: 3%; */
+/* align-items: center; */
+/* width: 90%; */
 }
 #poules{
-	/* border : solid brown 2px; */
-	margin: 5%;
-	overflow: auto;
+/* border : solid brown 2px; */
+margin: 5%;
+overflow: auto;
 }
 
 /* Style du centre / la page principale */
@@ -61,12 +65,15 @@ background-color: rgb(57, 62, 72);
 }
 
 #poulailler_et_recap{
-	display: flex;
-	background-color: rgb(217, 133, 182);
-	border: solid rgb(165, 42, 149) 5px;
-	border-radius: 2%;
-	width: 90%;
-	height: 40%;
+display: flex;
+/* background-color: rgb(217, 133, 182); */
+background-color: rgb(110, 104, 104);
+color: rgb(205, 207, 189);
+border: solid rgb(205, 207, 189) 3px;
+/* border: solid rgb(165, 42, 149) 5px; */
+border-radius: 2%;
+width: 90%;
+height: 40%;
 }
 
 
@@ -111,11 +118,13 @@ justify-content: space-around;
 
 #profil{
 display:flex;
-margin: 5%;
+/* margin: 5%; */
 background-color: rgb(175, 28, 28);
 border-radius: 3%;
 padding: 2%;
-color: lightgray
+color: lightgray;
+/* height: 20%;
+width: 80%; */
 }
 
 #menu{
@@ -150,92 +159,92 @@ overflow: auto;
 <div id="center">
 <div id="menuleft">
 <div id="poulailler">
-	<table>
-	<tr>
-		<td><img src="img/poullailer_niveau_1.png" width="120" height=auto></td>
-		<td  rowspan="2"><ul>
-			<li>Saison :</li>
-			<li>Année :</li>
-			<li>Nombre d'oeufs :</li>
-			<li>Nombre de poules :</li>
-			<li>Niveau de sécurit :</li>
-			<li>taille de poulailler :</li>
-		</ul></td>
-	</tr>
-	<tr><td>
-		Nom du poulailler
-		</td>
-	</tr>
+<table>
+<tr>
+<td><img src="img/poullailer_niveau_1.png" width="120" height=auto></td>
+<td  rowspan="2"><ul>
+<li>Saison :</li>
+<li>Année :</li>
+<li>Nombre d'oeufs :</li>
+<li>Nombre de poules :</li>
+<li>Niveau de sécurit :</li>
+<li>taille de poulailler :</li>
+</ul></td>
+</tr>
+<tr><td>
+Nom du poulailler
+</td>
+</tr>
 </table>
 </div>
 <div id="poules">
-	<table>
+<table>
 
-	<tr>
-		<td> <img src="img/poussin.png" width="auto" height=100></td>
-		<td>
-		<ul>
-			<li><strong>poussins : </strong> n individus</li>
-		</ul>
-		</td>
-	</tr>
-	<tr>
-		<td><img src="img/PouleInsouciante.png" width="auto" height=100></td>
-		<td>
-			<ul>
-		<li><strong>Insouciantes : </strong> n poules</li>
-		<li>Bonheur moyen : x %</li>
-		<li>Couveuses : n poules</li>
-		<li>Maternantes: n poules</li>
-		</ul>
-	</td>
-	</tr>
-	<tr>
-		<td><img src="img/PouleSerieuse.png" width="auto" height=100></td>
-		<td>
-			<ul>
-			<li><strong>Serieuses : </strong> n poules</li>
-			<li>Bonheur moyen : x %</li>
-			<li>Couveuses : n poules</li>
-			<li>Maternantes: n poules</li>
-		</ul></td>
-	</tr>
-	<tr>
-		<td><img src="img/MamanPoule.png" width="auto" height=100></td>
-		<td>
-			<ul>
-			<li><strong>Mamans Poule : </strong> n poules</li>
-			<li>Bonheur moyen : x %</li>
-			<li>Couveuses : n poules</li>
-			<li>Maternantes: n poules</li>
-		</ul></td>
-	</tr>
-	<tr>
-		<td><img src="img/PoulePsychopathe.png" width="auto" height=100></td>
-		<td>
-			<ul>
-			<li><strong>Psychopathes : </strong> n poules</li>
-			<li>Bonheur moyen : x %</li>
-			<li>Couveuses : n poules</li>
-			<li>Maternantes: n poules</li>
-		</ul></td>
-	</tr>
-	<tr>
-		<td><img src="img/PoulePyromane.png" width="auto" height=100></td>
-		<td>
-			<ul>
-			<li><strong>Pyromanes : </strong> n poules</li>
-			<li>Bonheur moyen : x %</li>
-			<li>Couveuses : n poules</li>
-			<li>Maternantes: n poules</li>
-		</ul></td>
-	</tr>
+<tr>
+<td> <img src="img/poussin.png" width="auto" height=100></td>
+<td>
+<ul>
+<li><strong>poussins : </strong> n individus</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><img src="img/PouleInsouciante.png" width="auto" height=100></td>
+<td>
+<ul>
+<li><strong>Insouciantes : </strong> n poules</li>
+<li>Bonheur moyen : x %</li>
+<li>Couveuses : n poules</li>
+<li>Maternantes: n poules</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><img src="img/PouleSerieuse.png" width="auto" height=100></td>
+<td>
+<ul>
+<li><strong>Serieuses : </strong> n poules</li>
+<li>Bonheur moyen : x %</li>
+<li>Couveuses : n poules</li>
+<li>Maternantes: n poules</li>
+</ul></td>
+</tr>
+<tr>
+<td><img src="img/MamanPoule.png" width="auto" height=100></td>
+<td>
+<ul>
+<li><strong>Mamans Poule : </strong> n poules</li>
+<li>Bonheur moyen : x %</li>
+<li>Couveuses : n poules</li>
+<li>Maternantes: n poules</li>
+</ul></td>
+</tr>
+<tr>
+<td><img src="img/PoulePsychopathe.png" width="auto" height=100></td>
+<td>
+<ul>
+<li><strong>Psychopathes : </strong> n poules</li>
+<li>Bonheur moyen : x %</li>
+<li>Couveuses : n poules</li>
+<li>Maternantes: n poules</li>
+</ul></td>
+</tr>
+<tr>
+<td><img src="img/PoulePyromane.png" width="auto" height=100></td>
+<td>
+<ul>
+<li><strong>Pyromanes : </strong> n poules</li>
+<li>Bonheur moyen : x %</li>
+<li>Couveuses : n poules</li>
+<li>Maternantes: n poules</li>
+</ul></td>
+</tr>
 </table>
 </div>
 </div>
 <div id="main">
 
-	<div id="poulailler_et_recap">
+<div id="poulailler_et_recap">
 <div id="screen">
 <img src="img/poullailer_niveau_1.png" width=100% height=auto>
 </div>
@@ -244,33 +253,69 @@ Bienvenue dans votre poulailler dont vous allez être poule en chef. Vous avez d
 </div>
 </div>
 <div id="choix_param">
+<h3>Quels sont vos choix pour cette saison ?</h3>
+<form>
+<table>
+<tr>
+	<td>Achat de nourriture</td>
+	<td><input name="nourritureAchat" type="number" value="0" min="0" step="1"></td>
+	<td>Amélioration du poulailler</td>
+	</tr>
 
+<tr><td></td><td></td><td><input name="securite" value="securite" id="securite" type="checkbox"> <label for="securite">Sécurité</label> <input name="taille" value="taille" id="taille" type="checkbox"> <label for="taille">Taille</label></td>
+</tr>
+<tr>
+	<td>Choix de l'activité de la saison</td>
+	<td><input name="activite" value="SortieG" id="SortieG" type="radio" checked> <label for="SortieG">Sortie Générale</label> <input name="activite" value="Escrime" id="Escrime" type="radio"> <label for="Escrime">Escrime</label> <input name="activite" value="Tricot" id="tricot" type="radio"> <label for="tricot">Tricot</label> <input name="activite" value="Danse" id="danse" type="radio" > <label for="danse">Danse</label></td>
+</tr>
+</table><br>
+<table>
+<tr>
+<td>Choix des poules qui vont couver</td>
+	<td>
+		<select name="couveuses" placeholder="poule à couver">
+			<option value="1">1-Germaine (psychopathe)</option>
+			<option value="2">2-Clémence (Serieuse)</option>
+			<option value="3">3-Marie-Emmanuelle (Maman-poule)</option>
+			</select>
+	</td>
+	<td><button>Ajouter poule</button></td>
+</tr>
+</table>
+<input value="Envoyer" type="submit">
+</form>
+<!-- <h5>Poule qui couvent</h5> -->
+<!-- <table>
+<tr>
+	<td>id</td><td>nom</td><td>tempérament</td>
+</tr>
+
+</table> -->
 </div>
 </div>
 <div id="menuright">
+<div id="profil">
+<table>
+<tr>
+	<td><img src="img/PouleEnCheffe.png" width="auto" height=100></td>
+	<td>
+	<ul>
+		<li>Id :</li>
+		<li>Succés :</li>
+		<li><a href="GameLogin.html">Se deconnecter</a></li>
+	</ul></td>
+</tr>
+</table>
+</div>
 <div id="menu">
-	<div id="profil">
-		<table>
-			<tr>
-				<td><img src="img/PouleEnCheffe.png" width="auto" height=100></td>
-				<td>
-				<ul>
-					<li>Id :</li>
-					<li>Succés :</li>
-					<li><a href="GameLogin.html">Se deconnecter</a></li>
-				</ul></td>
-			</tr>
-		</table>
-	</div>
-
-			<ul>
-				<li><a href="#">Accueil</a></li>
-				<li><a href="#">Détail des Poules</a></li>
-				<li><a href="#">Historique de la saison dernière</a></li>
-				<li><a href="guide.html">Guide</a></li>
-				<li><a href="#">Trophées</a></li>
-			</ul>
-	</div>
+<ul>
+	<li><a href="#">Accueil</a></li>
+	<li><a href="#">Détail des Poules</a></li>
+	<li><a href="#">Historique de la saison dernière</a></li>
+	<li><a href="guide.html">Guide</a></li>
+	<li><a href="#">Trophées</a></li>
+</ul>
+</div>
 <div id="recap">
 récap saison
 </div>
