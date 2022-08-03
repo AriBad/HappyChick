@@ -13,7 +13,7 @@ list-style-type:none;
 /* Header, center et Footer */
 
 #header {
-border: solid black 1px;
+/* border: solid black 1px; */
 height: 20%;
 background-image: url(img/header.png) ;
 background-size: 100% 100%;
@@ -21,7 +21,7 @@ background-repeat: no-repeat;
 
 }
 #center{
-border: solid black 1px;
+/* border: solid black 1px; */
 display : flex;
 height: 75%;
 
@@ -29,8 +29,8 @@ height: 75%;
 #footer{
 height: 5%;
 background-image: url(img/footer.png) ;
-background-size: 100% 100%;
-background-repeat: no-repeat;
+background-size: 80% 100%;
+background-repeat: repeat;
 }
 
 
@@ -40,22 +40,31 @@ background-repeat: no-repeat;
 display:flex;
 width:25%;
 flex-direction: column;
-background-color: rgb(234, 161, 27);
-border : solid rgb(51, 14, 91) 5px;
-height: 97%;
+/* background-color: rgb(234, 161, 27); */
+background-image: url(img/champs_bord.png);
+background-size: 300% 110%;
+background-repeat: no-repeat;
+font-family: 'Times New Roman', Times, serif;
+height: 100%;
+justify-content: space-around;
 padding: 5px;
+/* border : solid rgb(51, 14, 91) 5px; */
 }
 #poulailler{
 border : solid rgb(136, 16, 16) 2px;
-padding: 2%;
 background-color: rgb(175, 28, 28);
 border-radius: 3%;
 padding: 2%;
+margin: 2%;
 }
 #poules{
 /* border : solid brown 2px; */
 margin: 5%;
 overflow: auto;
+background-color: rgb(234, 161, 27);
+border-radius: 3%;
+padding: 2%;
+margin: 2%;
 }
 
 /* Style du centre / la page principale */
@@ -114,11 +123,14 @@ height: 45%;
 display:flex;
 width:15%;
 flex-direction: column;
-border : solid rgb(51, 14, 91) 5px;
+/* border : solid rgb(51, 14, 91) 5px; */
 /* background-color: rgb(98, 176, 126); */
-background-color: rgb(234, 161, 27);
+/* background-color: rgb(234, 161, 27); */
+background-image: url(img/champs_bord.png);
+background-size: 300% 110%;
+background-repeat: no-repeat;
 font-family: 'Times New Roman', Times, serif;
-height: 97%;
+height: 100%;
 justify-content: space-around;
 padding: 5px;
 }
@@ -128,6 +140,7 @@ display:flex;
 background-color: rgb(175, 28, 28);
 border-radius: 3%;
 padding: 2%;
+margin: 2%;
 color: lightgray;
 border : solid rgb(136, 16, 16) 2px;
 }
@@ -136,6 +149,10 @@ border : solid rgb(136, 16, 16) 2px;
 display:flex;
 /* margin-top: 5%;
 margin-bottom: 5%; */
+background-color: rgb(234, 161, 27);
+border-radius: 3%;
+padding: 2%;
+margin: 2%;
 }
 
 #menu ul {
@@ -146,7 +163,7 @@ line-height: 30px;
 display:flex;
 /* border : solid brown 2px; */
 height:50%;
-margin: 5%;
+margin: 2%;
 background-color: rgb(38, 32, 32);
 color: rgb(205, 207, 189);
 border-radius: 3%;
