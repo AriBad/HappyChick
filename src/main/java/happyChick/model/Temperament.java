@@ -56,9 +56,9 @@ public abstract class Temperament {
 	public void majBonheur(Poule poule) { // Pour le moment, le poids pour la densité et le nombre de morts sont à 0.1. C'est à changer.  
 		double bonheur;
 		if (poule.getPoulailler().getActiviteSaison()==Activite.SortieGenerale)  {
-			bonheur= poule.getBonheur()+10 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoule();
+			bonheur= poule.getBonheur()+10 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoulesVivantes();
 		} else {
-			bonheur= poule.getBonheur()+8 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoule();
+			bonheur= poule.getBonheur()+8 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoulesVivantes();
 		}
 		if (bonheur >100) {bonheur=100;}
 		poule.setBonheur(bonheur);
@@ -91,10 +91,10 @@ public abstract class Temperament {
 	public void majMaladie (Poule poule){
 		
 		if (poule.getEtat() == Etat.Couvaison ){
-		poule.setMaladie((0.5*(poule.getPoulailler().getNbPoule()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100)))*5);
+		poule.setMaladie((0.5*(poule.getPoulailler().getNbPoulesVivantes()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100)))*5);
 		}
 		else {
-		poule.setMaladie((0.5*(poule.getPoulailler().getNbPoule()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100))));
+		poule.setMaladie((0.5*(poule.getPoulailler().getNbPoulesVivantes()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100))));
 		}
 	}	
 }

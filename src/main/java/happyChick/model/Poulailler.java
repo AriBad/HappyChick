@@ -36,8 +36,6 @@ public class Poulailler {
 	@OneToMany(mappedBy="poulailler")
 	List<Poule> listePoules = new ArrayList();
 	
-	transient private List<Poule> poulesMortes = new ArrayList();
-	
 	public Integer getId() {
 		return id;
 	}
@@ -50,13 +48,6 @@ public class Poulailler {
 	public void setActiviteSaison(Activite activiteSaison) {
 		this.activiteSaison = activiteSaison;
 	}
-	public List<Poule> getPoulesMortes() {
-		return poulesMortes;
-	}
-	
-	public void setPoulesMortes(List<Poule> poulesMortes) {
-		this.poulesMortes = poulesMortes;
-	}
 	
 	public Poulailler() {
 		// TODO Auto-generated constructor stub
@@ -68,12 +59,6 @@ public class Poulailler {
 		this.oeufs = oeufs;
 		this.annee = annee;
 		this.saison = saison;
-	}
-	
-	public void indiquerMort(Poule p, CauseMort cause) {
-		this.listePoules.remove(p);
-		p.setCauseMort(cause);
-		this.poulesMortes.add(p);
 	}
 
 	public void indiquerNaissance(Poule p) {
@@ -107,6 +92,16 @@ public class Poulailler {
 		return null;
 	}
 	
+	public ArrayList<Poule> getPoulesVivantes() {
+		ArrayList<Poule> vivantes = new ArrayList();
+		for (Poule p : listePoules) {
+			if (p.getCauseMort() == null) {
+				vivantes.add(p);
+			}
+		}
+		return vivantes;
+	}
+	
 	public void step(Activite a, int portionNourriture, Map<Poule, Integer> poulesCouveuses, boolean agrandir, boolean securiser) {
 		echangeNourriture(portionNourriture);
 		saison= Saison.saisonSuivante(saison);
@@ -114,32 +109,25 @@ public class Poulailler {
 			annee++;
 		}
 		activiteSaison = a;
-		Collections.shuffle(listePoules);
 		if (agrandir) {agrandir();}
 		if (securiser) {augmenterSecurite();}
 		int cpt = 0;
 		int nbOeufs = 0;
-		//System.out.println("\n\nON VA REGARDER LA LISTE DES POULES !!");
-		//System.out.println(poulesCouveuses);
-		//System.out.println(listePoules);
 		
-		List<Poule> listePoulestmp = new ArrayList(listePoules);
+		List<Poule> listePoulestmp = getPoulesVivantes();
+		Collections.shuffle(listePoulestmp);
 		for (Poule p : listePoulestmp) {
-			
 			if (poulesCouveuses.containsKey(p)) {
-				//System.out.println("**************hashmap qui doivent couver*****************");
-				//System.out.println(p);
 				p.step(cpt<nourriture, poulesCouveuses.get(p));
 			}
 			else {
 				p.step(cpt < nourriture, 0);
 			}
-			System.out.println(p);
 			nbOeufs += p.oeufsPondus();
-			this.oeufs+=nbOeufs;
 			cpt++;
 		}
-		System.out.println("Il y a "+getNbPoule()+" poules dans le poullailer. Il y a "+this.nourriture+" portions de nouriture. Le nombre d'eoufs pondus cette saison est de "+nbOeufs+". Il y a maintenant "+this.oeufs+" oeufs dans le poullailer.");
+		this.oeufs+=nbOeufs;
+		System.out.println("Il y a "+getNbPoulesVivantes()+" poules dans le poullailer. Il y a "+this.nourriture+" portions de nouriture. Le nombre d'eoufs pondus cette saison est de "+nbOeufs+". Il y a maintenant "+this.oeufs+" oeufs dans le poullailer.");
 		
 	}
 	
@@ -201,8 +189,8 @@ public class Poulailler {
 		this.nbMort = nbMort;
 	}
 	
-	public int getNbPoule() {
-		return listePoules.size();
+	public int getNbPoulesVivantes() {
+		return getPoulesVivantes().size();
 	}
 	
 	public int getPrixAgrandir() {
@@ -239,7 +227,7 @@ public class Poulailler {
 	public String toString() {
 		return "Poulailler [securite=" + securite + ", taille=" + taille + ", nourriture=" + nourriture + ", oeufs="
 				+ oeufs + ", annee=" + annee + ", saison=" + saison + ", nbMort=" + nbMort + ", activiteSaison="
-				+ activiteSaison + ", listePoules=" + listePoules + ", poulesMortes=" + poulesMortes + "]";
+				+ activiteSaison + ", listePoules=" + listePoules + "]";
 	}
 	
 //	S'il y a plus ou autant de portion de nouriture que de poule --> pas de problème, sinon x (nb de poule - nb de portion) 

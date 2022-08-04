@@ -94,7 +94,7 @@ public class Test {
                   int couveuse;
                   int nbOeufsCouves = 0;
                   System.out.println("Souhaitez-vous ajouter une poule à couver ? Poules disponibles : ");
-                  for (Poule p : poulailler.getListePoules()) {
+                  for (Poule p : poulailler.getPoulesVivantes()) {
                      if ( p.isFemelle() && !p.isPoussin() && p.getEtat() == Etat.Liberte) {
                         System.out.println(p.getId() + " - " + p.toStringCouveuse());
                      }
@@ -144,6 +144,7 @@ public class Test {
                agrandir= false;
             }
             poulailler.step(activite, nourriture, map, agrandir, amelioSecu);
+            daoPoulailler.save(poulailler);
             for (Poule p : poulailler.getListePoules()) {
             	daoPoule.save(p);
             }

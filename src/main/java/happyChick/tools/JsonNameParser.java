@@ -14,8 +14,22 @@ import org.json.JSONObject;
 
 public class JsonNameParser {
 	
-	public List<String> nomPoules = new ArrayList();
-	public static List<String> nomCoqs = new ArrayList();
+	class NomNombre {
+		private String nom;
+		private int nb;
+		
+		NomNombre(String nom, int nb) {
+			this.nom = nom;
+			this.nb = nb;
+		}
+	}
+	
+	private List<NomNombre> nomPoules = new ArrayList();
+	private List<NomNombre> nomCoqs = new ArrayList();
+	
+	//Ces deux variables permettront de générer plus souvent les noms les plus donnés en France, et moins souvent les noms les plus rares
+	private int nomsMasculins = 0;
+	private int nomsFeminins = 0;
 	
 	public JsonNameParser() {
 		
@@ -44,10 +58,12 @@ public class JsonNameParser {
 			for (int i = 0 ; i < obj.length() ; i++) {
 				JSONObject fields = (JSONObject) obj.getJSONObject(i).get("fields");
 				if (fields.getString("sexe").equals("M")) {
-					nomCoqs.add(fields.getString("prenoms"));
+					nomsMasculins+=fields.getInt("nombre");
+					nomCoqs.add(new NomNombre(fields.getString("prenoms"), fields.getInt("nombre") ) );
 				}
 				else {
-					nomPoules.add(fields.getString("prenoms"));
+					nomsFeminins+=fields.getInt("nombre");
+					nomPoules.add(new NomNombre(fields.getString("prenoms"), fields.getInt("nombre") ));
 				}
 			}
 		} catch (Exception e) {
@@ -55,13 +71,41 @@ public class JsonNameParser {
 		}
 	}
 	
-	public String genererNomPoule() {
+	//Pour ces deux fonctions, "proportionnel" dit si oui ou non on veut que les noms les plus courants aient plus de chance d'être
+	//choisis, et inversement les noms les plus rares aient moins de chance d'être générés.
+	public String genererNomPoule(boolean proportionnel) {
 		Random r = new Random();
-		return nomPoules.get(r.nextInt(nomPoules.size()));
+		if (!proportionnel) {
+			return nomPoules.get(r.nextInt(nomPoules.size())).nom;
+		} else {
+			int tmp = r.nextInt(nomsFeminins);
+			int cpt = 0;
+			for (NomNombre current : nomPoules) {
+				cpt += current.nb;
+				if (cpt > tmp) {
+					return current.nom;
+				}
+			}
+			//ce cas n'arrive jamais, mais obligé pour compiler
+			return genererNomPoule(false);
+		}
 	}
 	
-	public String genererNomCoq() {
+	public String genererNomCoq(boolean proportionnel) {
 		Random r = new Random();
-		return nomCoqs.get(r.nextInt(nomCoqs.size()));
+		if (!proportionnel) {
+			return nomCoqs.get(r.nextInt(nomCoqs.size())).nom;
+		} else {
+			int tmp = r.nextInt(nomsMasculins);
+			int cpt = 0;
+			for (NomNombre current : nomCoqs) {
+				cpt += current.nb;
+				if (cpt > tmp) {
+					return current.nom;
+				}
+			}
+			//ce cas n'arrive jamais, mais obligé pour compiler
+			return genererNomCoq(false);
+		}
 	}
 }

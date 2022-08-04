@@ -88,23 +88,18 @@ public class Poule {
 		System.out.println("OEUF COUVES : " + oeufsCouves);
 		System.out.println(this);
 
-		if (etat == Etat.Couvaison) { //c'est quoi le souci ?  en gros, si elle materne et qu'elle vient juste d'être libre, on donnera à l'user l'option de la faire couver. Mais du coup elle passera pas par le else if. Elle recevra des oeufs à couver, mais elle couvera pas.
+		if (etat == Etat.Couvaison) {
 			oeufsEclos(this.oeufsCouves);
 			this.oeufsCouves=0;
 			etat = etat.Maternage;
 			System.out.println("la poule "+this.prenom+"est en train de materner.");
-		} else if (etat == Etat.Liberte && oeufsCouves !=0) { //ici c'est un else if, je pense on peut juste le passer en if, mais faut réfléchir si ça pète pas autre chose x)
-			//System.out.println("\n\nON AFFICHE LES OEUFS COUVES");
-			//System.out.println(oeufsCouves);
+		} else if (etat == Etat.Liberte && oeufsCouves !=0) {
 			this.oeufsCouves=oeufsCouves;
-			//System.out.println(this.oeufsCouves);
 			etat = Etat.Couvaison;
 			this.setPonte(0);
-			//System.out.println("la poule "+this.prenom+"est en train de couver.");
 		} else if (etat == Etat.Maternage) {
 			etat = etat.Liberte;
-		} // c'est mieux comme ça je pense ? nop x) en gros là la poule qui maternait à la saison d'avant pourra pas couver' --> oui mais tant pis, on dit qu'il lui faut une pause d'une saison
-
+		}
 
 
 		if (nourriture) {
@@ -120,11 +115,11 @@ public class Poule {
 		this.age+=0.25;
 		if (this.age==0.25) {
 			passageAdulte();
-			//System.out.println("La poule "+this.prenom+"(id="+this.id+") est passée à l'âge adulte.");
 		}
 		if (femelle && !poussin) {
 			temperament.majVariables(this);
 		}
+		mort();
 	}
 
 	public void manger() {
@@ -136,18 +131,18 @@ public class Poule {
 	public void mort() {
 		Random r = new Random();
 		if ( r.nextDouble() < maladie ) {
-			poulailler.indiquerMort(this, CauseMort.Maladie);
+			causeMort = CauseMort.Maladie;
 			System.out.println("La poule "+this.prenom+"(id="+this.id+") est morte de maladie.");
 		} else if (r.nextDouble() < predation) {
 			if (r.nextDouble() < (poulailler.getNbPsychopathe()*0.05)){
-				poulailler.indiquerMort(this, CauseMort.Predation);
+				causeMort = CauseMort.Predation;
 				System.out.println("La poule "+this.prenom+"(id="+this.id+") est morte à cause d'un prédateur.");
 			}
 		} else if (r.nextDouble() < 0.0025 * (age * age) && age > 10) {
-			poulailler.indiquerMort(this, causeMort.Age);
+			causeMort = CauseMort.Age;
 			System.out.println("La poule "+this.prenom+"(id="+this.id+") est morte de Vieillesse.");
 		} else if (r.nextDouble() < saisonSansManger * 0.334) {
-			poulailler.indiquerMort(this, CauseMort.Faim);
+			causeMort = CauseMort.Faim;
 		}
 	}
 
@@ -205,7 +200,6 @@ public class Poule {
 
 	public int oeufsEclos(int oeufsCouves) {
 		int oeufsEclos;
-		//System.out.println("\n\nON EST DANS LE CALCUL DES OEUFS ECLOS !!!");
 		System.out.println("Le taux de maternage est "+getMaternage());
 		oeufsEclos=((int) (getMaternage()*oeufsCouves));
 		System.out.println("La poule "+this.prenom+"(id="+this.id+") a donné naissance à "+oeufsEclos+" sur "+oeufsCouves+" oeufs couvés.");
@@ -219,10 +213,10 @@ public class Poule {
 		Random r = new Random();
 		Poule p;
 		if (r.nextDouble()<0.1) {
-			p = new Poule(Singleton.getInstance().getNameParser().genererNomCoq(), false, this.poulailler);
+			p = new Poule(Singleton.getInstance().getNameParser().genererNomCoq(true), false, this.poulailler);
 			
 		} else {
-			p = new Poule(Singleton.getInstance().getNameParser().genererNomPoule(), true, this.poulailler);
+			p = new Poule(Singleton.getInstance().getNameParser().genererNomPoule(true), true, this.poulailler);
 		}
 		poulailler.indiquerNaissance(p);
 		System.out.println("La poule "+p.prenom+"(id="+p.id+") est né !!!.");
