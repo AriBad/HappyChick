@@ -12,6 +12,12 @@ public class Pyromane extends Temperament {
 	public Pyromane() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public void majVariables(Poule p) {
+		super.majVariables(p);
+		toutBruler(p);
+	}
 
 	public void toutBruler(Poule poule) {
 		int nbOeufs=poule.getPoulailler().getOeufs();
