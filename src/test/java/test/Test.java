@@ -5,6 +5,7 @@ import happyChick.context.Singleton;
 import happyChick.dao.IDAOPoulailler;
 import happyChick.dao.IDAOPoule;
 import happyChick.dao.IDAOTemperament;
+import happyChick.dao.IDAOUser;
 import happyChick.model.Activite;
 import happyChick.model.Etat;
 import happyChick.model.Insouciante;
@@ -15,17 +16,23 @@ import happyChick.model.Psychopathe;
 import happyChick.model.Pyromane;
 import happyChick.model.Saison;
 import happyChick.model.Serieuse;
+import happyChick.model.User;
 import happyChick.tools.JsonNameParser;
 
 import java.util.Map;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
+
+
 public class Test {
-   
-   
-   	public static int saisieInt(String msg) {
+	
+	static User connected;
+	static  IDAOUser daoU = Singleton.getInstance().getDaoUser();
+   	
+	public static int saisieInt(String msg) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println(msg);
 		return sc.nextInt();
@@ -43,7 +50,47 @@ public class Test {
 		return sc.nextBoolean();
 	}
    
-   	public static void main(String[] args) {
+   	    
+   	 public static void menuPrincipal() 
+ 	{
+ 		System.out.println("\nMenu principal");
+ 		System.out.println("1- Se connecter");
+ 		System.out.println("2- Inscription");
+ 		System.out.println("3- Stop");
+
+ 		int choix = saisieInt("Choisir un menu");
+
+
+ 		switch(choix) 
+ 		{
+ 		case 1 : connexion();break;
+ 		case 2 : inscription();break;
+ 		case 3 :Singleton.getInstance().getEmf().close(); System.exit(0);break;
+ 		}
+ 		menuPrincipal();
+ 	}
+   		
+   	public static void inscription() {
+		System.out.println("inscription :");
+		String login = saisieString("Saisir votre login :");
+		String password = saisieString("Saisir votre password :");
+		User u = new User(login,password);
+		daoU.save(u);
+		System.out.println("Nous vous avons bien inscrit ! ");
+
+	}
+   	public static void connexion() 
+	{
+		System.out.println("connexion :");
+		String login = saisieString("Saisir votre login");
+		String password = saisieString("Saisir votre password");
+		connected = daoU.seConnecter(login, password);
+
+	   if(connected instanceof User) {startGame();}
+		else {System.out.println("Identifiants invalides");}
+	}
+
+   		public static void startGame() {
    		Poulailler poulailler;
    		//On teste la création de la partie, et le load
    		IDAOPoulailler daoPoulailler = Singleton.getInstance().getDaoPoulailler();
@@ -157,6 +204,10 @@ public class Test {
 		
 	}
    
+	public static void main(String[] args) {
+   	
+		menuPrincipal();
+	}
 }
 
   /* date = 0000-00-00

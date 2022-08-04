@@ -6,9 +6,11 @@ import javax.persistence.Persistence;
 import happyChick.dao.DAOPoulailler;
 import happyChick.dao.DAOPoule;
 import happyChick.dao.DAOTemperament;
+import happyChick.dao.DAOUser;
 import happyChick.dao.IDAOPoulailler;
 import happyChick.dao.IDAOPoule;
 import happyChick.dao.IDAOTemperament;
+import happyChick.dao.IDAOUser;
 import happyChick.model.Insouciante;
 import happyChick.model.MamanPoule;
 import happyChick.model.Psychopathe;
@@ -20,6 +22,7 @@ public class Singleton {
 	
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceJPA");
 	
+	private IDAOUser daoUser = new DAOUser();
 	private IDAOPoule daoPoule = new DAOPoule();
 	private IDAOPoulailler daoPoulailler= new DAOPoulailler();
 	private IDAOTemperament daoTemperament = new DAOTemperament();	
@@ -45,6 +48,7 @@ public class Singleton {
 		return instance;
 	}
 	
+	
 	public JsonNameParser getNameParser() {
 		return nameParser;
 	}
@@ -57,7 +61,13 @@ public class Singleton {
 		return serieuse;
 	}
 
+	public IDAOUser getDaoUser() {
+		return daoUser;
+	}
 
+	public void setDaoUser(IDAOUser daoUser) {
+		this.daoUser = daoUser;
+	}
 
 	public void setSerieuse(Serieuse serieuse) {
 		this.serieuse = serieuse;
