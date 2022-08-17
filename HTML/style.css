@@ -1,0 +1,297 @@
+
+ul
+{
+	list-style-type:none;
+}
+
+#header
+{
+	height: 20%;
+	background-image: url(img/header.png) ;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+#center
+{
+	display : flex;
+	height: 75%;
+	background-image: url(img/champs_bord.png) ;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	z-index:5;
+}
+
+#footer
+{
+	height: 5%;
+	background-image: url(img/footer.png) ;
+	background-size: 80% 100%;
+	background-repeat: repeat;
+}
+
+/* Menu à Gauche */
+#menuleft
+{
+	display:flex;
+	width:25%;
+	flex-direction: column;
+	background-image: url(img/champs_bord.png);
+	background-size: 300% 110%;
+	background-repeat: no-repeat;
+	font-family: 'Times New Roman', Times, serif;
+	height: 100%;
+	justify-content: space-around;
+	padding: 5px;
+}
+
+#poulailler
+{
+	border : solid rgb(136, 16, 16) 2px;
+	background-color: rgb(175, 28, 28);
+	border-radius: 3%;
+	padding: 2%;
+	margin: 2%;
+}
+
+#poulailler table
+{
+	color: rgb(205, 207, 189);
+}
+
+#poules
+{
+	margin: 2%;
+	overflow: auto;
+	background-color: rgb(234, 161, 27);
+	border-radius: 3%;
+	padding: 2%;
+}
+
+/* Style du centre / la page principale */
+#main
+{
+	display:flex;
+	width : 60%;
+	flex-direction: column;
+	align-items:center;
+	justify-content: space-around;
+	background-color: rgb(57, 62, 72);
+	border-radius: 2%;
+	/* overflow: auto;
+	*/
+	color: rgb(205, 207, 189);
+}
+
+#poulailler_et_recap
+{
+	display: flex;
+	background-color: rgb(110, 104, 104);
+	color: rgb(205, 207, 189);
+	border: solid rgb(205, 207, 189) 3px;
+	border-radius: 2%;
+	width: 90%;
+	height: 40%;
+	padding: 2px;
+}
+
+#screen
+{
+	display:flex;
+	align-items:center;
+	justify-content: center;
+	width: 150%;
+}
+
+#console
+{
+	display:flex;
+	padding: 2%;
+	align-items:center;
+	justify-content: center;
+	overflow: auto;
+}
+
+#choix_param
+{
+	background-color: rgb(110, 104, 104);
+	color: rgb(205, 207, 189);
+	border: solid rgb(205, 207, 189) 3px;
+	border-radius: 2%;
+	width: 90%;
+	height: 50%;
+	padding: 4px;
+	overflow: auto;
+}
+
+#choix_param table
+{
+	color: rgb(205, 207, 189);
+}
+
+#couveusestable
+{
+	display: none;
+}
+
+/* Menu sur la droite */
+#menuright
+{
+	display:flex;
+	width:15%;
+	flex-direction: column;
+	background-image: url(img/champs_bord.png);
+	background-size: 300% 110%;
+	background-repeat: no-repeat;
+	font-family: 'Times New Roman', Times, serif;
+	height: 100%;
+	justify-content: space-around;
+	padding: 5px;
+}
+
+#profil
+{
+	display:flex;
+	background-color: rgb(175, 28, 28);
+	border-radius: 3%;
+	padding: 2%;
+	margin: 2%;
+	color: lightgray;
+	border : solid rgb(136, 16, 16) 2px;
+}
+
+#profil table
+{
+	color: rgb(205, 207, 189);
+}
+
+#menu
+{
+	display:flex;
+	background-color: rgb(234, 161, 27);
+	border-radius: 3%;
+	padding: 2%;
+	margin: 2%;
+}
+
+#menu a
+{
+	color: rgb(46, 46, 46);
+	font-family: Arial, Helvetica, serif;
+	text-decoration: none;
+}
+
+#menu ul
+{
+	line-height: 30px;
+}
+
+#recap
+{
+	display:flex;
+	height:50%;
+	margin: 2%;
+	background-color: rgb(38, 32, 32);
+	color: rgb(205, 207, 189);
+	border-radius: 3%;
+	padding: 2%;
+	font-family: Arial, Helvetica, sans-serif;
+	overflow: auto;
+}
+
+#pouleMouvante
+{
+	position:absolute;
+	top:300px;
+	left:600px;
+}
+
+#PouleList table
+{
+	display: space-around;
+	color: rgb(205, 207, 189);
+}
+
+#PouleList
+{
+	display : flex;
+	/* justify-content: space-between;
+	*/
+	flex-direction: column;
+	align-items: center;
+	overflow: auto;
+}
+
+#poulesIdentite
+{
+	display : flex;
+	overflow: scroll;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	flex-direction: column;
+	/* position: fixed;
+	*/
+}
+
+.fiche
+{
+	background-color: rgb(53, 136, 79);
+	border: solid rgb(19, 50, 29) 5px;
+	color: rgb(205, 207, 189);
+	border-radius: 3%;
+	padding: 2%;
+	margin-top: 5%;
+	margin-bottom: 2%;
+	display : flex;
+}
+
+.informations
+{
+	/* display : flex;
+	flex-direction: column; */
+	margin-top: 2%;
+	margin-bottom: 2%;
+	width: 40%;
+    margin-left: 5%;
+}
+
+#poulesIdentite img
+{
+	display:flex;
+	align-items:center;
+	justify-content: center;
+	margin-right: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	margin-top: 2%;
+	margin-left: 2%;
+	border: solid rgb(92, 87, 50) 5px;
+    border-radius: 3%;
+}
+
+.action{
+    display:flex;
+	align-items:center;
+	justify-content: center;
+    flex-direction: column; 
+	margin-right: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	margin-top: 2%;
+	margin-left: 2%;
+}
+
+.action button{
+    width: 80%;
+    height: 50%;
+    margin-top: 5%;
+    margin-left: 30%;
+}
+
+.btnViolet,.btnViolet:hover
+{
+	color:white;
+	background-color:purple;
+	border-radius: 3%;
+}
