@@ -1,26 +1,38 @@
 package test;
 import java.util.Scanner;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import happyChick.context.Singleton;
+import happyChick.dao.IDAOPoulailler;
+import happyChick.dao.IDAOPoule;
+import happyChick.dao.IDAOTemperament;
+import happyChick.dao.IDAOUser;
+import happyChick.model.Activite;
+import happyChick.model.Etat;
+import happyChick.model.Insouciante;
+import happyChick.model.MamanPoule;
+import happyChick.model.Poulailler;
+import happyChick.model.Poule;
+import happyChick.model.Psychopathe;
+import happyChick.model.Pyromane;
+import happyChick.model.Saison;
+import happyChick.model.Serieuse;
+import happyChick.model.User;
+import happyChick.tools.JsonNameParser;
 
 import java.util.Map;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
-import model.Activite;
-import model.Etat;
-import model.Poulailler;
-import model.Poule;
-import model.Saison;
+
 
 public class Test {
-   
-   static Poulailler poulailler;
-   
-   	public static int saisieInt(String msg) {
+	
+	static User connected;
+	static  IDAOUser daoU = Singleton.getInstance().getDaoUser();
+   	
+	public static int saisieInt(String msg) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println(msg);
 		return sc.nextInt();
@@ -38,44 +50,87 @@ public class Test {
 		return sc.nextBoolean();
 	}
    
-   	public static void main(String[] args) {
-		System.out.println("Bienvenue dans votre poulailler dont vous allez être poule en chef. \nVous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. \nVous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité");
-		/*poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
+   	    
+   	 public static void menuPrincipal() 
+ 	{
+ 		System.out.println("\nMenu principal");
+ 		System.out.println("1- Se connecter");
+ 		System.out.println("2- Inscription");
+ 		System.out.println("3- Stop");
 
-		
-		HashMap<Poule, Integer> map = new HashMap();
-		System.out.println("Vous ne pouvez encore rien faire en cette saison");
-		poulailler.step(null, 5, map, false, false);
-		
-		System.out.println("\n--------------------------------- \n");
-		System.out.println("Une saison s'est écoulée, nous sommes maintenant en " + poulailler.getSaison() + " " + poulailler.getAnnee());
-		map.put(poulailler.getListePoules().get(0), 5);
-		map.put(poulailler.getListePoules().get(1), 5);
-		poulailler.step(Activite.Danse, 7, map, false, false);
-		System.out.println("\n--------------------------------- \n");
-		System.out.println("Une saison s'est écoulée, nous sommes maintenant en " + poulailler.getSaison() + " " + poulailler.getAnnee());
-		map.clear();
-		poulailler.step(Activite.Escrime, 7, map, false, false);
-		System.out.println("\n--------------------------------- \n");
-		System.out.println("Une saison s'est écoulée, nous sommes maintenant en " + poulailler.getSaison() + " " + poulailler.getAnnee());
-		
-		poulailler.step(Activite.SortieGenerale, 7, map, false, false);
-		System.out.println("\n--------------------------------- \n");
-		System.out.println("Une saison s'est écoulée, nous sommes maintenant en " + poulailler.getSaison() + " " + poulailler.getAnnee());
-		
-		poulailler.step(Activite.Tricot, 5, map, false, false);
-		
-		
+ 		int choix = saisieInt("Choisir un menu");
 
-	} //Erreur maternage à résoudre, les oeufs sont couvés mais n'éclosent pas
-	
-}*/
-		
-		
-		
-   		poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
+
+ 		switch(choix) 
+ 		{
+ 		case 1 : connexion();break;
+ 		case 2 : inscription();break;
+ 		case 3 :Singleton.getInstance().getEmf().close(); System.exit(0);break;
+ 		}
+ 		menuPrincipal();
+ 	}
+   		
+   	public static void inscription() {
+		System.out.println("inscription :");
+		String login = saisieString("Saisir votre login :");
+		String password = saisieString("Saisir votre password :");
+		User u = new User(login,password);
+		daoU.save(u);
+		System.out.println("Nous vous avons bien inscrit ! ");
+
+	}
+   	public static void connexion() 
+	{
+		System.out.println("connexion :");
+		String login = saisieString("Saisir votre login");
+		String password = saisieString("Saisir votre password");
+		connected = daoU.seConnecter(login, password);
+
+	   if(connected instanceof User) {startGame();}
+		else {System.out.println("Identifiants invalides");}
+	}
+
+   		public static void startGame() {
+   		Poulailler poulailler;
+   		//On teste la création de la partie, et le load
+   		IDAOPoulailler daoPoulailler = Singleton.getInstance().getDaoPoulailler();
+   		IDAOPoule daoPoule = Singleton.getInstance().getDaoPoule();
+   		IDAOTemperament daoTemperament = Singleton.getInstance().getDaoTemperament();
+   		
+   		if ( saisieInt("1) Créer une Partie     2) Charger une partie") == 1 ) {
+   			//on save les temperament, et on les manage
+   			Singleton.getInstance().setInsouciante( (Insouciante) daoTemperament.save(Singleton.getInstance().getInsouciante()));
+   			Singleton.getInstance().setSerieuse( (Serieuse) daoTemperament.save(Singleton.getInstance().getSerieuse()));
+   			Singleton.getInstance().setPsychopathe( (Psychopathe) daoTemperament.save(Singleton.getInstance().getPsychopathe()));
+   			Singleton.getInstance().setMamanPoule( (MamanPoule) daoTemperament.save(Singleton.getInstance().getMamanPoule()));
+   			Singleton.getInstance().setPyromane( (Pyromane) daoTemperament.save(Singleton.getInstance().getPyromane()));
+   			
+   			poulailler = new Poulailler(1,100, 10, 5, 2022, Saison.Printemps);
+   			poulailler= daoPoulailler.save(poulailler);
+   			
+   		    Poule p1 = new Poule ("Marlene",true,poulailler);
+   	        Poule p2 = new Poule ("Clara",true,poulailler);
+   	        Poule p3 = new Poule ("Jane",true,poulailler);
+   	        Poule p4 = new Poule ("Luna",true,poulailler);
+   	        Poule p5 = new Poule ("Marc",false,poulailler);
+   	        Collections.addAll(poulailler.getListePoules(),p1,p2,p3,p4,p5);
+   			
+   			for (Poule p : poulailler.getListePoules()) {
+   				daoPoule.save(p);
+   			}
+   			poulailler = daoPoulailler.findByIdWithPoules(poulailler.getId());
+   		}
+   		else {
+   			Singleton.getInstance().setInsouciante((Insouciante) daoTemperament.findById(1));
+   			Singleton.getInstance().setSerieuse((Serieuse) daoTemperament.findById(2));
+   			Singleton.getInstance().setPsychopathe((Psychopathe) daoTemperament.findById(3));
+   			Singleton.getInstance().setMamanPoule((MamanPoule) daoTemperament.findById(4));
+   			Singleton.getInstance().setPyromane((Pyromane) daoTemperament.findById(5));
+   			
+   			poulailler = daoPoulailler.findByIdWithPoules(1);
+   		}
+
 		HashMap<Poule, Integer> map = new HashMap();
-		
 		for (int i = 0 ; i < 15 ; i++) {
 			System.out.println("Etat du poulailler : "+poulailler);
 			System.out.println("\nIl y a les poules suivantes dans le poulailler"+poulailler.getListePoules()+"\n");
@@ -86,7 +141,7 @@ public class Test {
                   int couveuse;
                   int nbOeufsCouves = 0;
                   System.out.println("Souhaitez-vous ajouter une poule à couver ? Poules disponibles : ");
-                  for (Poule p : poulailler.getListePoules()) {
+                  for (Poule p : poulailler.getPoulesVivantes()) {
                      if ( p.isFemelle() && !p.isPoussin() && p.getEtat() == Etat.Liberte) {
                         System.out.println(p.getId() + " - " + p.toStringCouveuse());
                      }
@@ -136,28 +191,23 @@ public class Test {
                agrandir= false;
             }
             poulailler.step(activite, nourriture, map, agrandir, amelioSecu);
+            daoPoulailler.save(poulailler);
+            for (Poule p : poulailler.getListePoules()) {
+            	daoPoule.save(p);
+            }
+            poulailler = daoPoulailler.findByIdWithPoules(poulailler.getId());
             
-            
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceJPA");
-
-            EntityManager em = emf.createEntityManager();
-
-            em.getTransaction().begin();
-
-            em.persist(poulailler);
-
-            em.getTransaction().commit();
-
-
-            em.close();
-
-            emf.close(); 
-            
+            map.clear();
+   
        	}
 		
 		
 	}
    
+	public static void main(String[] args) {
+   	
+		menuPrincipal();
+	}
 }
 
   /* date = 0000-00-00
