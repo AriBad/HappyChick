@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-
 public class Poulailler {
 
 	@Id
@@ -31,6 +30,7 @@ public class Poulailler {
 	protected int annee;
 	protected Saison saison;
 	protected int nbMort=0;
+	private String nom;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition = "ENUM('SortieGenerale', 'Danse', 'Tricot', 'Escrime')")
@@ -66,8 +66,21 @@ public class Poulailler {
 		this.oeufs = oeufs;
 		this.annee = annee;
 		this.saison = saison;
+		nom="TODO";
 	}
 
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public void indiquerNaissance(Poule p) {
 		listePoules.add(p);
 		//System.out.println(p.getPrenom() + " est née !");
