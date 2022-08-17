@@ -88,6 +88,14 @@ public abstract class Temperament {
 	}
 	
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public void majMaladie (Poule poule){
 		
 		if (poule.getEtat() == Etat.Couvaison ){
