@@ -46,7 +46,7 @@ public class AppConfig {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		emf.setDataSource(dataSource);
-		emf.setPackagesToScan("happyChick.model");
+		emf.setPackagesToScan("happyChick.model","happyChick.tools");
 		emf.setJpaVendorAdapter(vendorAdapter);
 		emf.setJpaProperties(this.hibernateProperties());
 		return emf;

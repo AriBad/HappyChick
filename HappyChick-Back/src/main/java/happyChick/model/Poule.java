@@ -1,11 +1,7 @@
 package happyChick.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,7 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import happyChick.context.Singleton;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import happyChick.tools.JsonNameParser;
 
 @Entity
 
@@ -52,6 +50,23 @@ public class Poule {
 	@Column(columnDefinition = "ENUM('Faim', 'Meurtre', 'Predation', 'Maladie', 'Age')")
 	protected CauseMort causeMort;
 	
+	@Autowired
+	private Serieuse serieuse;
+	
+	@Autowired
+	private Insouciante insouciante;
+	
+	@Autowired
+	private MamanPoule mamanPoule;
+	
+	@Autowired
+	private Psychopathe psychopathe;
+	
+	@Autowired
+	private Pyromane pyromane;
+	
+	@Autowired
+	private JsonNameParser jsonNamePaser;
 
 
 	@Override
@@ -149,39 +164,39 @@ public class Poule {
 	public void passageAdulte() {
 		this.poussin=false;
 		if (this.femelle) {
-			if (this.poulailler.getSecurite()>5 && Singleton.getInstance().getPyromane().getPoules().size()<5) {
+			if (this.poulailler.getSecurite()>5 && pyromane.getPoules().size()<5) {
 				Random r = new Random();
 				int alea = r.nextInt(11); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
 				if (alea==0 || alea==1 || alea==2) {
-					this.temperament = Singleton.getInstance().getSerieuse();
+					this.temperament = serieuse;
 					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue serieuse.");
 				} else if (alea==3 || alea==4 || alea==5) {
-					this.temperament = Singleton.getInstance().getMamanPoule();
+					this.temperament = mamanPoule;
 					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Maman Poule.");
 				} else if (alea==6 || alea==7 || alea==8) {
-					this.temperament = Singleton.getInstance().getInsouciante();
+					this.temperament = insouciante;
 					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Insouciante.");
 				} else if (alea==9) {
-					this.temperament = Singleton.getInstance().getPsychopathe();
+					this.temperament = psychopathe;
 					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Psychopathe.");
 				} else if (alea==10) {
-					this.temperament = Singleton.getInstance().getPyromane();
+					this.temperament = pyromane;
 					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Pyromane.");
 				}
 			} else {
 				Random r = new Random();
 				int alea = r.nextInt(10); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
 				if (alea==0 || alea==1 || alea==2) {
-					this.temperament = Singleton.getInstance().getSerieuse();
+					this.temperament = serieuse;
 					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue serieuse.");
 				} else if (alea==3 || alea==4 || alea==5) {
-					this.temperament = Singleton.getInstance().getMamanPoule();
+					this.temperament = mamanPoule;
 					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Maman Poule.");
 				} else if (alea==6 || alea==7 || alea==8) {
-					this.temperament = Singleton.getInstance().getInsouciante();
+					this.temperament = insouciante;
 					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Insouciante.");
 				} else if (alea==9) {
-					this.temperament = Singleton.getInstance().getPsychopathe();
+					this.temperament = pyromane;
 					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Psychopathe.");
 				}
 			}
@@ -213,10 +228,10 @@ public class Poule {
 		Random r = new Random();
 		Poule p;
 		if (r.nextDouble()<0.1) {
-			p = new Poule(Singleton.getInstance().getNameParser().genererNomCoq(true), false, this.poulailler);
+			p = new Poule(jsonNamePaser.genererNomCoq(true), false, this.poulailler);
 			
 		} else {
-			p = new Poule(Singleton.getInstance().getNameParser().genererNomPoule(true), true, this.poulailler);
+			p = new Poule(jsonNamePaser.genererNomPoule(true), true, this.poulailler);
 		}
 		poulailler.indiquerNaissance(p);
 		System.out.println("La poule "+p.prenom+"(id="+p.id+") est né !!!.");
