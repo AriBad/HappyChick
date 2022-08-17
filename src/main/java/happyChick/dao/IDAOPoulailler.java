@@ -1,5 +1,7 @@
 package happyChick.dao;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,5 +10,5 @@ import happyChick.model.Poulailler;
 
 public interface IDAOPoulailler extends JpaRepository<Poulailler, Integer> {
 	@Query("SELECT p from Poulailler p join fetch p.listePoules where p.id=:id")
-	public Poulailler findByIdWithPoule(@Param("id") Integer id );
+	public Optional<Poulailler> findByIdWithPoule(@Param("id") Integer id );
 }

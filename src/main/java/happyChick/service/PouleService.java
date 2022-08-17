@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import exception.PoulaillerException;
+import exception.PouleException;
 import happyChick.dao.IDAOPoule;
-import happyChick.model.Poulailler;
+import happyChick.model.Poule;
 
 
 public class PouleService {
@@ -14,40 +14,34 @@ public class PouleService {
 	@Autowired
 	private IDAOPoule pouleRepo;
 
-	public Poulailler getById(Integer id) {
+	public Poule getById(Integer id) {
 		// return poulaillerRepo.findById(id).orElseThrow(PoulaillerException::new);
 		return pouleRepo.findById(id).orElseThrow(() -> {
-			throw new PoulaillerException("id Poulailler inconnu");
+			throw new PouleException("id Poulailler inconnu");
 		});
 	}
 
-	public List<Poulailler> getAll() {
+	public List<Poule> getAll() {
 		// poulaillerRepo.findAll().forEach(System.out::println);
 //		poulaillerRepo.findAll().forEach((p) -> {
 //			System.out.println(p);
 //		});
-		return poulaillerRepo.findAll();
+		return pouleRepo.findAll();
 	}
 	
-	public Poulailler create(Poulailler poulailler) {
-		if (poulailler.getNom() == null || poulailler.getNom().isEmpty()) {
-			throw new PoulaillerException("nom obligatoire");
-		}
-		return poulaillerRepo.save(poulailler);
+	public Poule create(Poule poule) {
+		return pouleRepo.save(poule);
 	}
 	
-	public Poule update(Poulailler poulailler) {
-		if (poulailler.getNom() == null || poulailler.getNom().isEmpty()) {
-			throw new PoulaillerException("nom obligatoire");
+	public Poule update(Poule poule) {
+		if (poule == null || pouleRepo.findById(poule.getId()) == null ) {
+			throw new PouleException("Update une poule qui n'existe pas en base");
 		}
-		Poulailler poulaillerEnBase = getById(poulailler.getId());
-		poulaillerEnBase.setNom(poulailler.getNom());
-		return poulaillerRepo.save(poulaillerEnBase);
+		return pouleRepo.save(poule);
 	}
 
-	public void delete(Poulailler poulailler) {
-		pouleRepo.deleteByPoulailler(poulailler);
-		poulaillerRepo.delete(poulailler);
+	public void delete(Poule poule) {
+		pouleRepo.delete(poule);
 	}
 
 	public void deleteById(Integer id) {

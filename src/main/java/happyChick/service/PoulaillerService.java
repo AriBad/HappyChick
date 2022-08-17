@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import exception.PoulaillerException;
+import exception.PouleException;
 import happyChick.dao.IDAOPoulailler;
 import happyChick.dao.IDAOPoule;
 import happyChick.model.Poulailler;
@@ -48,12 +49,10 @@ public class PoulaillerService {
 	}
 
 	public Poulailler update(Poulailler poulailler) {
-		if (poulailler.getNom() == null || poulailler.getNom().isEmpty()) {
-			throw new PoulaillerException("nom obligatoire");
+		if (poulailler == null || pouleRepo.findById(poulailler.getId()) == null ) {
+			throw new PoulaillerException("Update un poulailler qui n'existe pas en base");
 		}
-		Poulailler poulaillerEnBase = getById(poulailler.getId());
-		poulaillerEnBase.setNom(poulailler.getNom());
-		return poulaillerRepo.save(poulaillerEnBase);
+		return poulaillerRepo.save(poulailler);
 	}
 
 	public void delete(Poulailler poulailler) {
