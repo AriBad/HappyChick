@@ -1,4 +1,4 @@
-package exception;
+package happyChick.exception;
 
 public class TemperamentException extends RuntimeException{
 	public TemperamentException() {

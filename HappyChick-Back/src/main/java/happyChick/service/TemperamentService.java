@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import exception.TemperamentException;
 import happyChick.dao.IDAOPoule;
 import happyChick.dao.IDAOTemperament;
+import happyChick.exception.TemperamentException;
 import happyChick.model.Temperament;
 
 
