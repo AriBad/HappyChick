@@ -289,6 +289,7 @@ public class PouleService {
 		} else if (poule.getPoulailler().getActiviteSaison()==Activite.SortieGenerale) {
 			poule.setBonheur(poule.getBonheur()+10 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoulesVivantes()+poule.getPoulailler().getNbPsychopathe()*0.1);
 		}
+		if (poule.getBonheur()>100) {poule.setBonheur(100);}
 
 	}
 
