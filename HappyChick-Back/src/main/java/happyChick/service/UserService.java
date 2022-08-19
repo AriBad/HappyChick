@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import exception.UserException;
 import happyChick.dao.IDAOPoulailler;
 import happyChick.dao.IDAOPoule;
 import happyChick.dao.IDAOUser;
+import happyChick.exception.UserException;
 import happyChick.model.User;
 
 

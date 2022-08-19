@@ -1,4 +1,4 @@
-package exception;
+package happyChick.exception;
 
 public class PoulaillerException extends RuntimeException{
 	public PoulaillerException() {

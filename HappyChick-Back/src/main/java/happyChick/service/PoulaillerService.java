@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import exception.PoulaillerException;
-import exception.PouleException;
 import happyChick.dao.IDAOPoulailler;
 import happyChick.dao.IDAOPoule;
+import happyChick.exception.PoulaillerException;
+import happyChick.exception.PouleException;
 import happyChick.model.Poulailler;
 
 @Service

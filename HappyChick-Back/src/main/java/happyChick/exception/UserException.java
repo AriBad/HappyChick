@@ -1,4 +1,4 @@
-package exception;
+package happyChick.exception;
 
 public class UserException extends RuntimeException{
 	public UserException() {
