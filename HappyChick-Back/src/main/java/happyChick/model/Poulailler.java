@@ -16,32 +16,54 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import happyChick.model.jsonview.JsonViews;
+
 
 @Entity
 public class Poulailler {
-
+	@JsonView(JsonViews.Base.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
+	
+	@JsonView(JsonViews.Base.class)
 	protected int securite;
+	
+	@JsonView(JsonViews.Base.class)
 	protected int taille;
+	
+	@JsonView(JsonViews.Base.class)
 	protected int nourriture;
+	
+	@JsonView(JsonViews.Base.class)
 	protected int oeufs;
+	
+	@JsonView(JsonViews.Base.class)
 	protected int annee;
+	
+	@JsonView(JsonViews.Base.class)
 	protected Saison saison;
+	
+	@JsonView(JsonViews.Base.class)
 	protected int nbMort=0;
+	
+	@JsonView(JsonViews.Base.class)
 	private String nom;
 	
+	@JsonView(JsonViews.Base.class)
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition = "ENUM('SortieGenerale', 'Danse', 'Tricot', 'Escrime')")
 	protected Activite activiteSaison;
 	
+	@JsonView(JsonViews.PoulaillerWithPoules.class)
 	@OneToMany(mappedBy="poulailler")
 	List<Poule> listePoules = new ArrayList();
 	
 	@ManyToOne
 	@JoinColumn(name="id_user")
-	private User user;
+	transient private User user;
 	
 	public Integer getId() {
 		return id;
