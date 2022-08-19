@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import happyChick.model.Poulailler;
 import happyChick.model.Poule;
 import happyChick.model.Temperament;
-import happyChick.model.Temperament2;
 
 public interface IDAOPoule extends JpaRepository<Poule, Integer> {
 
@@ -16,6 +15,6 @@ public interface IDAOPoule extends JpaRepository<Poule, Integer> {
 
 	void deleteByTemperament(Temperament temperament);
 	
-	Optional <List<Poule>> findByTemperament(Temperament2 temperament);
+	Optional <List<Poule>> findByTemperament(Temperament temperament);
 
 }

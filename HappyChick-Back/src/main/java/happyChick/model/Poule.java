@@ -43,7 +43,7 @@ public class Poule {
 	
 	@JsonView(JsonViews.Base.class)
 	@Enumerated
-	protected Temperament2 temperament;
+	protected Temperament temperament;
 	
 	@JsonView(JsonViews.pouleWithPoulailler.class)
 	@ManyToOne
@@ -132,11 +132,11 @@ public class Poule {
 	}
 
 
-	public Temperament2 getTemperament() {
+	public Temperament getTemperament() {
 		return temperament;
 	}
 
-	public void setTemperament(Temperament2 temperament) {
+	public void setTemperament(Temperament temperament) {
 		this.temperament = temperament;
 	}
 
