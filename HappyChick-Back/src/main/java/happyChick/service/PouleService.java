@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import happyChick.dao.IDAOPoule;
 import happyChick.exception.PouleException;
+import happyChick.model.Activite;
 import happyChick.model.CauseMort;
 import happyChick.model.Etat;
 import happyChick.model.Poulailler;
@@ -17,7 +18,7 @@ import happyChick.tools.JsonNameParser;
 
 
 public class PouleService {
-	
+
 	@Autowired
 	private JsonNameParser jsonNameParser;
 	@Autowired
@@ -38,16 +39,16 @@ public class PouleService {
 
 	public List<Poule> getAll() {
 		// poulaillerRepo.findAll().forEach(System.out::println);
-//		poulaillerRepo.findAll().forEach((p) -> {
-//			System.out.println(p);
-//		});
+		//		poulaillerRepo.findAll().forEach((p) -> {
+		//			System.out.println(p);
+		//		});
 		return pouleRepo.findAll();
 	}
-	
+
 	public Poule create(Poule poule) {
 		return pouleRepo.save(poule);
 	}
-	
+
 	public Poule update(Poule poule) {
 		if (poule == null || pouleRepo.findById(poule.getId()) == null ) {
 			throw new PouleException("Update une poule qui n'existe pas en base");
@@ -62,12 +63,12 @@ public class PouleService {
 	public void deleteById(Integer id) {
 		delete(getById(id));
 	}
-	
+
 	public void step(boolean nourriture, int oeufsCouves, Poule poule) {
-	
+
 
 		if (poule.getEtat() == Etat.Couvaison) {
-			oeufsEclos(poule.getOeufsCouves());
+			oeufsEclos(poule, poule.getOeufsCouves());
 			poule.setOeufsCouves(0);
 			poule.setEtat(Etat.Maternage);
 		} else if (poule.getEtat() == Etat.Liberte && oeufsCouves !=0) {
@@ -86,6 +87,7 @@ public class PouleService {
 		}
 
 		grandir(poule);
+		update(poule);
 	}
 
 	public void grandir(Poule poule) {
@@ -98,6 +100,7 @@ public class PouleService {
 		}
 		mort(poule);
 	}
+
 
 	public void manger(Poule poule) {
 		poule.getPoulailler().setNourriture(poule.getPoulailler().getNourriture()-1);
@@ -126,7 +129,7 @@ public class PouleService {
 	public void passageAdulte(Poule poule) {
 		poule.setPoussin(false);
 		if (poule.isFemelle()) {
-			if (poule.getPoulailler().getSecurite()>5 && poule.getTemperament(Temperament2.pyromane).getPoules().size()<5) {
+			if (poule.getPoulailler().getSecurite()>5 && getByTemperament(Temperament2.pyromane).size()<5) {
 				Random r = new Random();
 				int alea = r.nextInt(11); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
 				if (alea==0 || alea==1 || alea==2) {
@@ -157,6 +160,7 @@ public class PouleService {
 		}
 	}
 
+
 	public int oeufsPondus(Poule poule) {
 		int pondus=(int) (poule.getPonte());
 		if (poule.getEtat() == Etat.Liberte) {
@@ -178,11 +182,142 @@ public class PouleService {
 		Poule p;
 		if (r.nextDouble()<0.1) {
 			p = new Poule(jsonNameParser.genererNomCoq(true), false, poule.getPoulailler());
-			
+
 		} else {
 			p = new Poule(jsonNameParser.genererNomPoule(true), true, poule.getPoulailler());
 		}
 		poule.getPoulailler().indiquerNaissance(p);
 	}
 
+
+	private void majVariables(Poule poule) {
+		majBonheur(poule);
+		majMaternage(poule);
+		majPredation(poule);
+		majMaladie(poule);
+		majPonte(poule);
+		if (poule.getTemperament()==Temperament2.pyromane) {
+			toutBruler(poule);
+		} else if (poule.getTemperament()==Temperament2.psychopathe) {
+			tuerPoule(poule);
+		}
+
+	}
+
+	private void genererVariablesBase(Poule poule) {
+		this.majMaternage(poule);
+		this.majPonte(poule);
+		poule.setBonheur(50);
+
+	}
+
+
+	private void majPonte(Poule poule) {
+		if (poule.getTemperament()==Temperament2.mamanPoule) {
+			Random r = new Random();
+			int alea = r.nextInt(10) + 20;
+			poule.setPonte((poule.getBonheur()/100)*(3/(1+poule.getAge()))*alea);
+		} else {
+			if (poule.getEtat()==Etat.Liberte) {
+				Random r = new Random();
+				int alea = r.nextInt(10) + 20;
+				poule.setPonte((poule.getBonheur()/100)*(3/(1+poule.getAge()))*alea);
+			} else {
+				poule.setPonte(0);
+			}
+		}
+
+	}
+	private void majMaladie(Poule poule) {
+		if (poule.getTemperament()==Temperament2.mamanPoule) {
+			if (poule.getEtat() == Etat.Couvaison ){
+				poule.setMaladie((0.5*(poule.getPoulailler().getNbPoulesVivantes()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100)))*5);
+			}
+			else {
+				poule.setMaladie((0.5*(poule.getPoulailler().getNbPoulesVivantes()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100))));
+			}
+			
+		} else {
+			if (poule.getEtat() == Etat.Couvaison ){
+				poule.setMaladie((0.5*(poule.getPoulailler().getNbPoulesVivantes()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100)))*5);
+			}
+			else {
+				poule.setMaladie((0.5*(poule.getPoulailler().getNbPoulesVivantes()/poule.getPoulailler().getTaille())*(1-(poule.getBonheur()/100))));
+			}
+		}	
+	}
+	private void majPredation(Poule poule) {
+		if (poule.getTemperament()==Temperament2.psychopathe) {
+			poule.setPredation( 0.05 * (1/poule.getPoulailler().getSecurite()) );
+		} else if (poule.getTemperament()==Temperament2.insouciante) {
+			poule.setPredation( 0.75 * (1/poule.getPoulailler().getSecurite()) );
+		} else if (poule.getTemperament()==Temperament2.serieuse) {
+			poule.setPredation( 0.3 * (1/poule.getPoulailler().getSecurite()) );
+		} else {
+			poule.setPredation( 0.5 * (1/poule.getPoulailler().getSecurite()) );
+		}
+
+	}
+	private void majMaternage(Poule poule) {
+		if (poule.getTemperament()==Temperament2.mamanPoule) {
+			poule.setMaternage(0.8);
+		} else if (poule.getTemperament()==Temperament2.pyromane) {
+			poule.setMaternage(0.7);
+		} else {
+			poule.setMaternage(0.6);
+		}
+
+	}
+	private void majBonheur(Poule poule) {
+		if (poule.getPoulailler().getActiviteSaison()==Activite.Escrime)  {
+			if (poule.getTemperament()==Temperament2.mamanPoule) {
+				poule.setBonheur(poule.getBonheur()+20 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoulesVivantes()-poule.getPoulailler().getSecurite()*5+poule.getPoulailler().getNbPsychopathe()*0.1);
+			} else {
+				poule.setBonheur(poule.getBonheur()+8 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoulesVivantes()+poule.getPoulailler().getNbPsychopathe()*0.1);
+			}
+		} else if (poule.getPoulailler().getActiviteSaison()==Activite.Tricot) {
+			if (poule.getTemperament()==Temperament2.serieuse) {
+				poule.setBonheur(poule.getBonheur()+20 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoulesVivantes()-poule.getPoulailler().getSecurite()*5+poule.getPoulailler().getNbPsychopathe()*0.1);
+			} else {
+				poule.setBonheur(poule.getBonheur()+8 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoulesVivantes()+poule.getPoulailler().getNbPsychopathe()*0.1);
+			}
+		} else if (poule.getPoulailler().getActiviteSaison()==Activite.Danse) {
+			if (poule.getTemperament()==Temperament2.insouciante) {
+				poule.setBonheur(poule.getBonheur()+20 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoulesVivantes()-poule.getPoulailler().getSecurite()*5+poule.getPoulailler().getNbPsychopathe()*0.1);
+			} else {
+				poule.setBonheur(poule.getBonheur()+8 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoulesVivantes()+poule.getPoulailler().getNbPsychopathe()*0.1);
+			}
+		} else if (poule.getPoulailler().getActiviteSaison()==Activite.SortieGenerale) {
+			poule.setBonheur(poule.getBonheur()+10 - 0.1*poule.getPoulailler().getNbMort()+0.1*poule.getPoulailler().getNbPoulesVivantes()+poule.getPoulailler().getNbPsychopathe()*0.1);
+		}
+
+	}
+
+	private void tuerPoule(Poule poule) {
+		int nbOeufs=poule.getPoulailler().getOeufs();
+		boolean premier =true;
+		for (int i = 2; i < nbOeufs; i++) {
+			if (nbOeufs % i == 0)
+				premier=false;
+		}
+		if (premier==true) {
+			if (poule.getPoulailler().getSecurite()>1) {
+				poule.getPoulailler().setSecurite(poule.getPoulailler().getSecurite()-1);
+			}
+		}
+
+	}
+	private void toutBruler(Poule poule) {
+		Random r1 = new Random();
+		if ( r1.nextDouble() > (poule.getBonheur()/100)) {
+
+			Random r2 = new Random();
+			int alea = r2.nextInt(poule.getPoulailler().getNbPoulesVivantes());
+
+			poule.getPoulailler().getPoulesVivantes().get(alea).setCauseMort(CauseMort.Meurtre);
+			
+			System.out.println("La poule psychopathe à tuer la poule "+poule.getPoulailler().getPoulesVivantes().get(alea));
+		}
+
+	}
 }
