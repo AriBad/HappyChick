@@ -1,0 +1,50 @@
+<style>
+
+  body
+  {
+    background-image : url("assets/img/happyChick2.png");
+    background-size:100% 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  #grass
+  {
+    display:none;
+    width:700px;
+    height:700px;
+    background-image : url("assets/img/champs_bord.png")
+  }
+
+  #poule
+  {
+    position:relative;
+    top:0;
+    left:0;
+    display:inline-block;
+  }
+  #poule2
+  {
+    position:relative;
+    top:0;
+    left:0;
+    display:inline-block;
+  }
+
+
+#error{color:yellow;}
+</style>
+
+<script defer src="poke.js"></script>
+
+
+<div id="formStart">
+  <input id="inputName" type="text" placeholder="Poule En Cheffe"><input id="btnStart" type="button" value="Start !">
+  <br><br><div id="error">&nbsp;</div>
+</div>
+
+<div id="grass">
+  <div id="poule"><img id="imgPoule" src="assets/img/pixelCheffeBas.png"></div>
+  <div id="poule2" class="Pixelpoules" temperament="Insouciante"><img id="imgPoule2" class= "Pixelpoulesimg" src="assets/img/pixelInsoucianteBas.png"></div>
+  <div id="poule3" class="Pixelpoules" temperament="Serieuse"><img id="imgPoule3" class= "Pixelpoulesimg" src="assets/img/pixelSerieuseBas.png"></div>
+</div>
