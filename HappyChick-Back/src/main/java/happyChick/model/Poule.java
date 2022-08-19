@@ -118,11 +118,11 @@ public class Poule {
 	}
 
 
-	public Temperament getTemperament() {
+	public Temperament2 getTemperament() {
 		return temperament;
 	}
 
-	public void setTemperament(Temperament temperament) {
+	public void setTemperament(Temperament2 temperament) {
 		this.temperament = temperament;
 	}
 

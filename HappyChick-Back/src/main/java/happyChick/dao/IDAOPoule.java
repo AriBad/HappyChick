@@ -1,6 +1,7 @@
 package happyChick.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,6 +16,6 @@ public interface IDAOPoule extends JpaRepository<Poule, Integer> {
 
 	void deleteByTemperament(Temperament temperament);
 	
-	List<Poule> findByTemperament(Temperament2 temperament);
+	Optional <List<Poule>> findByTemperament(Temperament2 temperament);
 
 }

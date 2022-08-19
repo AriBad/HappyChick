@@ -9,18 +9,30 @@ import happyChick.dao.IDAOPoule;
 import happyChick.exception.PouleException;
 import happyChick.model.CauseMort;
 import happyChick.model.Etat;
+import happyChick.model.Poulailler;
 import happyChick.model.Poule;
+import happyChick.model.Temperament;
+import happyChick.model.Temperament2;
+import happyChick.tools.JsonNameParser;
 
 
 public class PouleService {
 	
+	@Autowired
+	private JsonNameParser jsonNameParser;
 	@Autowired
 	private IDAOPoule pouleRepo;
 
 	public Poule getById(Integer id) {
 		// return poulaillerRepo.findById(id).orElseThrow(PoulaillerException::new);
 		return pouleRepo.findById(id).orElseThrow(() -> {
-			throw new PouleException("id Poulailler inconnu");
+			throw new PouleException("id Poule inconnu");
+		});
+	}
+	public List<Poule> getByTemperament(Temperament2 temperament) {
+		// return poulaillerRepo.findById(id).orElseThrow(PoulaillerException::new);
+		return pouleRepo.findByTemperament(temperament).orElseThrow(() -> {
+			throw new PouleException("Temperament de la poule inconnu");
 		});
 	}
 
@@ -68,7 +80,7 @@ public class PouleService {
 
 
 		if (nourriture) {
-			manger();
+			manger(poule);
 		} else {
 			poule.setSaisonSansManger(poule.getSaisonSansManger()+ 1);
 		}
@@ -78,114 +90,99 @@ public class PouleService {
 
 	public void grandir(Poule poule) {
 		poule.setAge(poule.getAge()+0.25);
-		if (this.age==0.25) {
-			passageAdulte();
+		if (poule.getAge()==0.25) {
+			passageAdulte(poule);
 		}
-		if (femelle && !poussin) {
-			temperament.majVariables(this);
+		if (poule.isFemelle() && !poule.isPoussin()) {
+			majVariables(poule);
 		}
-		mort();
+		mort(poule);
 	}
 
-	public void manger() {
-		poulailler.setNourriture(poulailler.getNourriture()-1);
-		this.saisonSansManger=0;
-		System.out.println("La poule "+this.prenom+"(id="+this.id+") a mangé.");
+	public void manger(Poule poule) {
+		poule.getPoulailler().setNourriture(poule.getPoulailler().getNourriture()-1);
+		poule.setSaisonSansManger(0);
+		System.out.println("La poule "+poule.getPrenom()+"(id="+poule.getId()+") a mangé.");
 	}
 
-	public void mort() {
+	public void mort(Poule poule) {
 		Random r = new Random();
-		if ( r.nextDouble() < maladie ) {
-			causeMort = CauseMort.Maladie;
-			System.out.println("La poule "+this.prenom+"(id="+this.id+") est morte de maladie.");
-		} else if (r.nextDouble() < predation) {
-			if (r.nextDouble() < (poulailler.getNbPsychopathe()*0.05)){
-				causeMort = CauseMort.Predation;
-				System.out.println("La poule "+this.prenom+"(id="+this.id+") est morte à cause d'un prédateur.");
+		if ( r.nextDouble() < poule.getMaladie()) {
+			poule.setCauseMort(CauseMort.Maladie);
+			System.out.println("La poule "+poule.getPrenom()+"(id="+poule.getId()+") est morte de maladie.");
+		} else if (r.nextDouble() < poule.getPredation()) {
+			if (r.nextDouble() < (poule.getPoulailler().getNbPsychopathe()*0.05)){
+				poule.setCauseMort(CauseMort.Predation);
+				System.out.println("La poule "+poule.getPrenom()+"(id="+poule.getId()+") est morte à cause d'un prédateur.");
 			}
-		} else if (r.nextDouble() < 0.0025 * (age * age) && age > 10) {
-			causeMort = CauseMort.Age;
-			System.out.println("La poule "+this.prenom+"(id="+this.id+") est morte de Vieillesse.");
-		} else if (r.nextDouble() < saisonSansManger * 0.334) {
-			causeMort = CauseMort.Faim;
+		} else if (r.nextDouble() < 0.0025 * (poule.getAge() * poule.getAge()) && poule.getAge() > 10) {
+			poule.setCauseMort(CauseMort.Age);
+			System.out.println("La poule "+poule.getPrenom()+"(id="+poule.getId()+") est morte de Vieillesse.");
+		} else if (r.nextDouble() < poule.getSaisonSansManger() * 0.334) {
+			poule.setCauseMort(CauseMort.Faim);
 		}
 	}
 
-	public void passageAdulte() {
-		this.poussin=false;
-		if (this.femelle) {
-			if (this.poulailler.getSecurite()>5 && pyromane.getPoules().size()<5) {
+	public void passageAdulte(Poule poule) {
+		poule.setPoussin(false);
+		if (poule.isFemelle()) {
+			if (poule.getPoulailler().getSecurite()>5 && poule.getTemperament(Temperament2.pyromane).getPoules().size()<5) {
 				Random r = new Random();
 				int alea = r.nextInt(11); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
 				if (alea==0 || alea==1 || alea==2) {
-					this.temperament = serieuse;
-					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue serieuse.");
+					poule.setTemperament(Temperament2.serieuse);
 				} else if (alea==3 || alea==4 || alea==5) {
-					this.temperament = mamanPoule;
-					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Maman Poule.");
+					poule.setTemperament(Temperament2.mamanPoule);
 				} else if (alea==6 || alea==7 || alea==8) {
-					this.temperament = insouciante;
-					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Insouciante.");
+					poule.setTemperament(Temperament2.insouciante);
 				} else if (alea==9) {
-					this.temperament = psychopathe;
-					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Psychopathe.");
+					poule.setTemperament(Temperament2.psychopathe);
 				} else if (alea==10) {
-					this.temperament = pyromane;
-					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Pyromane.");
+					poule.setTemperament(Temperament2.pyromane);
 				}
 			} else {
 				Random r = new Random();
 				int alea = r.nextInt(10); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
 				if (alea==0 || alea==1 || alea==2) {
-					this.temperament = serieuse;
-					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue serieuse.");
+					poule.setTemperament(Temperament2.serieuse);
 				} else if (alea==3 || alea==4 || alea==5) {
-					this.temperament = mamanPoule;
-					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Maman Poule.");
+					poule.setTemperament(Temperament2.mamanPoule);
 				} else if (alea==6 || alea==7 || alea==8) {
-					this.temperament = insouciante;
-					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Insouciante.");
+					poule.setTemperament(Temperament2.insouciante);
 				} else if (alea==9) {
-					this.temperament = pyromane;
-					System.out.println("La poule "+this.prenom+"(id="+this.id+") est devenue Psychopathe.");
+					poule.setTemperament(Temperament2.pyromane);
 				}
 			}
-			this.temperament.getPoules().add(this);
-			temperament.genererVariablesBase(this);
+			genererVariablesBase(poule);
 		}
 	}
 
-	public int oeufsPondus() {
-		int pondus=(int) (ponte);
-		if (etat == Etat.Liberte) {
-			System.out.println("La poule "+this.prenom+" a pondu "+pondus+" oeufs.");
-			return (int) (ponte);
+	public int oeufsPondus(Poule poule) {
+		int pondus=(int) (poule.getPonte());
+		if (poule.getEtat() == Etat.Liberte) {
+			return (int) (poule.getPonte());
 		} else {return 0;}
 	}
 
-	public int oeufsEclos(int oeufsCouves) {
+	public int oeufsEclos(Poule poule, int oeufsCouves) {
 		int oeufsEclos;
-		System.out.println("Le taux de maternage est "+getMaternage());
-		oeufsEclos=((int) (getMaternage()*oeufsCouves));
-		System.out.println("La poule "+this.prenom+"(id="+this.id+") a donné naissance à "+oeufsEclos+" sur "+oeufsCouves+" oeufs couvés.");
+		oeufsEclos=((int) (poule.getMaternage()*oeufsCouves));
 		for (int i = 0; i < oeufsEclos; i++) {
-			naissance();
+			naissance(poule);
 		}
 		return oeufsEclos;
 	}
 
-	public void naissance() {
+	public void naissance(Poule poule) {
 		Random r = new Random();
 		Poule p;
 		if (r.nextDouble()<0.1) {
-			p = new Poule(jsonNamePaser.genererNomCoq(true), false, this.poulailler);
+			p = new Poule(jsonNameParser.genererNomCoq(true), false, poule.getPoulailler());
 			
 		} else {
-			p = new Poule(jsonNamePaser.genererNomPoule(true), true, this.poulailler);
+			p = new Poule(jsonNameParser.genererNomPoule(true), true, poule.getPoulailler());
 		}
-		poulailler.indiquerNaissance(p);
-		System.out.println("La poule "+p.prenom+"(id="+p.id+") est né !!!.");
-
+		poule.getPoulailler().indiquerNaissance(p);
 	}
 
 }
