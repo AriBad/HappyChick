@@ -1,7 +1,5 @@
 package happyChick.model;
 
-import java.util.Random;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,41 +9,57 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.annotation.JsonView;
 
-import happyChick.tools.JsonNameParser;
+import happyChick.model.jsonview.JsonViews;
 
 @Entity
 
 public class Poule {
-
+	
+	@JsonView(JsonViews.Base.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
+	@JsonView(JsonViews.Base.class)
 	protected String prenom;
+	@JsonView(JsonViews.Base.class)
 	protected double age;
+	@JsonView(JsonViews.Base.class)
 	protected double bonheur;
+	@JsonView(JsonViews.Base.class)
 	protected double ponte;
+	@JsonView(JsonViews.Base.class)
 	protected double maternage;
+	@JsonView(JsonViews.Base.class)
 	protected double predation;
+	@JsonView(JsonViews.Base.class)
 	protected double maladie;
-
+	
+	@JsonView(JsonViews.Base.class)
 	protected boolean poussin;
+	@JsonView(JsonViews.Base.class)
 	protected boolean femelle;
-
+	
+	@JsonView(JsonViews.Base.class)
 	@Enumerated
 	protected Temperament2 temperament;
-
+	
+	@JsonView(JsonViews.pouleWithPoulailler.class)
 	@ManyToOne
 	protected Poulailler poulailler;
-
+	
+	@JsonView(JsonViews.Base.class)
 	protected int oeufsCouves;
 
+	@JsonView(JsonViews.Base.class)
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition = "ENUM('Couvaison', 'Maternage', 'Liberte')")
 	protected Etat etat;
+	@JsonView(JsonViews.Base.class)
 	protected int saisonSansManger;
-
+	
+	@JsonView(JsonViews.Base.class)
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition = "ENUM('Faim', 'Meurtre', 'Predation', 'Maladie', 'Age')")
 	protected CauseMort causeMort;
