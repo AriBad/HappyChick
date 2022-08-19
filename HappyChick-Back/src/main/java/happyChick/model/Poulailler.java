@@ -103,6 +103,7 @@ public class Poulailler {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
 	public void indiquerNaissance(Poule p) {
 		listePoules.add(p);
 		//System.out.println(p.getPrenom() + " est née !");
@@ -142,41 +143,6 @@ public class Poulailler {
 			}
 		}
 		return vivantes;
-	}
-	
-	public void step(Activite a, int portionNourriture, Map<Poule, Integer> poulesCouveuses, boolean agrandir, boolean securiser) {
-		echangeNourriture(portionNourriture);
-		saison= Saison.saisonSuivante(saison);
-		if (saison == Saison.Printemps) {
-			annee++;
-		}
-		activiteSaison = a;
-		if (agrandir) {agrandir();}
-		if (securiser) {augmenterSecurite();}
-		int cpt = 0;
-		int nbOeufs = 0;
-		
-		List<Poule> listePoulestmp = getPoulesVivantes();
-		Collections.shuffle(listePoulestmp);
-		for (Poule p : listePoulestmp) {
-			if (poulesCouveuses.containsKey(p)) {
-				p.step(cpt<nourriture, poulesCouveuses.get(p));
-			}
-			else {
-				p.step(cpt < nourriture, 0);
-			}
-			nbOeufs += p.oeufsPondus();
-			cpt++;
-		}
-		this.oeufs+=nbOeufs;
-		System.out.println("Il y a "+getNbPoulesVivantes()+" poules dans le poullailer. Il y a "+this.nourriture+" portions de nouriture. Le nombre d'eoufs pondus cette saison est de "+nbOeufs+". Il y a maintenant "+this.oeufs+" oeufs dans le poullailer.");
-		
-	}
-	
-	public void echangeNourriture(int portionNourriture) {
-		this.oeufs-=portionNourriture*50;
-		this.nourriture+=portionNourriture;
-		System.out.println("Vous avez échangé "+(portionNourriture*50)+" oeufs contre "+portionNourriture+" portions de nourriture");
 	}
 
 	public int getTaille() {

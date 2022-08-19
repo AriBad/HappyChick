@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @PropertySource("classpath:infos.properties")
 @EnableJpaRepositories("happyChick.dao")
-@ComponentScan(basePackages = {"happyChick.service"})
+@ComponentScan(basePackages = {"happyChick.service", "happyChick.tools"})
 public class AppConfig {
 
 
@@ -46,7 +46,7 @@ public class AppConfig {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		emf.setDataSource(dataSource);
-		emf.setPackagesToScan("happyChick.model","happyChick.tools");
+		emf.setPackagesToScan("happyChick.model");
 		emf.setJpaVendorAdapter(vendorAdapter);
 		emf.setJpaProperties(this.hibernateProperties());
 		return emf;
