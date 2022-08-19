@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "happyChick.controller" })
+@ComponentScan(basePackages = { "happyChick.controller", "happyChick.restcontroller" })
 @Import(AppConfig.class)
 public class WebConfig {
 

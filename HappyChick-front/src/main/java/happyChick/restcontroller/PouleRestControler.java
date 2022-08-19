@@ -30,7 +30,7 @@ import happyChick.service.PoulaillerService;
 import happyChick.service.PouleService;
 
 @RestController
-@RequestMapping("/api/Poule")
+@RequestMapping("/api/poule")
 public class PouleRestControler {
 
 	@Autowired

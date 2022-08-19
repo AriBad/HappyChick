@@ -35,6 +35,10 @@ public class PoulaillerService {
 		});
 	}
 
+	public List<Poulailler> getAllWithPoules() {
+		return poulaillerRepo.findAllWithPoules();
+	}
+	
 	public List<Poulailler> getAll() {
 		// poulaillerRepo.findAll().forEach(System.out::println);
 //		poulaillerRepo.findAll().forEach((p) -> {
@@ -44,7 +48,7 @@ public class PoulaillerService {
 	}
 	
 	public Poulailler getByIdWithPoules(Integer id) {
-		return poulaillerRepo.findByIdWithPoule(id).orElseThrow(() -> {
+		return poulaillerRepo.findByIdWithPoules(id).orElseThrow(() -> {
 			throw new PoulaillerException("id Poulailler inconnu");
 		});
 	}

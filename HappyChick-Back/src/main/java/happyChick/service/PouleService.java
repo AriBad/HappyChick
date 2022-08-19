@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import happyChick.dao.IDAOPoule;
 import happyChick.exception.PouleException;
@@ -14,7 +15,7 @@ import happyChick.model.Poule;
 import happyChick.model.Temperament;
 import happyChick.tools.JsonNameParser;
 
-
+@Service
 public class PouleService {
 
 	@Autowired

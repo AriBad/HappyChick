@@ -1,12 +1,15 @@
 package happyChick.restcontroller;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,9 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import happyChick.exception.PoulaillerException;
+import happyChick.model.Activite;
 import happyChick.model.Poulailler;
+import happyChick.model.Poule;
 import happyChick.model.jsonview.JsonViews;
 import happyChick.service.PoulaillerService;
+import happyChick.service.PouleService;
 
 @RestController
 @RequestMapping("/api/poulailler")
@@ -32,16 +38,19 @@ public class PoulaillerRestController {
 	@Autowired
 	PoulaillerService poulaillerService;
 	
+	@Autowired
+	PouleService pouleService;
+	
 	@GetMapping("")
-	@JsonView(JsonViews.PoulaillerWithPoules.class)
+	@JsonView(JsonViews.Base.class)
 	public List<Poulailler> getAll() {
 		return poulaillerService.getAll();
 	}
 	
-	@GetMapping("/poules")
+	@GetMapping("/poule")
 	@JsonView(JsonViews.PoulaillerWithPoules.class)
 	public List<Poulailler> getAllWithPoules() {
-		return poulaillerService.getAll();
+		return poulaillerService.getAllWithPoules();
 	}
 	
 	
@@ -51,10 +60,10 @@ public class PoulaillerRestController {
 		return poulaillerService.getById(id);
 	}
 
-	@GetMapping("/{id}/poules")
-	@JsonView(JsonViews.Base.class)
+	@GetMapping("/{id}/poule")
+	@JsonView(JsonViews.PoulaillerWithPoules.class)
 	public Poulailler getByIdWithPoules(@PathVariable Integer id) {
-		return poulaillerService.getById(id);
+		return poulaillerService.getByIdWithPoules(id);
 	}
 	
 	@PostMapping("")
@@ -78,6 +87,32 @@ public class PoulaillerRestController {
 			return poulaillerService.update(poulailler);
 		}
 		return null;
+	}
+	
+	@PostMapping("/{id}/saison")
+	@JsonView(JsonViews.PoulaillerWithPoules.class) //peut-être que optionnal fait exploser
+	public Poulailler poulaillerStep(@PathVariable Integer id,@Param("nourriture") Integer nourriture, @Param("activite") String activite, 
+			@Param("securite") Optional<String> securite, 
+			@Param("taille") Optional<String> taille, @RequestBody HashMap<Integer, Integer> mapCouveuse) {
+		Poulailler poulailler = poulaillerService.getById(id);
+		Activite a = Activite.valueOf(activite);
+		boolean securiser = false;
+		boolean agrandir = false;
+		if( securite.isPresent() ) { //peut exploser
+			securiser = true;
+		}
+		if (taille.isPresent()) {
+			agrandir=true;
+		}
+		
+		HashMap<Poule, Integer> mapCouveuseTemp = new HashMap();
+		for (Map.Entry<Integer, Integer> entry : mapCouveuse.entrySet()) {
+			mapCouveuseTemp.put(pouleService.getById(entry.getKey()), entry.getValue());
+	    }
+		
+		poulaillerService.step(poulailler, a, nourriture, mapCouveuseTemp, agrandir, securiser);
+		
+		return poulailler;		
 	}
 
 	@PatchMapping("/{id}")

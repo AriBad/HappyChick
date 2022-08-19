@@ -25,8 +25,8 @@ public class User {
 	protected String password;
 	
 
-	@OneToMany(mappedBy = "user")
-	private List<Poulailler> poulaillers;
+	/*@OneToMany(mappedBy = "user")
+	transient private List<Poulailler> poulaillers;*/
 	
 	public User(){}
 
@@ -60,13 +60,13 @@ public class User {
 		this.password = password;
 	}
 
-	public List<Poulailler> getPoulaillers() {
+	/*public List<Poulailler> getPoulaillers() {
 		return poulaillers;
 	}
 
 	public void setPoulaillers(List<Poulailler> poulaillers) {
 		this.poulaillers = poulaillers;
-	}
+	}*/
 
 	@Override
 	public String toString() {

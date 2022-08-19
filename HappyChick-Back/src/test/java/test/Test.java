@@ -1,21 +1,14 @@
 package test;
 import java.util.Scanner;
 
-import happyChick.context.Singleton;
 import happyChick.dao.IDAOPoulailler;
 import happyChick.dao.IDAOPoule;
-import happyChick.dao.IDAOTemperament;
 import happyChick.dao.IDAOUser;
 import happyChick.model.Activite;
 import happyChick.model.Etat;
-import happyChick.model.Insouciante;
-import happyChick.model.MamanPoule;
 import happyChick.model.Poulailler;
 import happyChick.model.Poule;
-import happyChick.model.Psychopathe;
-import happyChick.model.Pyromane;
 import happyChick.model.Saison;
-import happyChick.model.Serieuse;
 import happyChick.model.User;
 import happyChick.tools.JsonNameParser;
 
@@ -29,7 +22,7 @@ import java.util.HashMap;
 
 public class Test {
 	
-	static User connected;
+	/*static User connected;
 	static  IDAOUser daoU = Singleton.getInstance().getDaoUser();
    	
 	public static int saisieInt(String msg) {
@@ -207,7 +200,7 @@ public class Test {
 	public static void main(String[] args) {
    	
 		menuPrincipal();
-	}
+	}*/
 }
 
   /* date = 0000-00-00

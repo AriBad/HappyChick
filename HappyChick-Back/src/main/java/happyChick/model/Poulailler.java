@@ -61,9 +61,9 @@ public class Poulailler {
 	@OneToMany(mappedBy="poulailler")
 	List<Poule> listePoules = new ArrayList();
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="id_user")
-	transient private User user;
+	transient private User user;*/
 	
 	public Integer getId() {
 		return id;
@@ -97,12 +97,12 @@ public class Poulailler {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public User getUser() {
+	/*public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
-	}
+	}*/
 	
 	public void indiquerNaissance(Poule p) {
 		listePoules.add(p);
@@ -224,7 +224,7 @@ public class Poulailler {
 	public int getNbPsychopathe() {
 		int cpt = 0;
 		for (Poule p : listePoules) {
-			if (p.getTemperament() instanceof Psychopathe){
+			if (p.getTemperament() == Temperament.psychopathe){
 				cpt ++;
 			}
 		}
