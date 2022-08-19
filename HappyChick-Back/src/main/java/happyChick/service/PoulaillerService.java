@@ -90,9 +90,12 @@ public class PoulaillerService {
 		
 		List<Poule> listePoulestmp = poulailler.getPoulesVivantes();
 		Collections.shuffle(listePoulestmp);
+		
+		System.out.println(poulesCouveuses);
 		for (Poule p : listePoulestmp) {
 			if (poulesCouveuses.containsKey(p)) {
-				pouleService.step(cpt<poulailler.getNourriture(), poulesCouveuses.get(p), p);
+				System.out.println("ICIIIIIIIIIII");
+				pouleService.step(cpt < poulailler.getNourriture(), poulesCouveuses.get(p), p);
 			}
 			else {
 				pouleService.step(cpt < poulailler.getNourriture(), 0,p);

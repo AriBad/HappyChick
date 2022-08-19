@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,9 +54,12 @@ public class JsonNameParser {
 					}
                 }
             }*/
-			FileSystem fs = FileSystems.getDefault();
-			Path path = fs.getPath("src/main/resources/liste_des_prenoms.json");
-			String tmp = Files.readString(path, StandardCharsets.US_ASCII);
+			Scanner sc = new Scanner(getClass().getClassLoader().getResourceAsStream("liste_des_prenoms.json"));
+			String tmp = sc.nextLine();
+			//getClass().getClassLoader().getResourceAsStream("liste_des_prenoms.json")
+			//FileSystem fs = FileSystems.getDefault();
+			//Path path = fs.getPath("src/main/resources/liste_des_prenoms.json");
+			//String tmp = Files.readString(path, StandardCharsets.US_ASCII);
 			JSONArray obj = new JSONArray(tmp);
 			for (int i = 0 ; i < obj.length() ; i++) {
 				JSONObject fields = (JSONObject) obj.getJSONObject(i).get("fields");

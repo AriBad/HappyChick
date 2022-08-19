@@ -26,8 +26,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import happyChick.exception.PoulaillerException;
 import happyChick.model.Activite;
+import happyChick.model.ChoixUsers;
 import happyChick.model.Poulailler;
 import happyChick.model.Poule;
+import happyChick.model.PouleCouveuse;
 import happyChick.model.jsonview.JsonViews;
 import happyChick.service.PoulaillerService;
 import happyChick.service.PouleService;
@@ -91,26 +93,16 @@ public class PoulaillerRestController {
 	
 	@PostMapping("/{id}/saison")
 	@JsonView(JsonViews.PoulaillerWithPoules.class) //peut-être que optionnal fait exploser
-	public Poulailler poulaillerStep(@PathVariable Integer id,@Param("nourriture") Integer nourriture, @Param("activite") String activite, 
-			@Param("securite") Optional<String> securite, 
-			@Param("taille") Optional<String> taille, @RequestBody HashMap<Integer, Integer> mapCouveuse) {
-		Poulailler poulailler = poulaillerService.getById(id);
-		Activite a = Activite.valueOf(activite);
-		boolean securiser = false;
-		boolean agrandir = false;
-		if( securite.isPresent() ) { //peut exploser
-			securiser = true;
-		}
-		if (taille.isPresent()) {
-			agrandir=true;
-		}
+	public Poulailler poulaillerStep(@PathVariable Integer id, @RequestBody ChoixUsers choixUsers) {
+		Poulailler poulailler = poulaillerService.getByIdWithPoules(id);
 		
 		HashMap<Poule, Integer> mapCouveuseTemp = new HashMap();
-		for (Map.Entry<Integer, Integer> entry : mapCouveuse.entrySet()) {
-			mapCouveuseTemp.put(pouleService.getById(entry.getKey()), entry.getValue());
-	    }
+		for(PouleCouveuse pc : choixUsers.getListeCouveuses()) {
+			mapCouveuseTemp.put(pouleService.getById(pc.getPoule().getId()), pc.getOeufs());
+		}
 		
-		poulaillerService.step(poulailler, a, nourriture, mapCouveuseTemp, agrandir, securiser);
+		poulaillerService.step(poulailler, choixUsers.getActivite(), choixUsers.getNourriture(), mapCouveuseTemp, choixUsers.isTaille(), choixUsers.isSecurite());
+		
 		
 		return poulailler;		
 	}
