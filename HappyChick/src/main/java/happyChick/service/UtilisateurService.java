@@ -43,7 +43,7 @@ public class UtilisateurService {
 			throw new UtilisateurException("Login obligatoire");
 		}
 		if (utilisateur.getMotDePasse() == null || utilisateur.getMotDePasse().isEmpty()) {
-			throw new UtilisateurException("Password obligatoire");
+			throw new UtilisateurException("Mot de passe obligatoire");
 		}
 		Utilisateur userEnBase = getById(utilisateur.getId());
 		userEnBase.setLogin(utilisateur.getLogin());
