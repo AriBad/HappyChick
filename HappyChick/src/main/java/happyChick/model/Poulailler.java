@@ -63,7 +63,7 @@ public class Poulailler {
 	
 	@ManyToOne
 	@JoinColumn(name="id_user")
-	private User user;
+	private Utilisateur utilisateur;
 	
 	public Integer getId() {
 		return id;
@@ -98,12 +98,12 @@ public class Poulailler {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	/*public User getUser() {
-		return user;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
-	public void setUser(User user) {
-		this.user = user;
-	}*/
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 	
 	public void indiquerNaissance(Poule p) {
 		listePoules.add(p);

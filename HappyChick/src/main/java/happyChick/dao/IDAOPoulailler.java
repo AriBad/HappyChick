@@ -16,5 +16,5 @@ public interface IDAOPoulailler extends JpaRepository<Poulailler, Integer> {
 	@Query("SELECT p from Poulailler p join fetch p.listePoules")
 	public List<Poulailler> findAllWithPoules();
 
-	//public void deleteByUser(User user);
+	//public void deleteByUser(Utilisateur user);
 }
