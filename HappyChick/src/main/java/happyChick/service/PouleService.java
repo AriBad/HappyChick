@@ -152,7 +152,7 @@ public class PouleService {
 				} else if (alea==6 || alea==7 || alea==8) {
 					poule.setTemperament(Temperament.insouciante);
 				} else if (alea==9) {
-					poule.setTemperament(Temperament.pyromane);
+					poule.setTemperament(Temperament.psychopathe);
 				}
 			}
 			genererVariablesBase(poule);

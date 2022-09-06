@@ -25,8 +25,8 @@ public class User {
 	protected String password;
 	
 
-	/*@OneToMany(mappedBy = "user")
-	transient private List<Poulailler> poulaillers;*/
+	@OneToMany(mappedBy = "user")
+	private List<Poulailler> poulaillers;
 	
 	public User(){}
 

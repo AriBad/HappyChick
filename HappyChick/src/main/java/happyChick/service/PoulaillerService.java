@@ -59,7 +59,7 @@ public class PoulaillerService {
 			throw new PoulaillerException("nom obligatoire");
 		}
 		//Initialise les données au début du jeu avec un nouveau poulailler
-		poulailler.setSecurite(0);
+		poulailler.setSecurite(1);
 		poulailler.setTaille(100);
 		poulailler.setNourriture(10);
 		poulailler.setOeufs(5);

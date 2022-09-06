@@ -61,9 +61,9 @@ public class Poulailler {
 	@OneToMany(mappedBy="poulailler")
 	List<Poule> listePoules = new ArrayList();
 	
-	/*@ManyToOne
+	@ManyToOne
 	@JoinColumn(name="id_user")
-	transient private User user;*/
+	private User user;
 	
 	public Integer getId() {
 		return id;
@@ -111,11 +111,19 @@ public class Poulailler {
 	}
 
 	public int getSecurite() {
+		//securite = 0 n'existe pas
+		if(securite<0) {
+			securite=1;
+		}
 		return securite;
 	}
 
 	public void setSecurite(int securite) {
-		this.securite = securite;
+		if(securite < 0) {
+			this.securite = 1;
+		} else {
+			this.securite = securite;
+		}
 	}
 	
 	public Saison getSaison() {

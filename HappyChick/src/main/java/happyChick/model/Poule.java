@@ -44,7 +44,7 @@ public class Poule {
 	protected boolean femelle;
 	
 	@JsonView(JsonViews.Base.class)
-	@Enumerated
+	@Enumerated(EnumType.STRING)	
 	protected Temperament temperament;
 	
 	@JsonView(JsonViews.pouleWithPoulailler.class)
