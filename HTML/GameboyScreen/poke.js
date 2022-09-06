@@ -10,7 +10,9 @@
 
 var posX=0;
 var posY=0;
-var rand=0;
+//var rposY=100;
+//var rposX=100;
+//var rand=0;
 
 
 var img="pixelCheffeBas";
@@ -26,6 +28,8 @@ function lancerAventure()
     formStart.style.display="none";
     grass.style.display="block";
     poule.setAttribute("title",inputName.value);
+//    poule2.setAttribute("title2",inputName.value);
+//    poule3.setAttribute("title3",inputName.value);
     document.body.onkeyup=deplacement;
   }
   else
@@ -33,6 +37,37 @@ function lancerAventure()
     error.innerHTML="Il faut saisir un nom !";
   }
 }
+function easy() {
+    document.getElementById('poule1')
+        .style.animationDuration = '100s';
+    document.getElementById('poule1')
+        .className = 'pixelpoules';
+        document.getElementById('poule2')
+            .style.animationDuration = '100s';
+        document.getElementById('poule2')
+            .className = 'pixelpoules';
+            document.getElementById('poule3')
+                .style.animationDuration = '100s';
+            document.getElementById('poule3')
+                .className = 'pixelpoules';
+                document.getElementById('poule4')
+                    .style.animationDuration = '250s';
+                document.getElementById('poule4')
+                    .className = 'pixelpoules';
+                    document.getElementById('poule5')
+                        .style.animationDuration = '150s';
+                    document.getElementById('poule5')
+                        .className = 'pixelpoules';
+                        document.getElementById('poule6')
+                            .style.animationDuration = '300s';
+                        document.getElementById('poule6')
+                            .className = 'pixelpoules';
+                            document.getElementById('poule7')
+                                .style.animationDuration = '200s';
+                            document.getElementById('poule7')
+                                .className = 'pixelpoules';
+}
+setInterval(easy, 1000)
 
 function deplacement(event)
 {
@@ -96,15 +131,13 @@ function deplacement(event)
   imgPoule.setAttribute("src","assets/img/"+img+".png");
 
 }
-function random(){
+/* function random(){
 
   //var array = ['Cheffe','Coq','Insouciante','MamanPoule','Poussin','Psychopathe','Pyromane','Reine','Serieuse'];
 
   var allpoules=document.getElementsByClassName('Pixelpoules');
 
   for (var temp of allpoules){
-    var rposX=temp.style.to;
-    var rposY;
     var img;
     rand = parseInt(Math.random() * 80) - 40;
     if (rand<=0 && rand>=-20){
@@ -154,10 +187,14 @@ function random(){
       img="pixel"+temp.temperament+"Droite";
     }
 
-    temp.style.top=rposY+"px";
-    temp.style.left=rposX+"px";
-    temp.setAttribute("src","assets/img/"+img+".png");
-
+    poule2.style.top=rposY+"px";
+    poule2.style.left=rposX+"px";
+    poule3.style.top=rposY+"px";
+    poule3.style.left=rposX+"px";
+  poule2.setAttribute("src","assets/img/"+img2+".png");
+poule2.setAttribute("src","assets/img/"+img3+".png");
   }
 }
+
 setInterval(random, 1000)
+*/
