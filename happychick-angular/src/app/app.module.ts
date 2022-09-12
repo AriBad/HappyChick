@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PouleComponent } from './poule/poule.component';
 import { PoulaillerComponent } from './poulailler/poulailler.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PouleMemoryService } from './poule-memory.service';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,10 @@ import { PoulaillerComponent } from './poulailler/poulailler.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [PouleMemoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
