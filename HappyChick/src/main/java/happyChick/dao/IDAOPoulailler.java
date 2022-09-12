@@ -17,4 +17,8 @@ public interface IDAOPoulailler extends JpaRepository<Poulailler, Integer> {
 	public List<Poulailler> findAllWithPoules();
 
 	//public void deleteByUser(Utilisateur user);
+	
+	
+	
 }
+
