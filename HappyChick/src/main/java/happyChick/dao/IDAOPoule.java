@@ -27,6 +27,6 @@ public interface IDAOPoule extends JpaRepository<Poule, Integer> {
 	
 	Optional <List<Poule>> findByTemperament(Temperament temperament);
 	
-	List<Poule> findPouleByTemperamentAndVie(Temperament temperament, CauseMort causeMort);
+	//List<Poule> findPouleByTemperamentAndVie(Temperament temperament, CauseMort causeMort);
 }
 
