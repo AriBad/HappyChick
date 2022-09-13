@@ -10,6 +10,7 @@ import { PouleHttpService } from '../poule-http.service';
 export class PouleComponent implements OnInit {
   formPoule: Poule;
 
+
   constructor(private pouleService: PouleHttpService) { }
 
   ngOnInit(): void {
@@ -43,5 +44,11 @@ export class PouleComponent implements OnInit {
 
   delete(id: number) {
     this.pouleService.delete(id);
+  }
+  getPoulesVivantes() {
+    return this.pouleService.getPoulesVivantes();
+  }
+  getPoulesMortes(causemort: String) {
+    return this.pouleService.getPoulesMortes(causemort);
   }
 }
