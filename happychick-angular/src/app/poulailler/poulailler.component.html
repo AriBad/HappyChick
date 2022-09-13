@@ -1,1 +1,179 @@
-<p>poulailler works!</p>
+<!-- <div id="choix_param">
+                <h3>Quels sont vos choix pour cette saison ?</h3>
+                <p> Oeufs totaux : <span id="totalOeuf"> 550 </span> Oeufs dispos : <span id="oeufsDispos"> 550 </span>
+                </p>
+                <div class="input-group mb-3">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="nom" class="form-label">Achat de nourriture : </label> <input
+                                    id="nourritureAchat" name="nourritureAchat" type="number" value="0" min="0" step="1"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group vertical-align">
+                                <label for="nom"> Choix de l'activité de la saison : </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="activite" value="SortieG"
+                                        id="SortieG" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Sortie Générale
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="activite" value="Escrime"
+                                        id="Escrime">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Escrime
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="activite" value="Tricot"
+                                        id="tricot">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Tricot
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="activite" value="Danse"
+                                        id="danse">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Danse
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label> Amélioration du poulailler : </label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="securite" value="securite"
+                                    id="securite">
+                                <label class="form-check-label" for="securite">
+                                    Sécurité
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="taille" value="taille"
+                                    id="taille">
+                                <label class="form-check-label" for="taille">
+                                    Taille
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="nom">Choix des poules qui vont couver : </label>
+                                <select class="form-select" aria-label="Default select example" name="couveuses"
+                                    placeholder="poule à couver">
+                                    <option value="1">1-Germaine (psychopathe)</option>
+                                    <option value="2">2-Clémence (Serieuse)</option>
+                                    <option value="3">3-Marie-Emmanuelle (Maman-poule)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nom">Nombre d'oeufs à couver : </label>
+                                <input class="form-group" name="nbOeufsCouves" type="number" value="0" min="0" max="8"
+                                    step="1" placeholder="nombres d'oeufs à couver">
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group btn-group-lg float-right">
+                                    <button type="button" class="btn btn-primary">Ajouter Poule</button>
+                                    <button type="button" id="afficherCouveuses" class="btn btn-info">Afficher les
+                                        poules selectionées</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    <div id="couveusestable">
+                        <h5>Poule qui couvent</h5>
+                        <table class="table table-dark table-striped">
+                            <tr>
+                                <td>id</td>
+                                <td>nom</td>
+                                <td>tempérament</td>
+                                <td>nombre d'oeufs</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group btn-group-lg float-right">
+                            <button type="button" class="btn btn-success">Lancer la saison</button>
+                            <button type="button" class="btn btn-warning">Reinitialiser</button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+<div id="choix_param">
+    <h3>Quels sont vos choix pour cette saison ?</h3>
+    <p> Oeufs totaux : <span id="totalOeuf"> 550 </span> Oeufs dispos : <span id="oeufsDispos"> 550 </span>
+    </p>
+    <form method="get">
+        <table>
+            <tr>
+                <td>Achat de nourriture</td>
+                <td><input id="nourritureAchat" name="nourritureAchat" type="number" value="0" min="0" step="1" [(ngModel)]="saison.nourriture"></td>
+                <td>Amélioration du poulailler</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td><input name="securite" value="securite" id="securite" type="checkbox" [(ngModel)]="saison.securite"> <label
+                        for="securite">Sécurité</label> <input name="taille" value="taille" id="taille" type="checkbox" [(ngModel)]="saison.taille">
+                    <label for="taille">Taille</label></td>
+            </tr>
+            <tr>
+                <td>Choix de l'activité de la saison</td>
+                <td>
+                    <input name="activite" value="SortieG" id="SortieG" type="radio" checked [(ngModel)]="saison.activite"> 
+                    <label for="SortieG">Sortie Générale</label> 
+                    <input name="activite" value="Escrime" id="Escrime" type="radio" [(ngModel)]="saison.activite"> 
+                    <label for="Escrime">Escrime</label> 
+                    <input name="activite" value="Tricot" id="tricot" type="radio" [(ngModel)]="saison.activite"> 
+                    <label for="tricot">Tricot</label> <input name="activite" value="Danse" id="danse" type="radio" [(ngModel)]="saison.activite"> 
+                    <label for="danse">Danse</label>
+                </td>
+            </tr>
+        </table><br>
+        <fieldset>
+            <legend>Couvaisons<span class="badge badge-info">Plus d'informations</span></legend>
+            <table>
+
+                <tr>
+                    <td>Choix des poules qui vont couver</td>
+                    <td>
+                        <select name="couveuses" placeholder="poule à couver" [(ngModel)]="couveuseId">
+                            <option *ngFor="let poule of getPoulesLibres()" [value]="poule.id">{{poule.id}} - {{poule.prenom}} ({{poule.temperament}})</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nombre d'oeufs à couver</td>
+                    <td><input name="nbOeufsCouves" type="number" value="0" min="0" max="8" step="1"
+                            placeholder="nombres d'oeufs à couver" [(ngModel)]="couveuseNbOeufs"></td>
+                    <td><button type="button" class="btn btn-primary" (click)="ajouterCouveuse()">Ajouter Poule</button></td>
+                    <td><button type="button" id="afficherCouveuses" (click)="affichertableau()" class="btn btn-info">Afficher les
+                            poules selectionées</button></td>
+                </tr>
+
+            </table>
+        </fieldset>
+        <div id="couveusestable" *ngIf="affichePoulesCouveuses">
+            <h5>Poule qui couvent</h5>
+            <table class="table table-dark table-striped">
+                <tr>
+                    <td>id</td>
+                    <td>nom</td>
+                    <td>tempérament</td>
+                    <td>nombre d'oeufs</td>
+                </tr>
+                <tr *ngFor="let couv of saison.couveuses">
+                    <td>{{couv.idPoule}}</td>
+                    <td>{{findPouleById(couv.idPoule).prenom}</td>
+                    <td>findPouleById(couv.idPoule).temperament</td>
+                    <td>{{couv.nbOeufs}}</td>
+                </tr>
+            </table>
+        </div>
+        <input type="submit" class="btn btn-success" (click)="saisonSuivante()"> <button type="button"
+            class="btn btn-warning" (click)="reinitialiser()">Reinitialiser</button>
+    </form>
+</div>

@@ -62,7 +62,6 @@ ul
 	*/
 	color: rgb(205, 207, 189);
 }
-
 #poulailler_et_recap
 {
 	display: flex;
@@ -90,28 +89,6 @@ ul
 	align-items:center;
 	justify-content: center;
 	overflow: auto;
-}
-
-#choix_param
-{
-	background-color: rgb(110, 104, 104);
-	color: rgb(205, 207, 189);
-	border: solid rgb(205, 207, 189) 3px;
-	border-radius: 2%;
-	width: 90%;
-	height: 50%;
-	padding: 4px;
-	overflow: auto;
-}
-
-#choix_param table
-{
-	color: rgb(205, 207, 189);
-}
-
-#couveusestable
-{
-	display: none;
 }
 
 /* Menu sur la droite */
