@@ -16,6 +16,8 @@ import { MenuComponent } from './menu/menu.component';
 import { RecapSaisonComponent } from './recap-saison/recap-saison.component';
 import { GuideComponent } from './guide/guide.component';
 import { TropheeComponent } from './trophee/trophee.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PouleMemoryService } from './poule-memory.service';
 
 @NgModule({
   declarations: [
@@ -36,9 +38,10 @@ import { TropheeComponent } from './trophee/trophee.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [PouleMemoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
