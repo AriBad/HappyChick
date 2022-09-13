@@ -63,14 +63,4 @@ export class PoulaillerHttpService {
       this.load();
     });
   }
-
-  getPoulesLibres(): Array<Poule> {
-    let libres: Array<Poule>= new Array<Poule>;
-    
-    libres=this.poulailler.listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte");
-    console.log(libres);
-    console.log(libres[1]);
-    return libres;
-  }
-
 }
