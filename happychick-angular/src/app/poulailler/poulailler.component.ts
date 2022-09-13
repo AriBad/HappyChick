@@ -19,6 +19,7 @@ export class PoulaillerComponent implements OnInit {
 
   constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService) {
     this.saison = new Saison();
+    this.saison.couveuses = new Array<Couveuse>;
     this.poulaillerService.getPoulaillerActuel().subscribe(
       reponse => {
         this.poulailler = reponse;
