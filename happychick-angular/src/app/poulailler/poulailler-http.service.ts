@@ -9,35 +9,24 @@ import { Poulailler, Poule, Saison } from '../model';
 })
 export class PoulaillerHttpService {
   
-  poulailler : Poulailler;
+  poulaillerId : number;
   poulaillers : Array<Poulailler>;
   apiPath:string;
   
   constructor(private http: HttpClient, private appConfig: AppConfigService) {
     this.apiPath = this.appConfig.apiBackEndUrl + "poulailler/";
-    
     this.load();
   }
 
   load() {
+    this.poulaillerId = 1;
     this.http.get<Array<Poulailler>>(this.apiPath+"").subscribe(response => {
       this.poulaillers = response;
     });
-    this.http.get<Poulailler>(this.apiPath+"1").subscribe(response => {
-      this.poulailler = response;
-    });
   }
 
-  setPoulaillerActuel(id:number):void {
-    this.poulaillers.forEach((value) => {
-      if(value.id == id) {
-        this.poulailler=value;
-      }
-    });
-  }
-
-  getPoulaillerActuel():Poulailler {
-    return this.poulailler;
+  getPoulaillerActuel():Observable<Poulailler> {
+    return this.http.get<Poulailler>(this.apiPath+this.poulaillerId);
   }
 
   getAll(): Array<Poulailler> {
@@ -70,13 +59,8 @@ export class PoulaillerHttpService {
   }
 
   saisonSuivante(saison:Saison) {
-    this.http.put<void>(this.apiPath + this.poulailler.id + "/saison", saison).subscribe(resp => {
+    this.http.put<void>(this.apiPath + this.poulaillerId + "/saison", saison).subscribe(resp => {
       this.load();
     });
   }
-
-  getPoulesLibres(): Array<Poule> {
-    return this.poulailler.listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte");
-  }
-
 }
