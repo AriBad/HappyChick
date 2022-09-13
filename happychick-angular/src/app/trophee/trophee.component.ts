@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-trophee',
+  selector: 'trophee',
   templateUrl: './trophee.component.html',
   styleUrls: ['./trophee.component.scss']
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-recap-saison',
+  selector: 'recap-saison',
   templateUrl: './recap-saison.component.html',
   styleUrls: ['./recap-saison.component.scss']
 })
