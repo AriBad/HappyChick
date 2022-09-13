@@ -16,10 +16,10 @@
             </td>
             <td>
                 <ul>
-                    <li><strong>Insouciantes : </strong> n poules</li>
-                    <li>Bonheur moyen : x %</li>
-                    <li>Couveuses : n poules</li>
-                    <li>Maternantes: n poules</li>
+                    <li><strong>Insouciantes : </strong> {{getNbPoulesInsouciantes()}} poules</li>
+                    <li>Bonheur moyen : {{getBonheurMoyen("Insouciantes")}}%</li>
+                    <li>Couveuses : {{getNbPoulesCouveusesByTemperament("Insouciantes")}} poules</li>
+                    <li>Maternantes: {{getNbPoulesMaternageByTemperament("Insouciantes")}} poules</li>
                 </ul>
             </td>
         </tr>
@@ -29,10 +29,10 @@
             </td>
             <td>
                 <ul>
-                    <li><strong>Serieuses : </strong> n poules</li>
-                    <li>Bonheur moyen : x %</li>
-                    <li>Couveuses : n poules</li>
-                    <li>Maternantes: n poules</li>
+                    <li><strong>Serieuses : </strong> {{getNbPoulesSerieuses()}} poules</li>
+                    <li>Bonheur moyen : {{getBonheurMoyen("Serieuses")}}%</li>
+                    <li>Couveuses : {{getNbPoulesCouveusesByTemperament("Serieuses")}} poules</li>
+                    <li>Maternantes: {{getNbPoulesMaternageByTemperament("Serieuses")}} poules</li>
                 </ul>
             </td>
         </tr>
@@ -42,10 +42,10 @@
             </td>
             <td>
                 <ul>
-                    <li><strong>Mamans Poule : </strong> n poules</li>
-                    <li>Bonheur moyen : x %</li>
-                    <li>Couveuses : n poules</li>
-                    <li>Maternantes: n poules</li>
+                    <li><strong>Mamans Poule : </strong> {{getNbPoulesMamansPoule()}} poules</li>
+                    <li>Bonheur moyen : {{getBonheurMoyen("MamansPoule")}}%</li>
+                    <li>Couveuses : {{getNbPoulesCouveusesByTemperament("MamansPoule")}} poules</li>
+                    <li>Maternantes: {{getNbPoulesMaternageByTemperament("MamansPoule")}} poules</li>
                 </ul>
             </td>
         </tr>
@@ -55,10 +55,10 @@
             </td>
             <td>
                 <ul>
-                    <li><strong>Psychopathes : </strong> n poules</li>
-                    <li>Bonheur moyen : x %</li>
-                    <li>Couveuses : n poules</li>
-                    <li>Maternantes: n poules</li>
+                    <li><strong>Psychopathes : </strong> {{getNbPoulesPsychopathes()}} poules</li>
+                    <li>Bonheur moyen : {{getBonheurMoyen("Psychopathes")}}%</li>
+                    <li>Couveuses : {{getNbPoulesCouveusesByTemperament("Psychopathes")}} poules</li>
+                    <li>Maternantes: {{getNbPoulesMaternageByTemperament("Psychopathes")}} poules</li>
                 </ul>
             </td>
         </tr>
@@ -68,10 +68,10 @@
             </td>
             <td>
                 <ul>
-                    <li><strong>Pyromanes : </strong> n poules</li>
-                    <li>Bonheur moyen : x %</li>
-                    <li>Couveuses : n poules</li>
-                    <li>Maternantes: n poules</li>
+                    <li><strong>Pyromanes : </strong> {{getNbPoulesPyromanes()}} poules</li>
+                    <li>Bonheur moyen : {{getBonheurMoyen("Pyromanes")}}%</li>
+                    <li>Couveuses : {{getNbPoulesCouveusesByTemperament("Pyromanes")}} poules</li>
+                    <li>Maternantes: {{getNbPoulesMaternageByTemperament("Pyromanes")}} poules</li>
                 </ul>
             </td>
         </tr>

@@ -69,5 +69,24 @@ export class PouleHttpService {
   getPoulesByPoulailler(): Array<Poule> {
     return this.poulailler.listePoules;
   }
+  getPouleByTemperament(temperament: String): Array<Poule> {
+    return this.poulailler.listePoules.filter(poule => poule.temperament == temperament);
+  }
+
+  getPoulesCouveuseByTemperament(temperament: String): Array<Poule> {
+    return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.oeufsCouves!==0);
+  }
+
+  getPoulesMaternageByTemperament(temperament: String): Array<Poule> {
+    return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.maternage!==0);
+  }
+  getBonheurMoyen(temperament: String): number{
+   let bonheur : number = 0 ; 
+   let  cpt : number =0 ;
+   this.getPouleByTemperament(temperament).forEach(p => bonheur = bonheur+p.bonheur && cpt++);
+
+  return bonheur/cpt; 
+
+  }
 }
 

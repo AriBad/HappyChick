@@ -51,4 +51,7 @@ export class PouleComponent implements OnInit {
   getPoulesMortes(causemort: String) {
     return this.pouleService.getPoulesMortes(causemort);
   }
+  getPouleByTemperament(temperament: String) {
+    return this.pouleService.getPouleByTemperament(temperament);
+  }
 }
