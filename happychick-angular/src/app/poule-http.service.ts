@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppConfigService } from './app-config.service';
 import { Poulailler, Poule } from './model';
+import { PoulaillerHttpService } from './poulailler/poulailler-http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +11,19 @@ import { Poulailler, Poule } from './model';
 export class PouleHttpService {
 
   poules: Array<Poule> = new Array<Poule>();
-  poulaillers: Array<Poulailler> = new Array<Poulailler>();
+
 
   apiPath: string;
+  poulailler: Poulailler;
 
-  constructor(private http: HttpClient, private appConfig: AppConfigService) {
+  constructor(private http: HttpClient, private appConfig: AppConfigService, private poulaillerService: PoulaillerHttpService) {
     this.apiPath = this.appConfig.apiBackEndUrl + "poule/";
+    this.poulailler=poulaillerService.getPoulaillerActuel();
     this.load();
   }
 
   load() {
-    this.http.get<Array<Poule>>(this.apiPath+'full').subscribe(response => {
+    this.http.get<Array<Poule>>(this.apiPath).subscribe(response => {
       this.poules = response;
     });
   }
@@ -28,12 +31,13 @@ export class PouleHttpService {
   getAll(): Array<Poule> {
     return this.poules;
   }
- /* findAllbyPoulailler(): Array<Poule> {
-    return this.poules;
-  }
-*/
+
   findById(id: number): Observable<Poule> {
     return this.http.get<Poule>(this.apiPath+id);
+  }
+
+  getPoulesMortes(causemort: String) {
+    this.poulailler.listePoules.filter(poule=> poule.causeMort==causemort);
   }
 
   save(poule: Poule) {
@@ -56,4 +60,13 @@ export class PouleHttpService {
         this.load();
       });
   }
+
+  getPoulesVivantes() {
+    this.poulailler.listePoules.filter(poule=> poule.causeMort==null);
+  }
+
+  getPoulesByPoulailler(): Array<Poule> {
+    return this.poulailler.listePoules;
+  }
 }
+
