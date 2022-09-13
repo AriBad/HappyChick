@@ -101,9 +101,9 @@
                     </div>
                 </div>
             </div> -->
-<div id="choix_param">
+<div id="choix_param" *ngIf="poulailler">
     <h3>Quels sont vos choix pour cette saison ?</h3>
-    <p> Oeufs totaux : <span id="totalOeuf"> 550 </span> Oeufs dispos : <span id="oeufsDispos"> 550 </span>
+    <p> Oeufs totaux : <span id="totalOeuf"> {{poulailler.oeufs}} </span> Oeufs dispos : <span id="oeufsDispos"> 550 </span>
     </p>
     <form method="get">
         <table>
@@ -133,7 +133,7 @@
                 </td>
             </tr>
         </table><br>
-        <fieldset>
+        <fieldset *ngIf="getPoulesLibres!=null">
             <legend>Couvaisons<span class="badge badge-info">Plus d'informations</span></legend>
             <table>
 
@@ -150,8 +150,7 @@
                     <td><input name="nbOeufsCouves" type="number" value="0" min="0" max="8" step="1"
                             placeholder="nombres d'oeufs à couver" [(ngModel)]="couveuseNbOeufs"></td>
                     <td><button type="button" class="btn btn-primary" (click)="ajouterCouveuse()">Ajouter Poule</button></td>
-                    <td><button type="button" id="afficherCouveuses" (click)="affichertableau()" class="btn btn-info">Afficher les
-                            poules selectionées</button></td>
+                    <td><button type="button" id="afficherCouveuses" (click)="affichertableau()" class="btn btn-info">{{messageAfficherCouveuses}}</button></td>
                 </tr>
 
             </table>
@@ -167,8 +166,8 @@
                 </tr>
                 <tr *ngFor="let couv of saison.couveuses">
                     <td>{{couv.idPoule}}</td>
-                    <td>{{findPouleById(couv.idPoule).prenom}</td>
-                    <td>findPouleById(couv.idPoule).temperament</td>
+                    <td>{{findPouleById(couv.idPoule).prenom}}</td>
+                    <td>{{findPouleById(couv.idPoule).temperament}}</td>
                     <td>{{couv.nbOeufs}}</td>
                 </tr>
             </table>

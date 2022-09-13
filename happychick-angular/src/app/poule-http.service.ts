@@ -19,7 +19,11 @@ export class PouleHttpService {
 
   constructor(private http: HttpClient, private appConfig: AppConfigService, private poulaillerService: PoulaillerHttpService) {
     this.apiPath = this.appConfig.apiBackEndUrl + "poule/";
-    this.poulailler=poulaillerService.getPoulaillerActuel();
+    this.poulaillerService.getPoulaillerActuel().subscribe(
+      reponse => {
+        this.poulailler = reponse;
+      }
+    )
     this.load();
   }
 

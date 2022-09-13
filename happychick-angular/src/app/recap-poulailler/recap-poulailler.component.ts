@@ -10,13 +10,17 @@ import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 export class RecapPoulaillerComponent implements OnInit {
 
   poulailler : Poulailler;
-  constructor(poulaillerService: PoulaillerHttpService) {
-    this.poulailler=poulaillerService.getPoulaillerActuel();
-   }
+  constructor(private poulaillerService: PoulaillerHttpService) {
+    this.poulaillerService.getPoulaillerActuel().subscribe(
+      reponse => {
+        this.poulailler = reponse;
+      }
+    )
+  }
 
-   getNbPoules() : number {
+  getNbPoules() : number {
     return this.poulailler.listePoules.length;
-   }
+  }
    
 
   ngOnInit(): void {
