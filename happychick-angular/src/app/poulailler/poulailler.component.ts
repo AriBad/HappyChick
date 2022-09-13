@@ -15,9 +15,15 @@ export class PoulaillerComponent implements OnInit {
   couveuseNbOeufs:number;
   affichePoulesCouveuses:boolean = false;
   messageAfficherCouveuses:string = "Afficher Les Couveuses"
+  poulailler : Poulailler;
 
   constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService) {
     this.saison = new Saison();
+    this.poulaillerService.getPoulaillerActuel().subscribe(
+      reponse => {
+        this.poulailler = reponse;
+      }
+    )
   }
 
   ngOnInit(): void {
@@ -33,14 +39,6 @@ export class PoulaillerComponent implements OnInit {
 
   getAll():Array<Poulailler> {
     return this.poulaillerService.getAll();
-  }
-
-  choisirPoulaillerActuel(id:number):void {
-    this.poulaillerService.setPoulaillerActuel(id);
-  }
-
-  getPoulaillerActuel():Poulailler {
-    return this.poulaillerService.getPoulaillerActuel();
   }
 
   saisonSuivante():void {
@@ -63,7 +61,7 @@ export class PoulaillerComponent implements OnInit {
   }
 
   getPoulesLibres(): Array<Poule>{
-    return this.poulaillerService.getPoulesLibres();
+    return this.poulailler.listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte");
   }
 
   reinitialiser(){

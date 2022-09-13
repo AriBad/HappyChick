@@ -9,9 +9,9 @@ import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 })
 export class RecapPoulaillerComponent implements OnInit {
 
-  poulailler : Poulailler;
+  poulailler : Poulailler = new Poulailler("");
   constructor(poulaillerService: PoulaillerHttpService) {
-    this.poulailler=poulaillerService.getPoulaillerActuel();
+    
    }
 
    getNbPoules() : number {
