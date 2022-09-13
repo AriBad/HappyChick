@@ -1,11 +1,11 @@
 <div id="poulailler">
-    <table>
+    <table *ngIf="poulailler">
         <tr>
             <td>
                 <img src="../../assets/img/poullailer_niveau_{{poulailler.securite}}.png" width="120" height=auto>
             </td>
             <td  rowspan="2">
-                <ul *ngIf="poulailler">
+                <ul>
                     <li>Saison : {{poulailler.saison}}</li>
                     <li>Année : {{poulailler.annee}}</li>
                     <li>Nombre d'oeufs : {{poulailler.oeufs}}</li>
