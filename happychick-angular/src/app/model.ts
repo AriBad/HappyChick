@@ -60,14 +60,14 @@ export class Saison {
     securite:boolean;
     taille:boolean;
     activite:string;
-    couveuses:Array<Couveuse>;
+    listeCouveuses:Array<Couveuse>;
 
     constructor(nourriture?:number, securite?:boolean, taille?:boolean, activite?:string, couveuses?:Array<Couveuse>) {
         this.nourriture=nourriture;
         this.securite=securite;
         this.taille=taille;
         this.activite=activite;
-        this.couveuses=couveuses;
+        this.listeCouveuses=couveuses;
     }
 
 }
@@ -77,6 +77,15 @@ export class Couveuse {
     nbOeufs:number;
     constructor(idPoule:number, nbOeufs:number) {
         this.idPoule=idPoule;
+        this.nbOeufs=nbOeufs;
+    }
+}
+
+export class CouveuseComplete {
+    poule:Poule;
+    nbOeufs:number;
+    constructor(poule:Poule, nbOeufs:number) {
+        this.poule=poule;
         this.nbOeufs=nbOeufs;
     }
 }

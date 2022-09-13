@@ -1,5 +1,5 @@
 import { Component, KeyValueDiffers, OnInit } from '@angular/core';
-import { Couveuse, Poulailler, Poule, Saison } from '../model';
+import { Couveuse, CouveuseComplete, Poulailler, Poule, Saison } from '../model';
 import { PouleHttpService } from '../poule-http.service';
 import { PoulaillerHttpService } from './poulailler-http.service';
 
@@ -11,15 +11,16 @@ import { PoulaillerHttpService } from './poulailler-http.service';
 export class PoulaillerComponent implements OnInit {
   nom:string;
   saison:Saison;
-  couveuseId:number;
   couveuseNbOeufs:number;
+  couveuseId:number;
   affichePoulesCouveuses:boolean = false;
   messageAfficherCouveuses:string = "Afficher Les Couveuses"
   poulailler : Poulailler;
+  poulesCouveuses : Array<CouveuseComplete>;
 
   constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService) {
     this.saison = new Saison();
-    this.saison.couveuses = new Array<Couveuse>;
+    this.saison.listeCouveuses = new Array<Couveuse>;
     this.poulaillerService.getPoulaillerActuel().subscribe(
       reponse => {
         this.poulailler = reponse;
@@ -43,20 +44,25 @@ export class PoulaillerComponent implements OnInit {
   }
 
   saisonSuivante():void {
+    this.poulesCouveuses.forEach((value,index) =>{
+      this.saison.listeCouveuses.push(new Couveuse(value.poule.id, value.nbOeufs));
+    });
     this.poulaillerService.saisonSuivante(this.saison);
     this.saison=new Saison();
+    this.saison.listeCouveuses = new Array<Couveuse>;
   }
 
   ajouterCouveuse():void {
-    this.saison.couveuses.push(new Couveuse(this.couveuseId, this.couveuseNbOeufs));
-    this.couveuseId=null;
+    this.pouleService.findById(this.couveuseId).subscribe(resp=> {
+      this.poulesCouveuses.push(new CouveuseComplete(resp, this.couveuseNbOeufs));
+    });
     this.couveuseNbOeufs=null;
   }
 
   supprimerCouveuse(id : number):void {
-    this.saison.couveuses.forEach((value,index) =>{
-      if(value.idPoule == id) {
-        this.saison.couveuses.slice(index, 1);
+    this.poulesCouveuses.forEach((value,index) =>{
+      if(value.poule.id == id) {
+        this.poulesCouveuses.slice(index, 1);
       }
     });
   }

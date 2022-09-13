@@ -59,6 +59,7 @@ export class PoulaillerHttpService {
   }
 
   saisonSuivante(saison:Saison) {
+    alert(saison.nourriture + " "  +saison.securite);
     this.http.put<void>(this.apiPath + this.poulaillerId + "/saison", saison).subscribe(resp => {
       this.load();
     });
