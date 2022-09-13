@@ -1,0 +1,116 @@
+
+ul
+{
+	list-style-type:none;
+}
+
+#header
+{
+	height: 20%;
+	background-image: url(../../assets/img/header.png) ;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+#center
+{
+	display : flex;
+	height: 75%;
+	background-image: url(../../assets/img/champs_bord.png) ;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	z-index:5;
+}
+
+#footer
+{
+	height: 5%;
+	background-image: url(../../assets/img/footer.png) ;
+	background-size: 80% 100%;
+	background-repeat: repeat;
+}
+
+/* Menu à Gauche */
+#menuleft
+{
+	display:flex;
+	width:25%;
+	flex-direction: column;
+	background-image: url(../../assets/img/champs_bord.png);
+	background-size: 300% 110%;
+	background-repeat: no-repeat;
+	font-family: 'Times New Roman', Times, serif;
+	height: 100%;
+	justify-content: space-around;
+	padding: 5px;
+}
+
+#poulailler
+{
+	border : solid rgb(136, 16, 16) 2px;
+	background-color: rgb(175, 28, 28);
+	border-radius: 3%;
+	padding: 2%;
+	margin: 2%;
+}
+
+#poulailler table
+{
+	color: rgb(205, 207, 189);
+}
+
+#poules
+{
+	margin: 2%;
+	overflow: auto;
+	background-color: rgb(234, 161, 27);
+	border-radius: 3%;
+	padding: 2%;
+}
+
+/* Style du centre / la page principale */
+#main
+{
+	display:inline-block;
+	width : 60%;
+    padding: 20px;
+    height: 1000px;
+	flex-direction: column;
+	align-items:center;
+	justify-content: space-around;
+	background-color: rgb(57, 62, 72);
+	border-radius: 2%;
+	overflow: scroll;
+    position: relative;
+    color: rgb(205, 207, 189);
+}
+
+
+/* Menu sur la droite */
+#menuright
+{
+	display:flex;
+	width:15%;
+	flex-direction: column;
+	background-image: url(../../assets/img/champs_bord.png);
+	background-size: 300% 110%;
+	background-repeat: no-repeat;
+	font-family: 'Times New Roman', Times, serif;
+	height: 100%;
+	justify-content: space-around;
+	padding: 5px;
+}
+
+
+#recap
+{
+	display:flex;
+	height:50%;
+	margin: 2%;
+	background-color: rgb(38, 32, 32);
+	color: rgb(205, 207, 189);
+	border-radius: 3%;
+	padding: 2%;
+	font-family: Arial, Helvetica, sans-serif;
+	overflow: auto;
+}
