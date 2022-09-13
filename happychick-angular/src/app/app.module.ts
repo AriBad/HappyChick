@@ -6,12 +6,32 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PouleComponent } from './poule/poule.component';
 import { PoulaillerComponent } from './poulailler/poulailler.component';
+import { InitComponent } from './init/init.component';
+import { HomeComponent } from './home/home.component';
+import { DetailsPouleComponent } from './details-poule/details-poule.component';
+import { RecapPoulaillerComponent } from './recap-poulailler/recap-poulailler.component';
+import { RecapPoulesComponent } from './recap-poules/recap-poules.component';
+import { RecapUtilisateurComponent } from './recap-utilisateur/recap-utilisateur.component';
+import { MenuComponent } from './menu/menu.component';
+import { RecapSaisonComponent } from './recap-saison/recap-saison.component';
+import { GuideComponent } from './guide/guide.component';
+import { TropheeComponent } from './trophee/trophee.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PouleComponent,
-    PoulaillerComponent
+    PoulaillerComponent,
+    InitComponent,
+    HomeComponent,
+    DetailsPouleComponent,
+    RecapPoulaillerComponent,
+    RecapPoulesComponent,
+    RecapUtilisateurComponent,
+    MenuComponent,
+    RecapSaisonComponent,
+    GuideComponent,
+    TropheeComponent
   ],
   imports: [
     BrowserModule,
