@@ -61,7 +61,7 @@ export class PoulaillerComponent implements OnInit {
   }
 
   getPoulesLibres(): Array<Poule>{
-    return this.poulailler.listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte");
+    return this.poulailler.listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte" && poule.femelle==true);
   }
 
   reinitialiser(){
