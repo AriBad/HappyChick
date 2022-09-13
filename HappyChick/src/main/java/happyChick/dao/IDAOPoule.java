@@ -11,8 +11,11 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import happyChick.model.CauseMort;
 import happyChick.model.Poulailler;
@@ -27,6 +30,9 @@ public interface IDAOPoule extends JpaRepository<Poule, Integer> {
 	
 	Optional <List<Poule>> findByTemperament(Temperament temperament);
 	
-	//List<Poule> findPouleByTemperamentAndVie(Temperament temperament, CauseMort causeMort);
+Optional <List<Poule>> findByPoulaillerAndCauseMort(Poulailler poulailler, CauseMort causemort);
+	
+	@Query("SELECT p from Poule p where p.poulailler.id=:id and p.causeMort IS NULL")
+	Optional <List<Poule>> findByVivante(Integer id);
 }
 

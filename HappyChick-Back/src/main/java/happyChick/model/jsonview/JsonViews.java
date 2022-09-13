@@ -12,4 +12,5 @@ public class JsonViews {
 	public class pouleWithPoulailler extends Base {
 		
 	}
+
 }

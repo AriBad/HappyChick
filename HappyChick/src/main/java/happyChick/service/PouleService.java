@@ -6,6 +6,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import happyChick.dao.IDAOPoulailler;
 import happyChick.dao.IDAOPoule;
 import happyChick.exception.PouleException;
 import happyChick.model.Activite;
@@ -22,6 +23,8 @@ public class PouleService {
 	private JsonNameParser jsonNameParser;
 	@Autowired
 	private IDAOPoule pouleRepo;
+	@Autowired
+	private IDAOPoulailler poulaillerRepo;
 
 	public Poule getById(Integer id) {
 		// return poulaillerRepo.findById(id).orElseThrow(PoulaillerException::new);
@@ -33,6 +36,20 @@ public class PouleService {
 		// return poulaillerRepo.findById(id).orElseThrow(PoulaillerException::new);
 		return pouleRepo.findByTemperament(temperament).orElseThrow(() -> {
 			throw new PouleException("Temperament de la poule inconnu");
+		});
+	}
+	
+	public List<Poule> getByPoulaillerCauseMort(Integer id, String causemort) {
+		// return poulaillerRepo.findById(id).orElseThrow(PoulaillerException::new);
+		return pouleRepo.findByPoulaillerAndCauseMort(poulaillerRepo.findById(id).get(),CauseMort.valueOf(causemort) ).orElseThrow(() -> {
+			throw new PouleException("La cause le mort de la poule est inconnu");
+		});
+	}
+	
+	public List<Poule> getByPoulaillerVivante(Integer id) {
+		// return poulaillerRepo.findById(id).orElseThrow(PoulaillerException::new);
+		return pouleRepo.findByVivante(id).orElseThrow(() -> {
+			throw new PouleException("Le poulailler est inconnu");
 		});
 	}
 

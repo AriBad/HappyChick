@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,6 +26,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import happyChick.exception.PouleException;
+import happyChick.model.CauseMort;
 import happyChick.model.Poule;
 import happyChick.model.jsonview.JsonViews;
 import happyChick.service.PoulaillerService;
@@ -64,6 +66,18 @@ public class PouleRestControler {
 	@GetMapping("/{id}/poulailler")
 	public Poule getByIdWithPoulailler(@PathVariable Integer id) {
 		return pouleService	.getById(id);
+	}
+	
+	@JsonView(JsonViews.poulesMortes.class)
+	@GetMapping("/mortes")
+	public List<Poule> getByPoulaillerCauseMort(@RequestParam Integer id,@RequestParam String causemort) {
+		return pouleService	.getByPoulaillerCauseMort(id,causemort);
+	}
+	
+	@JsonView(JsonViews.poulesVivantes.class)
+	@GetMapping("/vivantes")
+	public List<Poule> getByPoulaillerVivante(@RequestParam Integer id) {
+		return pouleService	.getByPoulaillerVivante(id);
 	}
 
 	@ResponseStatus(code = HttpStatus.CREATED)

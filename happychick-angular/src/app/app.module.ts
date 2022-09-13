@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { PouleComponent } from './poule/poule.component';
 import { PoulaillerComponent } from './poulailler/poulailler.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PouleMemoryService } from './poule-memory.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,7 @@ import { PouleMemoryService } from './poule-memory.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [PouleMemoryService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
