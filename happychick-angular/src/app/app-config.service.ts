@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AppConfigService {
 
-  apiBackEndUrl: string = "http://localhost:8080/api/";
+  apiBackEndUrl: string = "http://localhost:8080/happyChick/api/";
   apiKey: string = "123456";
   constructor() { }
 }

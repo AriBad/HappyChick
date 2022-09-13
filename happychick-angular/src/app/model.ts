@@ -37,13 +37,13 @@ export class Poulailler {
     nourriture: number;
     oeufs: number;
     annee: number;
-    saison: Set<string> = new Set<string>();;
+    saison: string;
     nbMort: number = 0;
     nom: string;
-    aciveSaison: Set<string> = new Set<string>();;
+    activiteSaison: string;
     listePoules: Array<Poule> = new Array<Poule>();
 
-    constructor(nom:string, id?: number, securite?: number, taille?: number, nourriture?: number, oeufs?: number,annee?: number,saison?: Set<string>) {
+    constructor(nom:string, id?: number, securite?: number, taille?: number, nourriture?: number, oeufs?: number,annee?: number,saison? :string) {
         this.nom=nom;
         this.id = id;
         this.securite = securite;
