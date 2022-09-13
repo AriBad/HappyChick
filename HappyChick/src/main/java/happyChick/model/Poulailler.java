@@ -53,6 +53,9 @@ public class Poulailler {
 	private String nom;
 	
 	@JsonView(JsonViews.Base.class)
+	private int cptSaisons;
+	
+	@JsonView(JsonViews.Base.class)
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition = "ENUM('SortieGenerale', 'Danse', 'Tricot', 'Escrime')")
 	protected Activite activiteSaison;
@@ -134,6 +137,12 @@ public class Poulailler {
 		this.saison = saison;
 	}
 	
+	public int getCptSaisons() {
+		return cptSaisons;
+	}
+	public void setCptSaisons(int cptSaisons) {
+		this.cptSaisons = cptSaisons;
+	}
 	public Poule getPouleById(int id) {
 		//TODO
 		for(Poule p : listePoules) {

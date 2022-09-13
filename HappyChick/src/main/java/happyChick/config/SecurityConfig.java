@@ -1,4 +1,4 @@
-package happyChick.config;
+/*package happyChick.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,11 +31,6 @@ public class SecurityConfig {
 //	}
 
 	@Bean
-	public DBUserDetailsService userDetailsService(IDAOUtilisateur utilisateurRepository) {
-		return new DBUserDetailsService(utilisateurRepository);
-	}
-
-	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests((authz) -> {
@@ -51,4 +46,4 @@ public class SecurityConfig {
 	public PasswordEncoder passwordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
 	}
-}
+}*/

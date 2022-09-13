@@ -65,6 +65,7 @@ public class PoulaillerService {
 		poulailler.setOeufs(5);
 		poulailler.setAnnee(0);
 		poulailler.setSaison(Saison.Printemps);
+		poulailler.setCptSaisons(0);
 		poulailler=poulaillerRepo.save(poulailler);
 		Poule p1 = pouleService.create(new Poule ("Marlene",true,poulailler));
         Poule p2 = pouleService.create(new Poule ("Clara",true,poulailler));
@@ -120,6 +121,7 @@ public class PoulaillerService {
 			cpt++;
 		}
 		poulailler.setOeufs(poulailler.getOeufs()+nbOeufs);
+		poulailler.setCptSaisons(poulailler.getCptSaisons() + 1);
 		
 		update(poulailler);
 		
