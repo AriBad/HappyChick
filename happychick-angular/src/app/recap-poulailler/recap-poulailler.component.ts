@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Poulailler } from '../model';
+import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 
 @Component({
   selector: 'recap-poulailler',
@@ -7,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecapPoulaillerComponent implements OnInit {
 
-  constructor() { }
+  poulailler : Poulailler;
+  constructor(poulaillerService: PoulaillerHttpService) {
+    this.poulailler=poulaillerService.getPoulaillerActuel();
+   }
+
+   getNbPoules() : number {
+    return this.poulailler.listePoules.length;
+   }
+   
 
   ngOnInit(): void {
   }

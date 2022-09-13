@@ -15,12 +15,16 @@ export class PoulaillerHttpService {
   
   constructor(private http: HttpClient, private appConfig: AppConfigService) {
     this.apiPath = this.appConfig.apiBackEndUrl + "poulailler/";
+    
     this.load();
   }
 
   load() {
-    this.http.get<Array<Poulailler>>(this.apiPath+"poule/").subscribe(response => {
+    this.http.get<Array<Poulailler>>(this.apiPath+"").subscribe(response => {
       this.poulaillers = response;
+    });
+    this.http.get<Poulailler>(this.apiPath+"1").subscribe(response => {
+      this.poulailler = response;
     });
   }
 
