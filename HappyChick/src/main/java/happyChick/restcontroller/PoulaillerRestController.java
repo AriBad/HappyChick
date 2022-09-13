@@ -90,7 +90,7 @@ public class PoulaillerRestController {
 		return null;
 	}
 	
-	@PostMapping("/{id}/saison")
+	@PutMapping("/{id}/saison")
 	@JsonView(JsonViews.PoulaillerWithPoules.class) //peut-être que optionnal fait exploser
 	public Poulailler poulaillerStep(@PathVariable Integer id, @RequestBody ChoixUsers choixUsers) {
 		Poulailler poulailler = poulaillerService.getByIdWithPoules(id);

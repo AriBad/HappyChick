@@ -10,12 +10,12 @@ export class Poule {
     maladie: number;
     poussin: boolean;
     femelle: boolean;
-    temperament: Set<string> = new Set<string>();;
+    temperament: string;
     poulailler: Poulailler;
     oeufsCouves: number;
-    etat: Set<string> = new Set<string>();;
+    etat: string;
     saisonSansManger: number;
-    causeMort: Set<string> = new Set<string>();;
+    causeMort: string;
 
 
     constructor(id?: number, prenom?: string, femelle?: Boolean, poulailler?: Poulailler) {
@@ -43,14 +43,40 @@ export class Poulailler {
     aciveSaison: Set<string> = new Set<string>();;
     listePoules: Array<Poule> = new Array<Poule>();
 
-    constructor(id?: number, securite?: number, taille?: number, nourriture?: number, oeufs?: number,annee?: number,saison?: Set<string>) {
+    constructor(nom:string, id?: number, securite?: number, taille?: number, nourriture?: number, oeufs?: number,annee?: number,saison?: Set<string>) {
+        this.nom=nom;
         this.id = id;
-        this.nom = "TODO";
         this.securite = securite;
 		this.taille = taille;
 		this.nourriture = nourriture;
 		this.oeufs = oeufs;
 		this.annee = annee;
 		this.saison = saison;
+    }
+}
+
+export class Saison {
+    nourriture:number;
+    securite:boolean;
+    taille:boolean;
+    activite:string;
+    couveuses:Array<Couveuse>;
+
+    constructor(nourriture?:number, securite?:boolean, taille?:boolean, activite?:string, couveuses?:Array<Couveuse>) {
+        this.nourriture=nourriture;
+        this.securite=securite;
+        this.taille=taille;
+        this.activite=activite;
+        this.couveuses=couveuses;
+    }
+
+}
+
+export class Couveuse {
+    idPoule:number;
+    nbOeufs:number;
+    constructor(idPoule:number, nbOeufs:number) {
+        this.idPoule=idPoule;
+        this.nbOeufs=nbOeufs;
     }
 }
