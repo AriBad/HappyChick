@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import happyChick.model.CauseMort;
 import happyChick.model.Poulailler;
 import happyChick.model.Poule;
 import happyChick.model.Temperament;
@@ -16,5 +19,6 @@ public interface IDAOPoule extends JpaRepository<Poule, Integer> {
 	void deleteByTemperament(Temperament temperament);
 	
 	Optional <List<Poule>> findByTemperament(Temperament temperament);
+	
 
 }

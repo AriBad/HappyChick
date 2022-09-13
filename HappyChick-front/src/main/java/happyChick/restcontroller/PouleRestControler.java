@@ -24,6 +24,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import happyChick.exception.PouleException;
+import happyChick.model.CauseMort;
+import happyChick.model.Poulailler;
 import happyChick.model.Poule;
 import happyChick.model.jsonview.JsonViews;
 import happyChick.service.PoulaillerService;

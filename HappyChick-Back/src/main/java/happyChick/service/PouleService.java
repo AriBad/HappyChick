@@ -11,6 +11,7 @@ import happyChick.exception.PouleException;
 import happyChick.model.Activite;
 import happyChick.model.CauseMort;
 import happyChick.model.Etat;
+import happyChick.model.Poulailler;
 import happyChick.model.Poule;
 import happyChick.model.Temperament;
 import happyChick.tools.JsonNameParser;
@@ -35,6 +36,7 @@ public class PouleService {
 			throw new PouleException("Temperament de la poule inconnu");
 		});
 	}
+	
 
 	public List<Poule> getAll() {
 		// poulaillerRepo.findAll().forEach(System.out::println);

@@ -25,7 +25,7 @@ export class Poule {
         this.poussin = true;
 		this.femelle = true;
 		this.poulailler = poulailler;
-		this.etat=Etat.Liberte;
+		// this.etat=Etat.Liberte;
 		this.saisonSansManger = 0;	
 
     }
