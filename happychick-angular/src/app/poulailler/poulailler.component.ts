@@ -1,9 +1,10 @@
 import { Component, KeyValueDiffers, OnInit } from '@angular/core';
-import { Couveuse, Poulailler, Saison } from '../model';
+import { Couveuse, Poulailler, Poule, Saison } from '../model';
+import { PouleHttpService } from '../poule-http.service';
 import { PoulaillerHttpService } from './poulailler-http.service';
 
 @Component({
-  selector: 'app-poulailler',
+  selector: 'poulailler',
   templateUrl: './poulailler.component.html',
   styleUrls: ['./poulailler.component.scss']
 })
@@ -12,9 +13,9 @@ export class PoulaillerComponent implements OnInit {
   saison:Saison;
   couveuseId:number;
   couveuseNbOeufs:number;
-  couveuseIdASupprimer:number;
+  affichePoulesCouveuses:boolean = false;
 
-  constructor(private poulaillerService: PoulaillerHttpService) {
+  constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService) {
     this.saison = new Saison();
   }
 
@@ -52,16 +53,36 @@ export class PoulaillerComponent implements OnInit {
     this.couveuseNbOeufs=null;
   }
 
-  supprimerCouveuse():void {
+  supprimerCouveuse(id : number):void {
     this.saison.couveuses.forEach((value,index) =>{
-      if(value.idPoule == this.couveuseIdASupprimer) {
+      if(value.idPoule == id) {
         this.saison.couveuses.slice(index, 1);
       }
     });
   }
 
-  getPoulesLibres() {
+  getPoulesLibres(): Array<Poule>{
     return this.poulaillerService.getPoulesLibres();
+  }
+
+  reinitialiser(){
+    this.saison =null;
+  }
+
+  affichertableau(){
+    if (this.affichePoulesCouveuses==true){
+      this.affichePoulesCouveuses=false;
+    } else {
+      this.affichePoulesCouveuses=true;
+    }
+  }
+
+  findPouleById(id: number) : Poule{
+    let poule: Poule = new Poule();
+    this.pouleService.findById(id).subscribe(resp=> {
+      poule = resp;
+    });
+    return poule;
   }
   
 }

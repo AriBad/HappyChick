@@ -75,8 +75,8 @@ export class PoulaillerHttpService {
     });
   }
 
-  getPoulesLibres() {
-    this.poulailler.listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte");
+  getPoulesLibres(): Array<Poule> {
+    return this.poulailler.listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte");
   }
 
 }

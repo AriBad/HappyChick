@@ -12,6 +12,7 @@ export class PouleHttpService {
 
   poules: Array<Poule> = new Array<Poule>();
 
+  poule: Poule = new Poule;
 
   apiPath: string;
   poulailler: Poulailler;
