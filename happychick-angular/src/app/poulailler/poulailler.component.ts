@@ -14,6 +14,7 @@ export class PoulaillerComponent implements OnInit {
   couveuseId:number;
   couveuseNbOeufs:number;
   affichePoulesCouveuses:boolean = false;
+  messageAfficherCouveuses:string = "Afficher Les Couveuses"
 
   constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService) {
     this.saison = new Saison();
@@ -72,8 +73,10 @@ export class PoulaillerComponent implements OnInit {
   affichertableau(){
     if (this.affichePoulesCouveuses==true){
       this.affichePoulesCouveuses=false;
+      this.messageAfficherCouveuses = "Afficher Les Couveuses";
     } else {
       this.affichePoulesCouveuses=true;
+      this.messageAfficherCouveuses = "Cacher Les Couveuses";
     }
   }
 
