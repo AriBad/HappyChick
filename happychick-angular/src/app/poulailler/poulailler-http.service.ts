@@ -26,7 +26,7 @@ export class PoulaillerHttpService {
   }
 
   getPoulaillerActuel():Observable<Poulailler> {
-    return this.http.get<Poulailler>(this.apiPath+this.poulaillerId);
+    return this.http.get<Poulailler>(this.apiPath+this.poulaillerId+"/poule");
   }
 
   getAll(): Array<Poulailler> {
