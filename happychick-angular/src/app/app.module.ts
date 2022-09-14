@@ -17,6 +17,7 @@ import { RecapSaisonComponent } from './recap-saison/recap-saison.component';
 import { GuideComponent } from './guide/guide.component';
 import { TropheeComponent } from './trophee/trophee.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ChoixPoulaillerComponent } from './choix-poulailler/choix-poulailler.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MenuComponent,
     RecapSaisonComponent,
     GuideComponent,
-    TropheeComponent
+    TropheeComponent,
+    ChoixPoulaillerComponent
   ],
   imports: [
     BrowserModule,
