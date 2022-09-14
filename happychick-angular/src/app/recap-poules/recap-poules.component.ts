@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Couveuse, Poule } from '../model';
+import { Couveuse, Poulailler, Poule } from '../model';
+import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 import { PouleHttpService } from '../poule-http.service';
 
 @Component({
@@ -11,8 +12,13 @@ export class RecapPoulesComponent implements OnInit {
 
   poule : Poule;
   couveuse: Couveuse;
-  constructor(private pouleService: PouleHttpService) {
-    
+  poulailler: Poulailler;
+  constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService) {
+    this.poulaillerService.getPoulaillerActuel().subscribe(
+      reponse => {
+        this.poulailler = reponse;
+      }
+    )
    }
 
    getNbPoulesInsouciantes(): number {

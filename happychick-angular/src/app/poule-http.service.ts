@@ -11,7 +11,7 @@ import { PoulaillerHttpService } from './poulailler/poulailler-http.service';
 export class PouleHttpService {
 
   poules: Array<Poule> = new Array<Poule>();
-
+  poulaillerId : number;
   poule: Poule = new Poule;
 
   apiPath: string;
@@ -19,11 +19,6 @@ export class PouleHttpService {
 
   constructor(private http: HttpClient, private appConfig: AppConfigService, private poulaillerService: PoulaillerHttpService) {
     this.apiPath = this.appConfig.apiBackEndUrl + "poule/";
-    this.poulaillerService.getPoulaillerActuel().subscribe(
-      reponse => {
-        this.poulailler = reponse;
-      }
-    )
     this.load();
   }
 
