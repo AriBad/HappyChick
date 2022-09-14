@@ -10,13 +10,16 @@ import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 })
 export class RecapPoulaillerComponent implements OnInit {
 
-  poulailler:Poulailler = this.poulaillerSessionService.poulailler;
+  
   constructor(private poulaillerService: PoulaillerHttpService,private poulaillerSessionService : PoulaillerSessionService) { }
 
   getNbPoules() : number {
-    return this.poulailler.listePoules.length;
+    return this.getSessionPoulailler().listePoules.length;
   }
-   
+  
+  getSessionPoulailler(): Poulailler {
+    return this.poulaillerSessionService.poulailler;
+  }
 
   ngOnInit(): void {
   }

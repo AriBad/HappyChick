@@ -1,23 +1,23 @@
 <div id="poulailler">
-    <table *ngIf="poulailler">
+    <table *ngIf="getSessionPoulailler()">
         <tr>
             <td>
-                <img src="../../assets/img/poullailer_niveau_{{poulailler.securite}}.png" width="120" height=auto>
+                <img src="../../assets/img/poullailer_niveau_{{getSessionPoulailler().securite}}.png" width="120" height=auto>
             </td>
             <td  rowspan="2">
                 <ul>
-                    <li><b>Saison : </b>{{poulailler.saison}}</li>
-                    <li><b>Année : </b>{{poulailler.annee}}</li>
-                    <li><b>Nombre d'oeufs : </b>{{poulailler.oeufs}}</li>
+                    <li><b>Saison : </b>{{getSessionPoulailler().saison}}</li>
+                    <li><b>Année : </b>{{getSessionPoulailler().annee}}</li>
+                    <li><b>Nombre d'oeufs : </b>{{getSessionPoulailler().oeufs}}</li>
                     <li><b>Nombre de poules : </b>{{getNbPoules()}}</li>
-                    <li><b>Niveau de sécurité :</b> {{poulailler.securite}}</li>
-                    <li><b>Taille de poulailler : </b> {{poulailler.taille}}</li>
-                    <li><b>Nourriture :</b> {{poulailler.nourriture}} </li>
+                    <li><b>Niveau de sécurité :</b> {{getSessionPoulailler().securite}}</li>
+                    <li><b>Taille de poulailler : </b> {{getSessionPoulailler().taille}}</li>
+                    <li><b>Nourriture :</b> {{getSessionPoulailler().nourriture}} </li>
                 </ul>
             </td>
         </tr>
         <tr>
-            <td id="poulaillerNom">{{poulailler.nom}}</td>
+            <td id="poulaillerNom">{{getSessionPoulailler().nom}}</td>
         </tr>
     </table>
 </div>

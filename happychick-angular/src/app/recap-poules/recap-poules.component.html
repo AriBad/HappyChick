@@ -1,4 +1,4 @@
-<div id="poules" *ngIf="poulailler">
+<div id="poules" *ngIf=" getSessionPoulailler()">
     <table>
         <tr *ngIf="getNbPoussins() != 0">
             <td>

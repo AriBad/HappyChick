@@ -15,19 +15,21 @@ export class PoulaillerComponent implements OnInit {
   couveuseoeufs:number;
   couveuseId:number;
   affichePoulesCouveuses:boolean = false;
-  messageAfficherCouveuses:string = "Afficher Les Couveuses"
-  poulailler:Poulailler = this.poulaillerSessionService.poulailler;
+  messageAfficherCouveuses:string = "Afficher Les Couveuses";
   tempcouv: Array<number> = new Array<number>;
   submitDisabled=false;
 
   constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService,private poulaillerSessionService : PoulaillerSessionService) {
     this.saison = new Saison();
     this.saison.listeCouveuses = new Array<Couveuse>;
-    
   }
 
  
   ngOnInit(): void {
+  }
+
+  getSessionPoulailler(): Poulailler {
+    return this.poulaillerSessionService.poulailler;
   }
 
   save():void {
@@ -50,7 +52,7 @@ export class PoulaillerComponent implements OnInit {
   }
 
   oeufsDispos():number {
-    let oeufsDispos = this.poulailler.oeufs;
+    let oeufsDispos = this.getSessionPoulailler().oeufs;
     this.saison.listeCouveuses.forEach((value) =>{
       oeufsDispos-= value.oeufs;
     });
@@ -94,7 +96,7 @@ export class PoulaillerComponent implements OnInit {
 
 
   getPoulesLibres(): Array<Poule>{
-    return this.poulailler.listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte" && poule.poussin==false && poule.femelle==true && !this.tempcouv.includes(poule.id));
+    return this.getSessionPoulailler().listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte" && poule.poussin==false && poule.femelle==true && !this.tempcouv.includes(poule.id));
   }
 
   reinitialiser(){

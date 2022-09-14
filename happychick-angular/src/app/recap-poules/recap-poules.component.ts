@@ -13,14 +13,17 @@ export class RecapPoulesComponent implements OnInit {
 
   poule : Poule;
   couveuse: Couveuse;
-  poulailler:Poulailler = this.poulaillerSessionService.poulailler;
   poussins: Array<Poule>;
   constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService,private poulaillerSessionService : PoulaillerSessionService) { }
 
    getNbPoussins(): number {
-    this.poussins = this.poulailler.listePoules.filter(poule => poule.poussin == true);
+    this.poussins = this.getSessionPoulailler().listePoules.filter(poule => poule.poussin == true);
     return this.poussins.length;
    }
+
+  getSessionPoulailler(): Poulailler {
+    return this.poulaillerSessionService.poulailler;
+  }
 
    getNbPoulesInsouciantes(): number {
   
@@ -55,15 +58,15 @@ getNbPoulesMaternageByTemperament(temperament: string){
  }
 
 getPouleByTemperament(temperament: string): Array<Poule> {
-  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.causeMort ==null);
+  return this.getSessionPoulailler().listePoules.filter(poule => poule.temperament == temperament && poule.causeMort ==null);
 }
 
 getPoulesCouveuseByTemperament(temperament: string): Array<Poule> {
-  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.oeufsCouves!==0 && poule.causeMort ==null);
+  return this.getSessionPoulailler().listePoules.filter(poule => poule.temperament == temperament && poule.oeufsCouves!==0 && poule.causeMort ==null);
 }
 
 getPoulesMaternageByTemperament(temperament: string): Array<Poule> {
-  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.etat=="Maternage" && poule.causeMort ==null);
+  return this.getSessionPoulailler().listePoules.filter(poule => poule.temperament == temperament && poule.etat=="Maternage" && poule.causeMort ==null);
 }
 getBonheur(temperament: string): number{
   let bonheur : number = 0 ; 
