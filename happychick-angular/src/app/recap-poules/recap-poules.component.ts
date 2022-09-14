@@ -27,6 +27,7 @@ export class RecapPoulesComponent implements OnInit {
    }
 
    getNbPoulesInsouciantes(): number {
+  
     return this.getPouleByTemperament("Insouciantes").length;
    }
    
@@ -57,11 +58,6 @@ getNbPoulesMaternageByTemperament(temperament: String){
   return this.getBonheur(temperament);
  }
 
- 
-
-getPoulesByPoulailler(): Array<Poule> {
-  return this.poulailler.listePoules;
-}
 getPouleByTemperament(temperament: String): Array<Poule> {
   return this.poulailler.listePoules.filter(poule => poule.temperament == temperament);
 }

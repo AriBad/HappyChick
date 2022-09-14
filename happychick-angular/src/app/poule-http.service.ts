@@ -61,6 +61,10 @@ export class PouleHttpService {
         this.load();
       });
   }
+  
+getPoulesByPoulailler(): Array<Poule> {
+  return this.poulailler.listePoules;
+}
   getPoulesVivantes() {
     this.poulailler.listePoules.filter(poule=> poule.causeMort==null);
   }
