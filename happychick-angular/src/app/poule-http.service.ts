@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { AppConfigService } from './app-config.service';
 import { Poulailler, Poule } from './model';
 import { PoulaillerHttpService } from './poulailler/poulailler-http.service';
+import { PouleComponent } from './poule/poule.component';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,6 @@ export class PouleHttpService {
 
   apiPath: string;
   poulailler: Poulailler;
-
   constructor(private http: HttpClient, private appConfig: AppConfigService, private poulaillerService: PoulaillerHttpService) {
     this.apiPath = this.appConfig.apiBackEndUrl + "poule/";
     this.load();
@@ -60,32 +61,12 @@ export class PouleHttpService {
         this.load();
       });
   }
-
   getPoulesVivantes() {
     this.poulailler.listePoules.filter(poule=> poule.causeMort==null);
   }
 
-  getPoulesByPoulailler(): Array<Poule> {
-    return this.poulailler.listePoules;
-  }
   getPouleByTemperament(temperament: String): Array<Poule> {
     return this.poulailler.listePoules.filter(poule => poule.temperament == temperament);
-  }
-
-  getPoulesCouveuseByTemperament(temperament: String): Array<Poule> {
-    return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.oeufsCouves!==0);
-  }
-
-  getPoulesMaternageByTemperament(temperament: String): Array<Poule> {
-    return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.maternage!==0);
-  }
-  getBonheurMoyen(temperament: String): number{
-   let bonheur : number = 0 ; 
-   let  cpt : number =0 ;
-   this.getPouleByTemperament(temperament).forEach(p => bonheur = bonheur+p.bonheur && cpt++);
-
-  return bonheur/cpt; 
-
   }
 }
 
