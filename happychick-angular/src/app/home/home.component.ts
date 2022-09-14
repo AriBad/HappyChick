@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Poulailler, Saison } from '../model';
+import { PoulaillerSessionService } from '../poulailler-session.service';
 import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 
 @Component({
@@ -9,29 +10,13 @@ import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 })
 export class HomeComponent implements OnInit {
 
-  poulailler:Poulailler;
+ poulailler:Poulailler = this.poulaillerSessionService.poulailler;
+ 
+  constructor(private poulaillerService : PoulaillerHttpService, private poulaillerSessionService : PoulaillerSessionService  ) { 
 
-  constructor(private poulaillerService : PoulaillerHttpService ) { 
-    this.loadPoulailler();
   }
 
   loadPoulailler(saison?:Saison) : void {
-    if(saison) {
-      this.poulaillerService.saisonSuivante(saison).subscribe(resp => {
-        this.poulaillerService.getPoulaillerActuel().subscribe(
-          reponse => {
-            this.poulailler = reponse;
-          }
-        );
-      });
-    }
-    else {
-      this.poulaillerService.getPoulaillerActuel().subscribe(
-        reponse => {
-          this.poulailler = reponse;
-        }
-      );
-    }
     
   }
 

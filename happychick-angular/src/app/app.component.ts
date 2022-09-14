@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Poulailler, Saison } from './model';
+import { PoulaillerHttpService } from './poulailler/poulailler-http.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   init: boolean=true;
+  poulaillerService: PoulaillerHttpService;
+  poulailler: Poulailler;
+
+  
 
   goHome(){
     this.init=false;

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, KeyValueDiffers, OnInit, Output } from '@angular/core';
 import { Couveuse, CouveuseComplete, Poulailler, Poule, Saison } from '../model';
+import { PoulaillerSessionService } from '../poulailler-session.service';
 import { PouleHttpService } from '../poule-http.service';
 import { PoulaillerHttpService } from './poulailler-http.service';
 
@@ -15,17 +16,17 @@ export class PoulaillerComponent implements OnInit {
   couveuseId:number;
   affichePoulesCouveuses:boolean = false;
   messageAfficherCouveuses:string = "Afficher Les Couveuses"
-  @Input() poulailler : Poulailler;
-  @Output() itemEvent = new EventEmitter<Saison>();
+  poulailler:Poulailler = this.poulaillerSessionService.poulailler;
   tempcouv: Array<number> = new Array<number>;
   submitDisabled=false;
 
-
-  constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService) {
+  constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService,private poulaillerSessionService : PoulaillerSessionService) {
     this.saison = new Saison();
     this.saison.listeCouveuses = new Array<Couveuse>;
+    
   }
 
+ 
   ngOnInit(): void {
   }
 
@@ -42,7 +43,7 @@ export class PoulaillerComponent implements OnInit {
   }
 
   saisonSuivante():void {
-    this.itemEvent.emit(this.saison);
+    this.poulaillerSessionService.loadPoulailler(this.saison);
     this.saison=new Saison();
     this.saison.listeCouveuses = new Array<Couveuse>;
     this.reinitialiser();

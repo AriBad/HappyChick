@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Couveuse, Poulailler, Poule } from '../model';
+import { PoulaillerSessionService } from '../poulailler-session.service';
 import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 import { PouleHttpService } from '../poule-http.service';
 
@@ -12,9 +13,9 @@ export class RecapPoulesComponent implements OnInit {
 
   poule : Poule;
   couveuse: Couveuse;
-  @Input() poulailler: Poulailler;
+  poulailler:Poulailler = this.poulaillerSessionService.poulailler;
   poussins: Array<Poule>;
-  constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService) { }
+  constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService,private poulaillerSessionService : PoulaillerSessionService) { }
 
    getNbPoussins(): number {
     this.poussins = this.poulailler.listePoules.filter(poule => poule.poussin == true);
