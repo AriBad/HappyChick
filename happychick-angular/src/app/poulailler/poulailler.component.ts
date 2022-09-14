@@ -11,12 +11,12 @@ import { PoulaillerHttpService } from './poulailler-http.service';
 export class PoulaillerComponent implements OnInit {
   nom:string;
   saison:Saison;
-  couveuseNbOeufs:number;
+  couveuseoeufs:number;
   couveuseId:number;
   affichePoulesCouveuses:boolean = false;
   messageAfficherCouveuses:string = "Afficher Les Couveuses"
   poulailler : Poulailler;
-  poulesCouveuses : Array<CouveuseComplete>;
+  poulesCouveuses : Array<Couveuse> = new Array<Couveuse>;
 
   constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService) {
     this.saison = new Saison();
@@ -45,7 +45,7 @@ export class PoulaillerComponent implements OnInit {
 
   saisonSuivante():void {
     this.poulesCouveuses.forEach((value,index) =>{
-      this.saison.listeCouveuses.push(new Couveuse(value.poule.id, value.nbOeufs));
+      this.saison.listeCouveuses.push(value);
     });
     this.poulaillerService.saisonSuivante(this.saison);
     this.saison=new Saison();
@@ -54,9 +54,10 @@ export class PoulaillerComponent implements OnInit {
 
   ajouterCouveuse():void {
     this.pouleService.findById(this.couveuseId).subscribe(resp=> {
-      this.poulesCouveuses.push(new CouveuseComplete(resp, this.couveuseNbOeufs));
+      this.poulesCouveuses.push(new Couveuse(resp, this.couveuseoeufs));
+      this.couveuseoeufs=null;
     });
-    this.couveuseNbOeufs=null;
+    
   }
 
   supprimerCouveuse(id : number):void {

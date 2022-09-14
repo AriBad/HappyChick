@@ -73,19 +73,25 @@ export class Saison {
 }
 
 export class Couveuse {
-    idPoule:number;
-    nbOeufs:number;
-    constructor(idPoule:number, nbOeufs:number) {
-        this.idPoule=idPoule;
-        this.nbOeufs=nbOeufs;
+    // idPoule:number;
+    // oeufs:number;
+    // constructor(idPoule:number, oeufs:number) {
+    //     this.idPoule=idPoule;
+    //     this.oeufs=oeufs;
+    // }
+    poule:Poule;
+    oeufs:number;
+    constructor(poule:Poule, oeufs:number) {
+        this.poule=poule;
+        this.oeufs=oeufs;
     }
 }
 
 export class CouveuseComplete {
     poule:Poule;
-    nbOeufs:number;
-    constructor(poule:Poule, nbOeufs:number) {
+    oeufs:number;
+    constructor(poule:Poule, oeufs:number) {
         this.poule=poule;
-        this.nbOeufs=nbOeufs;
+        this.oeufs=oeufs;
     }
 }

@@ -123,7 +123,7 @@
             <tr>
                 <td>Choix de l'activité de la saison</td>
                 <td>
-                    <input name="activite" value="SortieG" id="SortieG" type="radio" checked [(ngModel)]="saison.activite"> 
+                    <input name="activite" value="SortieGenerale" id="SortieGenerale" type="radio" checked [(ngModel)]="saison.activite"> 
                     <label for="SortieG">Sortie Générale</label> 
                     <input name="activite" value="Escrime" id="Escrime" type="radio" [(ngModel)]="saison.activite"> 
                     <label for="Escrime">Escrime</label> 
@@ -148,7 +148,7 @@
                 <tr>
                     <td>Nombre d'oeufs à couver</td>
                     <td><input name="nbOeufsCouves" type="number" value="0" min="0" max="8" step="1"
-                            placeholder="nombres d'oeufs à couver" [(ngModel)]="couveuseNbOeufs"></td>
+                            placeholder="nombres d'oeufs à couver" [(ngModel)]="couveuseoeufs"></td>
                     <td><button type="button" class="btn btn-primary" (click)="ajouterCouveuse()">Ajouter Poule</button></td>
                     <td><button type="button" id="afficherCouveuses" (click)="affichertableau()" class="btn btn-info">{{messageAfficherCouveuses}}</button></td>
                 </tr>
@@ -168,7 +168,7 @@
                     <td>{{couv.poule.id}}</td>
                     <td>{{couv.poule.prenom}}</td>
                     <td>{{couv.poule.temperament}}</td>
-                    <td>{{couv.nbOeufs}}</td>
+                    <td>{{couv.oeufs}}</td>
                 </tr>
             </table>
         </div>
