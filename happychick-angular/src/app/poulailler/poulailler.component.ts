@@ -1,4 +1,4 @@
-import { Component, KeyValueDiffers, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, KeyValueDiffers, OnInit, Output } from '@angular/core';
 import { Couveuse, CouveuseComplete, Poulailler, Poule, Saison } from '../model';
 import { PouleHttpService } from '../poule-http.service';
 import { PoulaillerHttpService } from './poulailler-http.service';
@@ -15,18 +15,14 @@ export class PoulaillerComponent implements OnInit {
   couveuseId:number;
   affichePoulesCouveuses:boolean = false;
   messageAfficherCouveuses:string = "Afficher Les Couveuses"
-  poulailler : Poulailler;
-  poulesCouveuses : Array<Couveuse> = new Array<Couveuse>;
+  @Input() poulailler : Poulailler;
+  @Output() itemEvent = new EventEmitter<Saison>();
   tempcouv: Array<number> = new Array<number>;
+  submitDisabled=false;
 
   constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService) {
     this.saison = new Saison();
     this.saison.listeCouveuses = new Array<Couveuse>;
-    this.poulaillerService.getPoulaillerActuel().subscribe(
-      reponse => {
-        this.poulailler = reponse;
-      }
-    )
   }
 
   ngOnInit(): void {
@@ -45,17 +41,15 @@ export class PoulaillerComponent implements OnInit {
   }
 
   saisonSuivante():void {
-    this.poulesCouveuses.forEach((value,index) =>{
-      this.saison.listeCouveuses.push(value);
-    });
-    this.poulaillerService.saisonSuivante(this.saison);
+    this.itemEvent.emit(this.saison);
     this.saison=new Saison();
     this.saison.listeCouveuses = new Array<Couveuse>;
+    this.reinitialiser();
   }
 
   ajouterCouveuse():void {
     this.pouleService.findById(this.couveuseId).subscribe(resp=> {
-      this.poulesCouveuses.push(new Couveuse(resp, this.couveuseoeufs));
+      this.saison.listeCouveuses.push(new Couveuse(resp, this.couveuseoeufs));
       this.couveuseoeufs=null;
       this.tempcouv.push(resp.id);
     });
@@ -63,9 +57,9 @@ export class PoulaillerComponent implements OnInit {
   }
 
   supprimerCouveuse(id : number):void {
-    this.poulesCouveuses.forEach((value,index) =>{
+    this.saison.listeCouveuses.forEach((value,index) =>{
       if(value.poule.id == id) {
-        this.poulesCouveuses.slice(index, 1);
+        this.saison.listeCouveuses.slice(index, 1);
       }
     });
   }
@@ -77,7 +71,10 @@ export class PoulaillerComponent implements OnInit {
   }
 
   reinitialiser(){
-    this.saison =null;
+    this.saison =new Saison();
+    this.saison.listeCouveuses = new Array<Couveuse>;
+    this.couveuseId=null;
+    this.couveuseoeufs=null;
   }
 
   affichertableau(){

@@ -1,6 +1,6 @@
 <div id="poules" *ngIf="poulailler">
     <table>
-        <tr>
+        <tr *ngIf="getNbPoussins() != 0">
             <td>
                 <img src="../../assets/img/poussin.png" width="auto" height=100>
             </td>
@@ -10,7 +10,7 @@
                 </ul>
             </td>
         </tr>
-        <tr>
+        <tr *ngIf="getNbPoulesInsouciantes() != 0">
             <td>
                 <img src="../../assets/img/PouleInsouciante.png" width="auto" height=100>
             </td>
@@ -23,7 +23,7 @@
                 </ul>
             </td>
         </tr>
-        <tr>
+        <tr *ngIf="getNbPoulesSerieuses() != 0">
             <td>
                 <img src="../../assets/img/PouleSerieuse.png" width="auto" height=100>
             </td>
@@ -36,7 +36,7 @@
                 </ul>
             </td>
         </tr>
-        <tr>
+        <tr *ngIf="getNbPoulesMamansPoule() != 0">
             <td>
                 <img src="../../assets/img/MamanPoule.png" width="auto" height=100>
             </td>
@@ -49,7 +49,7 @@
                 </ul>
             </td>
         </tr>
-        <tr>
+        <tr *ngIf="getNbPoulesPsychopathes() != 0">
             <td>
                 <img src="../../assets/img/PoulePsychopathe.png" width="auto" height=100>
             </td>
@@ -62,7 +62,7 @@
                 </ul>
             </td>
         </tr>
-        <tr>
+        <tr *ngIf="getNbPoulesPyromanes() != 0">
             <td>
                 <img src="../../assets/img/PoulePyromane.png" width="auto" height=100>
             </td>

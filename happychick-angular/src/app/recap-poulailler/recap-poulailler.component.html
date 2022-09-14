@@ -6,17 +6,18 @@
             </td>
             <td  rowspan="2">
                 <ul>
-                    <li>Saison : {{poulailler.saison}}</li>
-                    <li>Année : {{poulailler.annee}}</li>
-                    <li>Nombre d'oeufs : {{poulailler.oeufs}}</li>
-                    <li>Nombre de poules : {{getNbPoules()}}</li>
-                    <li>Niveau de sécurité : {{poulailler.securite}}</li>
-                    <li>Taille de poulailler : {{poulailler.taille}}</li>
+                    <li><b>Saison : </b>{{poulailler.saison}}</li>
+                    <li><b>Année : </b>{{poulailler.annee}}</li>
+                    <li><b>Nombre d'oeufs : </b>{{poulailler.oeufs}}</li>
+                    <li><b>Nombre de poules : </b>{{getNbPoules()}}</li>
+                    <li><b>Niveau de sécurité :</b> {{poulailler.securite}}</li>
+                    <li><b>Taille de poulailler : </b> {{poulailler.taille}}</li>
+                    <li><b>Nourriture :</b> {{poulailler.nourriture}} </li>
                 </ul>
             </td>
         </tr>
         <tr>
-            <td>{{poulailler.nom}}</td>
+            <td id="poulaillerNom">{{poulailler.nom}}</td>
         </tr>
     </table>
 </div>

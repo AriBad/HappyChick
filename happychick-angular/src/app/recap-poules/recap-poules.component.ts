@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Couveuse, Poulailler, Poule } from '../model';
 import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 import { PouleHttpService } from '../poule-http.service';
@@ -12,15 +12,10 @@ export class RecapPoulesComponent implements OnInit {
 
   poule : Poule;
   couveuse: Couveuse;
-  poulailler: Poulailler;
+  @Input() poulailler: Poulailler;
   poussins: Array<Poule>;
-  constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService) {
-    this.poulaillerService.getPoulaillerActuel().subscribe(
-      reponse => {
-        this.poulailler = reponse;
-      }
-    )
-   }
+  constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService) { }
+
    getNbPoussins(): number {
     this.poussins = this.poulailler.listePoules.filter(poule => poule.poussin == true);
     return this.poussins.length;
@@ -59,15 +54,15 @@ getNbPoulesMaternageByTemperament(temperament: string){
  }
 
 getPouleByTemperament(temperament: string): Array<Poule> {
-  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament);
+  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.causeMort ==null);
 }
 
 getPoulesCouveuseByTemperament(temperament: string): Array<Poule> {
-  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.oeufsCouves!==0);
+  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.oeufsCouves!==0 && poule.causeMort ==null);
 }
 
 getPoulesMaternageByTemperament(temperament: string): Array<Poule> {
-  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.maternage!==0);
+  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.etat=="Maternage" && poule.causeMort ==null);
 }
 getBonheur(temperament: string): number{
   let bonheur : number = 0 ; 
