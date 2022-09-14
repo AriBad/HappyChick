@@ -17,6 +17,7 @@ export class PoulaillerComponent implements OnInit {
   messageAfficherCouveuses:string = "Afficher Les Couveuses"
   poulailler : Poulailler;
   poulesCouveuses : Array<Couveuse> = new Array<Couveuse>;
+  tempcouv: Array<number> = new Array<number>;
 
   constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService) {
     this.saison = new Saison();
@@ -56,6 +57,7 @@ export class PoulaillerComponent implements OnInit {
     this.pouleService.findById(this.couveuseId).subscribe(resp=> {
       this.poulesCouveuses.push(new Couveuse(resp, this.couveuseoeufs));
       this.couveuseoeufs=null;
+      this.tempcouv.push(resp.id);
     });
     
   }
@@ -68,8 +70,10 @@ export class PoulaillerComponent implements OnInit {
     });
   }
 
+
+
   getPoulesLibres(): Array<Poule>{
-    return this.poulailler.listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte" && poule.femelle==true);
+    return this.poulailler.listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte" && poule.poussin==false && poule.femelle==true && !this.tempcouv.includes(poule.id));
   }
 
   reinitialiser(){
