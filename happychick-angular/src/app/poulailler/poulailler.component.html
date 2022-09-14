@@ -103,7 +103,7 @@
             </div> -->
 <div id="choix_param" *ngIf="poulailler">
     <h3>Quels sont vos choix pour cette saison ?</h3>
-    <p> Oeufs totaux : <span id="totalOeuf"> {{poulailler.oeufs}} </span> Oeufs dispos : <span id="oeufsDispos"> 550 </span>
+    <p> Oeufs totaux : <span id="totalOeuf"> {{poulailler.oeufs}} </span> Oeufs dispos : <span id="oeufsDispos"> {{oeufsDispos()}} </span>
     </p>
     <form method="get">
         <table>
@@ -169,10 +169,12 @@
                     <td>{{couv.poule.prenom}}</td>
                     <td>{{couv.poule.temperament}}</td>
                     <td>{{couv.oeufs}}</td>
+                    <td><button type="button" class="btn btn-secondary" (click)="supprimerCouveuse(couv.poule.id)"> Supprimer </button></td>
                 </tr>
             </table>
         </div>
         <input type="submit" class="btn btn-success" (click)="saisonSuivante()" [disabled]="submitDisabled"> <button type="button"
             class="btn btn-warning" (click)="reinitialiser()">Reinitialiser</button>
+        <div *ngIf="submitDisabled" id="erreurOeufs">Vous n'avez pas assez d'oeufs !</div>
     </form>
 </div>

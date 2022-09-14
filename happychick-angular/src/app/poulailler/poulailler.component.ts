@@ -20,6 +20,7 @@ export class PoulaillerComponent implements OnInit {
   tempcouv: Array<number> = new Array<number>;
   submitDisabled=false;
 
+
   constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService) {
     this.saison = new Saison();
     this.saison.listeCouveuses = new Array<Couveuse>;
@@ -47,11 +48,31 @@ export class PoulaillerComponent implements OnInit {
     this.reinitialiser();
   }
 
+  oeufsDispos():number {
+    let oeufsDispos = this.poulailler.oeufs;
+    this.saison.listeCouveuses.forEach((value) =>{
+      oeufsDispos-= value.oeufs;
+    });
+
+    if(this.saison.securite) {
+      oeufsDispos-=20;
+    }
+    if(this.saison.taille) {
+      oeufsDispos-=20;
+    }
+    if(this.saison.nourriture) {
+      oeufsDispos -= this.saison.nourriture*50;
+    }
+    this.submitDisabled = oeufsDispos < 0;
+    return oeufsDispos; 
+  }
+
   ajouterCouveuse():void {
     this.pouleService.findById(this.couveuseId).subscribe(resp=> {
       this.saison.listeCouveuses.push(new Couveuse(resp, this.couveuseoeufs));
       this.couveuseoeufs=null;
       this.tempcouv.push(resp.id);
+      this.couveuseId=null;
     });
     
   }
@@ -59,7 +80,12 @@ export class PoulaillerComponent implements OnInit {
   supprimerCouveuse(id : number):void {
     this.saison.listeCouveuses.forEach((value,index) =>{
       if(value.poule.id == id) {
-        this.saison.listeCouveuses.slice(index, 1);
+        this.saison.listeCouveuses.splice(index, 1);
+      }
+    });
+    this.tempcouv.forEach((value,index) =>{
+      if(value == id) {
+        this.tempcouv.splice(index, 1);
       }
     });
   }
