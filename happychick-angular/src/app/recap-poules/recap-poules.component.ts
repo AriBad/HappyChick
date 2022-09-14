@@ -79,7 +79,8 @@ getBonheur(temperament: string): number{
  if (this.getPouleByTemperament(temperament).length == 0) {
   return 0;
  }
-return bonheur/cpt; 
+  let tmp :number = bonheur/cpt;
+  return parseFloat((bonheur/cpt).toFixed(2)); 
 
 }
 

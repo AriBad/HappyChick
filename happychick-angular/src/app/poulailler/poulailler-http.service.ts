@@ -51,6 +51,10 @@ export class PoulaillerHttpService {
     }
   }
 
+  setPoulaillerActuel(id : number) : void {
+    this.poulaillerId=id;
+  }
+
   delete(id: number) {
     this.http.delete<void>(this.apiPath + id)
       .subscribe(resp => {

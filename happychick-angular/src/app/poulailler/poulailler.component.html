@@ -173,8 +173,8 @@
                 </tr>
             </table>
         </div>
-        <input type="submit" class="btn btn-success" (click)="saisonSuivante()" [disabled]="submitDisabled"> <button type="button"
-            class="btn btn-warning" (click)="reinitialiser()">Reinitialiser</button>
+        <input type="submit" class="btn btn-success" (click)="saisonSuivante()" [disabled]="submitDisabled"> 
+        <button type="button" class="btn btn-warning" (click)="reinitialiser()">Reinitialiser</button>
         <div *ngIf="submitDisabled" id="erreurOeufs">Vous n'avez pas assez d'oeufs !</div>
     </form>
 </div>

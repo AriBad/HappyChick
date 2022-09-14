@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,7 +24,7 @@ import happyChick.model.Poule;
 import happyChick.model.Temperament;
 
 public interface IDAOPoule extends JpaRepository<Poule, Integer> {
-
+	@Transactional
 	void deleteByPoulailler(Poulailler poulailler);
 
 	void deleteByTemperament(Temperament temperament);
