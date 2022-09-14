@@ -146,10 +146,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Nombre d'oeufs à couver</td>
+                    <td>Nombre d'oeufs à couver (max 8)</td>
                     <td><input name="nbOeufsCouves" type="number" value="0" min="0" max="8" step="1"
                             placeholder="nombres d'oeufs à couver" [(ngModel)]="couveuseoeufs"></td>
-                    <td><button type="button" class="btn btn-primary" (click)="ajouterCouveuse()">Ajouter Poule</button></td>
+                    <td><button type="button" class="btn btn-primary" (click)="ajouterCouveuse()" [disabled]="couveuseoeufs > 8 || couveuseoeufs <= 0 || couveuseId==null">Ajouter Poule</button></td>
                     <td><button type="button" id="afficherCouveuses" (click)="affichertableau()" class="btn btn-info">{{messageAfficherCouveuses}}</button></td>
                 </tr>
 
