@@ -9,8 +9,8 @@
     <div id="center">
         <img src="../../assets/img/pixel/pixelCheffeGauche.png" id="pouleMouvante">
         <div id="menuleft">
-            <recap-poulailler></recap-poulailler>
-            <!-- <recap-poules></recap-poules> -->
+            <recap-poulailler [poulailler]="poulailler"></recap-poulailler>
+          <recap-poules [poulailler]="poulailler"></recap-poules>
         </div>
         <div id="main">
 
@@ -24,7 +24,7 @@
                     également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité.
                 </div>
             </div>
-            <poulailler></poulailler>
+            <poulailler (itemEvent)="loadPoulailler($event)" [poulailler]="poulailler"></poulailler>
         </div>
         <div id="menuright">
             <recap-utilisateur></recap-utilisateur>

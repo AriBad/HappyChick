@@ -164,7 +164,7 @@
                     <td>tempérament</td>
                     <td>nombre d'oeufs</td>
                 </tr>
-                <tr *ngFor="let couv of poulesCouveuses">
+                <tr *ngFor="let couv of saison.listeCouveuses">
                     <td>{{couv.poule.id}}</td>
                     <td>{{couv.poule.prenom}}</td>
                     <td>{{couv.poule.temperament}}</td>
@@ -172,7 +172,7 @@
                 </tr>
             </table>
         </div>
-        <input type="submit" class="btn btn-success" (click)="saisonSuivante()"> <button type="button"
+        <input type="submit" class="btn btn-success" (click)="saisonSuivante()" [disabled]="submitDisabled"> <button type="button"
             class="btn btn-warning" (click)="reinitialiser()">Reinitialiser</button>
     </form>
 </div>

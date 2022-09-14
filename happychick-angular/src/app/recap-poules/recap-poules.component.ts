@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Couveuse, Poulailler, Poule } from '../model';
 import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 import { PouleHttpService } from '../poule-http.service';
@@ -12,15 +12,10 @@ export class RecapPoulesComponent implements OnInit {
 
   poule : Poule;
   couveuse: Couveuse;
-  poulailler: Poulailler;
+  @Input() poulailler: Poulailler;
   poussins: Array<Poule>;
-  constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService) {
-    this.poulaillerService.getPoulaillerActuel().subscribe(
-      reponse => {
-        this.poulailler = reponse;
-      }
-    )
-   }
+  constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService) { }
+
    getNbPoussins(): number {
     this.poussins = this.poulailler.listePoules.filter(poule => poule.poussin == true);
     return this.poussins.length;
@@ -28,52 +23,58 @@ export class RecapPoulesComponent implements OnInit {
 
    getNbPoulesInsouciantes(): number {
   
-    return this.getPouleByTemperament("Insouciantes").length;
+    return this.getPouleByTemperament("insouciante").length;
    }
    
    getNbPoulesSerieuses(): number {
-    return this.getPouleByTemperament("Serieuses").length;
+    return this.getPouleByTemperament("serieuse").length;
    }
    
    getNbPoulesMamansPoule(): number {
-    return this.getPouleByTemperament("MamansPoule").length;
+    return this.getPouleByTemperament("mamanPoule").length;
    }
    
    getNbPoulesPsychopathes(): number {
-    return this.getPouleByTemperament("Psychopathes").length;
+    return this.getPouleByTemperament("psychopathe").length;
    }
    
    getNbPoulesPyromanes(): number {
-    return this.getPouleByTemperament("Pyromanes").length;
+    return this.getPouleByTemperament("pyromane").length;
    }
 
-getNbPoulesCouveusesByTemperament(temperament: String){
+getNbPoulesCouveusesByTemperament(temperament: string){
  return this.getPoulesCouveuseByTemperament(temperament).length;
 }
 
-getNbPoulesMaternageByTemperament(temperament: String){
+getNbPoulesMaternageByTemperament(temperament: string){
   return this.getPoulesMaternageByTemperament(temperament).length;
  }
- getBonheurMoyen(temperament: String){
+ getBonheurMoyen(temperament: string){
   return this.getBonheur(temperament);
  }
 
-getPouleByTemperament(temperament: String): Array<Poule> {
-  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament);
+getPouleByTemperament(temperament: string): Array<Poule> {
+  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.causeMort ==null);
 }
 
-getPoulesCouveuseByTemperament(temperament: String): Array<Poule> {
-  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.oeufsCouves!==0);
+getPoulesCouveuseByTemperament(temperament: string): Array<Poule> {
+  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.oeufsCouves!==0 && poule.causeMort ==null);
 }
 
-getPoulesMaternageByTemperament(temperament: String): Array<Poule> {
-  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.maternage!==0);
+getPoulesMaternageByTemperament(temperament: string): Array<Poule> {
+  return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.etat=="Maternage" && poule.causeMort ==null);
 }
-getBonheur(temperament: String): number{
- let bonheur : number = 0 ; 
- let  cpt : number =0 ;
- this.getPouleByTemperament(temperament).forEach(p => bonheur = bonheur+p.bonheur && cpt++);
-
+getBonheur(temperament: string): number{
+  let bonheur : number = 0 ; 
+  let  cpt : number =0 ;
+  
+  this.getPouleByTemperament(temperament).forEach(p => {
+   bonheur = bonheur+p.bonheur;
+   cpt++;
+ });
+ if (this.getPouleByTemperament(temperament).length == 0) {
+  return 0;
+ }
 return bonheur/cpt; 
 
 }
