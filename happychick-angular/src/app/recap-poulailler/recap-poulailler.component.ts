@@ -13,8 +13,8 @@ export class RecapPoulaillerComponent implements OnInit {
   
   constructor(private poulaillerService: PoulaillerHttpService,private poulaillerSessionService : PoulaillerSessionService) { }
 
-  getNbPoules() : number {
-    return this.getSessionPoulailler().listePoules.length;
+  getNbPoulesVivantes() : number {
+    return this.getSessionPoulailler().listePoules.filter(poule => poule.causeMort ==null ).length;
   }
   
   getSessionPoulailler(): Poulailler {
