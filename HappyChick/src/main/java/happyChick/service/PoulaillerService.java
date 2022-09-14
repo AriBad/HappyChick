@@ -81,6 +81,7 @@ public class PoulaillerService {
 		if (poulailler == null || pouleRepo.findById(poulailler.getId()) == null ) {
 			throw new PoulaillerException("Update un poulailler qui n'existe pas en base");
 		}
+	
 		return poulaillerRepo.save(poulailler);
 	}
 
