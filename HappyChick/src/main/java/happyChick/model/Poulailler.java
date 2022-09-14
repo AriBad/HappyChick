@@ -110,7 +110,7 @@ public class Poulailler {
 	
 	public void indiquerNaissance(Poule p) {
 		listePoules.add(p);
-		//System.out.println(p.getPrenom() + " est née !");
+		System.out.println(p.getPrenom() + " est née dans poulailler !");
 	}
 
 	public int getSecurite() {

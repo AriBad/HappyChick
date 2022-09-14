@@ -87,12 +87,15 @@ public class PouleService {
 			oeufsEclos(poule, poule.getOeufsCouves());
 			poule.setOeufsCouves(0);
 			poule.setEtat(Etat.Maternage);
+			System.out.println("ICIIIIIIIIIII Couvaison");
 		} else if (poule.getEtat() == Etat.Liberte && oeufsCouves !=0) {
 			poule.setOeufsCouves(oeufsCouves);
 			poule.setEtat(Etat.Couvaison);
 			poule.setPonte(0);
+			System.out.println("ICIIIIIIIIIII Liberte");
 		} else if (poule.getEtat() == Etat.Maternage) {
 			poule.setEtat(Etat.Liberte);
+			System.out.println("ICIIIIIIIIIII Maternage");
 		}
 
 
@@ -187,6 +190,7 @@ public class PouleService {
 	public int oeufsEclos(Poule poule, int oeufsCouves) {
 		int oeufsEclos;
 		oeufsEclos=((int) (poule.getMaternage()*oeufsCouves));
+		System.out.println("personne n'est née !");
 		for (int i = 0; i < oeufsEclos; i++) {
 			naissance(poule);
 		}
@@ -197,12 +201,15 @@ public class PouleService {
 		Random r = new Random();
 		Poule p;
 		if (r.nextDouble()<0.1) {
-			p = new Poule(jsonNameParser.genererNomCoq(true), false, poule.getPoulailler());
-
+			p = create(new Poule(jsonNameParser.genererNomCoq(true), false, poule.getPoulailler()));
+			System.out.println(p.getPrenom() + " ca marche !");
+			poule.getPoulailler().indiquerNaissance(p);
 		} else {
-			p = new Poule(jsonNameParser.genererNomPoule(true), true, poule.getPoulailler());
+			p = create(new Poule(jsonNameParser.genererNomPoule(true), true, poule.getPoulailler()));
+			System.out.println(p.getPrenom() + " ca marche !");
+			poule.getPoulailler().indiquerNaissance(p);
 		}
-		poule.getPoulailler().indiquerNaissance(p);
+		
 	}
 
 
