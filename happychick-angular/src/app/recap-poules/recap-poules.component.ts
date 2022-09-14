@@ -28,52 +28,58 @@ export class RecapPoulesComponent implements OnInit {
 
    getNbPoulesInsouciantes(): number {
   
-    return this.getPouleByTemperament("Insouciantes").length;
+    return this.getPouleByTemperament("insouciante").length;
    }
    
    getNbPoulesSerieuses(): number {
-    return this.getPouleByTemperament("Serieuses").length;
+    return this.getPouleByTemperament("serieuse").length;
    }
    
    getNbPoulesMamansPoule(): number {
-    return this.getPouleByTemperament("MamansPoule").length;
+    return this.getPouleByTemperament("mamanPoule").length;
    }
    
    getNbPoulesPsychopathes(): number {
-    return this.getPouleByTemperament("Psychopathes").length;
+    return this.getPouleByTemperament("psychopathe").length;
    }
    
    getNbPoulesPyromanes(): number {
-    return this.getPouleByTemperament("Pyromanes").length;
+    return this.getPouleByTemperament("pyromane").length;
    }
 
-getNbPoulesCouveusesByTemperament(temperament: String){
+getNbPoulesCouveusesByTemperament(temperament: string){
  return this.getPoulesCouveuseByTemperament(temperament).length;
 }
 
-getNbPoulesMaternageByTemperament(temperament: String){
+getNbPoulesMaternageByTemperament(temperament: string){
   return this.getPoulesMaternageByTemperament(temperament).length;
  }
- getBonheurMoyen(temperament: String){
+ getBonheurMoyen(temperament: string){
   return this.getBonheur(temperament);
  }
 
-getPouleByTemperament(temperament: String): Array<Poule> {
+getPouleByTemperament(temperament: string): Array<Poule> {
   return this.poulailler.listePoules.filter(poule => poule.temperament == temperament);
 }
 
-getPoulesCouveuseByTemperament(temperament: String): Array<Poule> {
+getPoulesCouveuseByTemperament(temperament: string): Array<Poule> {
   return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.oeufsCouves!==0);
 }
 
-getPoulesMaternageByTemperament(temperament: String): Array<Poule> {
+getPoulesMaternageByTemperament(temperament: string): Array<Poule> {
   return this.poulailler.listePoules.filter(poule => poule.temperament == temperament && poule.maternage!==0);
 }
-getBonheur(temperament: String): number{
- let bonheur : number = 0 ; 
- let  cpt : number =0 ;
- this.getPouleByTemperament(temperament).forEach(p => bonheur = bonheur+p.bonheur && cpt++);
-
+getBonheur(temperament: string): number{
+  let bonheur : number = 0 ; 
+  let  cpt : number =0 ;
+  
+  this.getPouleByTemperament(temperament).forEach(p => {
+   bonheur = bonheur+p.bonheur;
+   cpt++;
+ });
+ if (this.getPouleByTemperament(temperament).length == 0) {
+  return 0;
+ }
 return bonheur/cpt; 
 
 }
