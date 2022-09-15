@@ -26,7 +26,7 @@ class LoadTests {
 	@Test
 	public void load() {
 
-		Utilisateur ariane = new Utilisateur("ariane", "123456");
+		Utilisateur ariane = new Utilisateur("Ariane", "123456");
 		ariane.addRole(Role.USER);
 
 		ariane = utilisateurRepository.save(ariane);
