@@ -45,46 +45,46 @@ ul
 	padding: 5px;
 }
 
-
-
-
 /* Style du centre / la page principale */
 #main
 {
-	display:flex;
+	display: inline-flex;
 	width : 60%;
 	flex-direction: column;
 	align-items:center;
 	justify-content: space-around;
 	background-color: rgb(57, 62, 72);
 	border-radius: 2%;
-	/* overflow: auto;
-	*/
+	overflow: auto;
 	color: rgb(205, 207, 189);
+	// padding: 2%;
 }
 #poulailler_et_recap
 {
-	display: flex;
+	display: inline-flex;
 	background-color: rgb(110, 104, 104);
 	color: rgb(205, 207, 189);
 	border: solid rgb(205, 207, 189) 3px;
 	border-radius: 2%;
-	width: 90%;
-	height: 40%;
-	padding: 2px;
+	height: 30%;
+	padding: 1%;
+	margin: 2%;
+	flex-direction: center;
+	justify-content: center;
+	align-items: center;
 }
 
 #screen
 {
-	display:flex;
+	display:inline-flex;
 	align-items:center;
 	justify-content: center;
-	width: 150%;
+	width: 100%;
 }
 
 #console
 {
-	display:flex;
+	display:inline-flex;
 	padding: 2%;
 	align-items:center;
 	justify-content: center;
@@ -126,9 +126,3 @@ ul
 	display:none;
 }
 
-.btnViolet,.btnViolet:hover
-{
-	color:white;
-	background-color:purple;
-	border-radius: 3%;
-}

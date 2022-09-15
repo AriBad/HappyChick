@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppConfigService } from './app-config.service';
 import { Poulailler, Poule } from './model';
+import { PoulaillerSessionService } from './poulailler-session.service';
 import { PoulaillerHttpService } from './poulailler/poulailler-http.service';
 import { PouleComponent } from './poule/poule.component';
 
@@ -17,8 +18,9 @@ export class PouleHttpService {
   poule: Poule = new Poule;
 
   apiPath: string;
-  poulailler: Poulailler;
-  constructor(private http: HttpClient, private appConfig: AppConfigService, private poulaillerService: PoulaillerHttpService) {
+  //poulailler: Poulailler;
+
+  constructor(private http: HttpClient, private appConfig: AppConfigService, private poulaillerService: PoulaillerHttpService, private poulaillerSessionService: PoulaillerSessionService) {
     this.apiPath = this.appConfig.apiBackEndUrl + "poule/";
     this.load();
   }
@@ -38,7 +40,7 @@ export class PouleHttpService {
   }
 
   getPoulesMortes(causemort: String) {
-    this.poulailler.listePoules.filter(poule=> poule.causeMort==causemort);
+    this.poulaillerSessionService.poulailler.listePoules.filter(poule=> poule.causeMort==causemort);
   }
 
   save(poule: Poule) {
@@ -55,6 +57,8 @@ export class PouleHttpService {
     }
   }
 
+  
+
   delete(id: number) {
     this.http.delete<void>(this.apiPath + id)
       .subscribe(resp => {
@@ -63,14 +67,14 @@ export class PouleHttpService {
   }
   
 getPoulesByPoulailler(): Array<Poule> {
-  return this.poulailler.listePoules;
+  return this.poulaillerSessionService.poulailler.listePoules;
 }
   getPoulesVivantes() {
-    this.poulailler.listePoules.filter(poule=> poule.causeMort==null);
+    this.poulaillerSessionService.poulailler.listePoules.filter(poule=> poule.causeMort==null);
   }
 
   getPouleByTemperament(temperament: String): Array<Poule> {
-    return this.poulailler.listePoules.filter(poule => poule.temperament == temperament);
+    return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.temperament == temperament);
   }
 }
 

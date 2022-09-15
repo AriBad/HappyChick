@@ -6,7 +6,7 @@
             </td>
             <td>
                 <ul>
-                    <li><strong>poussins : </strong> {{getNbPoussins()}} individus</li>
+                    <strong>poussins : </strong> {{getNbPoussins()}} individus
                 </ul>
             </td>
         </tr>
@@ -16,10 +16,16 @@
             </td>
             <td>
                 <ul>
-                    <li><strong>Insouciantes : </strong> {{getNbPoulesInsouciantes()}} poules</li>
-                    <li>Bonheur moyen : {{getBonheurMoyen("insouciante")}}%</li>
-                    <li>Couveuses : {{getNbPoulesCouveusesByTemperament("insouciante")}} poules</li>
-                    <li>Maternantes: {{getNbPoulesMaternageByTemperament("insouciante")}} poules</li>
+                    <strong>Insouciantes : </strong> {{getNbPoulesInsouciantes()}} poules<br>
+                    Bonheur moyen : {{getBonheurMoyen("insouciante")}}%<br>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                            [ngStyle]="{'width.%': getBonheurMoyen('insouciante')}" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    Couveuses : {{getNbPoulesCouveusesByTemperament("insouciante")}} poules<br>
+                    Maternantes: {{getNbPoulesMaternageByTemperament("insouciante")}} poules
                 </ul>
             </td>
         </tr>
@@ -29,23 +35,35 @@
             </td>
             <td>
                 <ul>
-                    <li><strong>Serieuses : </strong> {{getNbPoulesSerieuses()}} poules</li>
-                    <li>Bonheur moyen : {{getBonheurMoyen("serieuse")}}%</li>
-                    <li>Couveuses : {{getNbPoulesCouveusesByTemperament("serieuse")}} poules</li>
-                    <li>Maternantes: {{getNbPoulesMaternageByTemperament("serieuse")}} poules</li>
+                    <strong>Serieuses : </strong> {{getNbPoulesSerieuses()}} poules<br>
+                    Bonheur moyen : {{getBonheurMoyen("serieuse")}}%<br>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                            [ngStyle]="{'width.%': getBonheurMoyen('serieuse')}" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    Couveuses : {{getNbPoulesCouveusesByTemperament("serieuse")}} poules<br>
+                    Maternantes: {{getNbPoulesMaternageByTemperament("serieuse")}} poules
                 </ul>
             </td>
         </tr>
         <tr *ngIf="getNbPoulesMamansPoule() != 0">
             <td>
-                <img src="../../assets/img/MamanPoule.png" width="auto" height=100>
+                <img src="../../assets/img/PouleMamanpoule.png" width="auto" height=100>
             </td>
             <td>
                 <ul>
-                    <li><strong>Mamans Poule : </strong> {{getNbPoulesMamansPoule()}} poules</li>
-                    <li>Bonheur moyen : {{getBonheurMoyen("mamanPoule")}}%</li>
-                    <li>Couveuses : {{getNbPoulesCouveusesByTemperament("mamanPoule")}} poules</li>
-                    <li>Maternantes: {{getNbPoulesMaternageByTemperament("mamanPoule")}} poules</li>
+                    <strong>Mamans Poule : </strong> {{getNbPoulesMamansPoule()}} poules<br>
+                    Bonheur moyen : {{getBonheurMoyen("mamanPoule")}}%<br>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                            [ngStyle]="{'width.%': getBonheurMoyen('mamanPoule')}" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    Couveuses : {{getNbPoulesCouveusesByTemperament("mamanPoule")}} poules<br>
+                    Maternantes: {{getNbPoulesMaternageByTemperament("mamanPoule")}} poules
                 </ul>
             </td>
         </tr>
@@ -55,10 +73,16 @@
             </td>
             <td>
                 <ul>
-                    <li><strong>Psychopathes : </strong> {{getNbPoulesPsychopathes()}} poules</li>
-                    <li>Bonheur moyen : {{getBonheurMoyen("psychopathe")}}%</li>
-                    <li>Couveuses : {{getNbPoulesCouveusesByTemperament("psychopathe")}} poules</li>
-                    <li>Maternantes: {{getNbPoulesMaternageByTemperament("psychopathe")}} poules</li>
+                    <strong>Psychopathes : </strong> {{getNbPoulesPsychopathes()}} poules<br>
+                    Bonheur moyen : {{getBonheurMoyen("psychopathe")}}%<br>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                            [ngStyle]="{'width.%': getBonheurMoyen('psychopathe')}" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    Couveuses : {{getNbPoulesCouveusesByTemperament("psychopathe")}} poules<br>
+                    Maternantes: {{getNbPoulesMaternageByTemperament("psychopathe")}} poules
                 </ul>
             </td>
         </tr>
@@ -68,10 +92,26 @@
             </td>
             <td>
                 <ul>
-                    <li><strong>Pyromanes : </strong> {{getNbPoulesPyromanes()}} poules</li>
-                    <li>Bonheur moyen : {{getBonheurMoyen("pyromane")}}%</li>
-                    <li>Couveuses : {{getNbPoulesCouveusesByTemperament("pyromane")}} poules</li>
-                    <li>Maternantes: {{getNbPoulesMaternageByTemperament("pyromane")}} poules</li>
+                    <strong>Pyromanes : </strong> {{getNbPoulesPyromanes()}} poules <br>
+                    Bonheur moyen : {{getBonheurMoyen("pyromane")}}% <br>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                            [ngStyle]="{'width.%': getBonheurMoyen('pyromane')}" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    Couveuses : {{getNbPoulesCouveusesByTemperament("pyromane")}} poules<br>
+                    Maternantes: {{getNbPoulesMaternageByTemperament("pyromane")}} poules
+                </ul>
+            </td>
+        </tr>
+        <tr *ngIf="getNbPoulesCoq() != 0">
+            <td>
+                <img src="../../assets/img/coq.png" width="auto" height=100>
+            </td>
+            <td>
+                <ul>
+                    <strong>Coq : </strong> {{getNbPoulesCoq()}} coqs
                 </ul>
             </td>
         </tr>

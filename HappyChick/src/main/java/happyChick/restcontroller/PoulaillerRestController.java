@@ -103,7 +103,7 @@ public class PoulaillerRestController {
 		poulaillerService.step(poulailler, choixUsers.getActivite(), choixUsers.getNourriture(), mapCouveuseTemp, choixUsers.isTaille(), choixUsers.isSecurite());
 		
 		
-		return poulailler;		
+		return poulailler;
 	}
 
 	@PatchMapping("/{id}")

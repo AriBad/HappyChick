@@ -238,12 +238,12 @@ public class PouleService {
 	private void majPonte(Poule poule) {
 		if (poule.getTemperament()==Temperament.mamanPoule) {
 			Random r = new Random();
-			int alea = r.nextInt(10) + 20;
+			int alea = r.nextInt(5) + 10;
 			poule.setPonte((poule.getBonheur()/100)*(3/(1+poule.getAge()))*alea);
 		} else {
 			if (poule.getEtat()==Etat.Liberte) {
 				Random r = new Random();
-				int alea = r.nextInt(10) + 20;
+				int alea = r.nextInt(5) + 5;
 				poule.setPonte((poule.getBonheur()/100)*(3/(1+poule.getAge()))*alea);
 			} else {
 				poule.setPonte(0);
@@ -317,7 +317,7 @@ public class PouleService {
 
 	}
 
-	private void tuerPoule(Poule poule) {
+	private void toutBruler(Poule poule) {
 		int nbOeufs=poule.getPoulailler().getOeufs();
 		boolean premier =true;
 		for (int i = 2; i < nbOeufs; i++) {
@@ -327,14 +327,14 @@ public class PouleService {
 		if (premier==true) {
 			if (poule.getPoulailler().getSecurite()>1) {
 				poule.getPoulailler().setSecurite(poule.getPoulailler().getSecurite()-1);
+				System.out.println("!!!!!   LE POULAILLER A TROP CRAMER !!!!!!!!");
 			}
 		}
 
 	}
-	private void toutBruler(Poule poule) {
+	private void tuerPoule(Poule poule) {
 		Random r1 = new Random();
 		if ( r1.nextDouble() > (poule.getBonheur()/100)) {
-
 			Random r2 = new Random();
 			int alea = r2.nextInt(poule.getPoulailler().getNbPoulesVivantes());
 

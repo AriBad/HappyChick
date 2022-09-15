@@ -48,44 +48,44 @@ export class DetailsPouleComponent implements OnInit {
     if (filtre == "poussins") {
       console.log("ce sont des poussins");
       if (mortes && vivantes) {
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.poussin == true);
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.poussin == true);
       } else if (mortes && !vivantes) {
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.causeMort != null && poule.poussin == true)
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.causeMort != null && poule.poussin == true)
       } else if (!mortes && vivantes) {
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.causeMort == null && poule.poussin == true)
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.causeMort == null && poule.poussin == true)
       } else {
         return null;
       }
     } else if (filtre == "coq") {
       console.log("ce sont des coqs");
       if (mortes && vivantes) {
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.femelle == false);
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.femelle == false);
       } else if (mortes && !vivantes) {
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.causeMort != null && poule.femelle == false)
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.causeMort != null && poule.femelle == false)
       } else if (!mortes && vivantes) {
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.causeMort == null && poule.femelle == false)
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.causeMort == null && poule.femelle == false)
       } else {
         return null;
       }
     } else if (filtre == null || filtre=="") {
       console.log("ce sont toutes");
       if (mortes && vivantes) {
-        return this.getSessionPoulailler().listePoules
+        return this.poulaillerSessionService.poulailler.listePoules
       } else if (mortes && !vivantes) {
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.causeMort != null)
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.causeMort != null)
       } else if (!mortes && vivantes) {
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.causeMort == null)
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.causeMort == null)
       } else {
         return null;
       }
     } else {
       if (mortes && vivantes) {
         console.log("ce sont des poules");
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.temperament == filtre)
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.temperament == filtre)
       } else if (mortes && !vivantes) {
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.temperament == filtre && poule.causeMort != null)
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.temperament == filtre && poule.causeMort != null)
       } else if (!mortes && vivantes) {
-        return this.getSessionPoulailler().listePoules.filter(poule => poule.temperament == filtre && poule.causeMort == null)
+        return this.poulaillerSessionService.poulailler.listePoules.filter(poule => poule.temperament == filtre && poule.causeMort == null)
       } else {
         return null;
       }

@@ -61,7 +61,7 @@ public class PoulaillerService {
 		//Initialise les données au début du jeu avec un nouveau poulailler
 		poulailler.setSecurite(1);
 		poulailler.setTaille(100);
-		poulailler.setNourriture(10);
+		poulailler.setNourriture(50);
 		poulailler.setOeufs(5);
 		poulailler.setAnnee(0);
 		poulailler.setSaison(Saison.Printemps);
@@ -129,7 +129,7 @@ public class PoulaillerService {
 	}
 	
 	public void echangeNourriture(Poulailler poulailler, int portionNourriture) {
-		poulailler.setOeufs(poulailler.getOeufs() - (portionNourriture*50));
+		poulailler.setOeufs(poulailler.getOeufs() - (portionNourriture*8));
 		poulailler.setNourriture(poulailler.getNourriture() + portionNourriture);
 	}
 }

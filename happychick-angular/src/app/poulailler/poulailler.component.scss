@@ -1,17 +1,18 @@
 #choix_param
 {
-    display: inline-block;
+    display: inline-flex;
 	background-color: rgb(110, 104, 104);
 	color: rgb(205, 207, 189);
 	border: solid rgb(205, 207, 189) 3px;
 	border-radius: 2%;
-	width: 90%;
+	width: 95%;
 	height: 100%;
-	padding: 4px;
-    margin: 5px;
+	padding: 2%;
+    margin: 2%;
 	overflow: auto;
-    align-items:center;
+    align-items: center;
 	justify-content: center;
+	flex-direction: column;
 }
 
 #choix_param div

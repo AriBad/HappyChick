@@ -108,7 +108,7 @@
     <form method="get">
         <table>
             <tr>
-                <td>Achat de nourriture</td>
+                <td>Achat de nourriture <br> (1 portion = 8 oeufs)</td>
                 <td><input id="nourritureAchat" name="nourritureAchat" type="number" value="0" min="0" step="1" [(ngModel)]="getSaison().nourriture"></td>
                 <td>Amélioration du poulailler</td>
             </tr>
@@ -133,7 +133,7 @@
                 </td>
             </tr>
         </table><br>
-        <fieldset *ngIf="getPoulesLibres!=null">
+        <fieldset *ngIf="getPoulesLibres!=null && coqsVivants()">
             <legend>Couvaisons<span class="badge badge-info">Plus d'informations</span></legend>
             <table>
 

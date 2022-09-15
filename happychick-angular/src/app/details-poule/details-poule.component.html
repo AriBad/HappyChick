@@ -2,7 +2,7 @@
     <title>HappyChick - Detail des poules</title>
 </head>
 
-<body *ngIf="getSessionPoulailler()">
+<body>
     <div id="header">
         <img src="../../assets/img/Header.png" width=100% height=100%>
     </div>
@@ -11,11 +11,11 @@
             <recap-poulailler></recap-poulailler>
             <recap-poules></recap-poules>
         </div>
-        <div id="main">
+        <div id="main" *ngIf=" getSessionPoulailler()">
             <div id="PouleList">
                 <h1>Details des poules</h1>
                 <div id="menuAffichagePoules">
-                    <form>
+                    <form class="selection">
                         <div class="form-group">
                             <label for="affichage">Poules à afficher :</label>
                             <select name="affichage" [(ngModel)]="filtre">
@@ -38,7 +38,8 @@
                             <input class="form-check-input" type="checkbox" [(ngModel)]="mortes" name=true id="mortes">
                             <label class="form-check-label" for="mortes">mortes</label>
                         </div>
-                        <!-- <td>
+                    </form>
+                    <!-- <td>
                             Tri :
                         </td>
                         <td>
@@ -49,67 +50,64 @@
                                 <option value="PrenomAlph">par leur prénom</option>
                             </select>
                         </td> -->
-                        <div id="poulesIdentite" *ngFor="let poule of filterPoule(mortes, vivantes, filtre)">
-                            <div class="fiche" [style.backgroundColor]="poule.causeMort!=null ? 'grey' : 'rgb(53, 136, 79)'">
-                                <div>
-                                    <img *ngIf="!poule.poussin && poule.femelle"
-                                        src="../../assets/img/Poule{{poule.temperament.charAt(0).toUpperCase()+poule.temperament.substr(1).toLowerCase()}}.png"
-                                        width="auto" height=150>
-                                    <img *ngIf="poule.poussin" src="../../assets/img/poussin.png" width="auto"
-                                        height=150>
-                                    <img *ngIf="!poule.femelle" src="../../assets/img/coq.png" width="auto" height=150>
-                                </div>
-                                <div class="informations">
-                                    <strong>{{poule.id}} - {{poule.prenom}}</strong>
-                                    <br>
-                                    <div *ngIf="!poule.poussin && poule.femelle">
-                                        <strong>Tempérament :</strong>
-                                        {{poule.temperament}}
-                                    </div>
-                                    <strong>Age :</strong>
-                                    {{poule.age}} ans
-                                    <br>
-                                    <div id="bonheur" *ngIf="!poule.poussin && poule.femelle">
-                                        <strong>Bonheur </strong>
-                                        ({{poule.bonheur}} %)
-                                        <div class="progress">
-                                            <div class="progress-bar progress-bar-striped bg-infos" role="progressbar"
-                                                [ngStyle]="{'width.%': poule.bonheur}" aria-valuenow="25"
-                                                aria-valuemin="0" aria-valuemax="100">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="!poule.poussin && poule.femelle && poule.causeMort==null"><strong>Etat :</strong>
-                                        {{poule.etat}}
-                                    </div>
-                                    <div *ngIf="poule.causeMort!=null"><strong>Cause de la mort :</strong>
-                                            {{poule.causeMort}}
-                                    </div>
-                                </div>
-                                <form>
-                                    <div class="form-row align-items-center" *ngIf="!poule.poussin && poule.femelle && poule.causeMort==null && !CouveDeja(poule.id)">
-                                        <label>Mettre la poule à couver ?</label>
-                                        <input type="number" class="form-control" name="nbOeufsCouves" value="0" min="0"
-                                            max="8" step="1" [(ngModel)]="couveuseoeufs">
-                                        <button type="button" class="btn btn-primary" (click)="ajouterCouveuse(poule.id)">Valider</button>
-                                    </div>
-                                    <div *ngIf="poule.causeMort==null" class="form-group">
-                                        <button (click)="enVoyage(poule.id)" type="button" id="enVoyage"
-                                            class="btn btn-warning">Envoyer en voyage (définitif)</button>
-                                    </div>
-                                </form>
+                    <div id="poulesIdentite" *ngFor="let poule of filterPoule(mortes, vivantes, filtre)">
+                        <div class="fiche"
+                            [style.backgroundColor]="poule.causeMort!=null ? 'grey' : 'rgb(53, 136, 79)'">
+                            <div>
+                                <img *ngIf="!poule.poussin && poule.femelle"
+                                    src="../../assets/img/Poule{{poule.temperament.charAt(0).toUpperCase()+poule.temperament.substr(1).toLowerCase()}}.png"
+                                    width="auto" height=150>
+                                <img *ngIf="poule.poussin" src="../../assets/img/poussin.png" width="auto" height=150>
+                                <img *ngIf="!poule.femelle" src="../../assets/img/coq.png" width="auto" height=150>
                             </div>
+                            <div class="informations">
+                                <strong>{{poule.id}} - {{poule.prenom}}</strong>
+                                <br>
+                                <div *ngIf="!poule.poussin && poule.femelle">
+                                    <strong>Tempérament :</strong>
+                                    {{poule.temperament}}
+                                </div>
+                                <strong>Age :</strong>
+                                {{poule.age}} ans
+                                <br>
+                                <div id="bonheur" *ngIf="!poule.poussin && poule.femelle">
+                                    <strong>Bonheur </strong>
+                                    ({{poule.bonheur}} %)
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" [ngStyle]="{'width.%': poule.bonheur}" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                </div>
+                                <div *ngIf="!poule.poussin && poule.femelle && poule.causeMort==null"><strong>Etat
+                                        :</strong>
+                                    {{poule.etat}}
+                                </div>
+                                <div *ngIf="poule.causeMort!=null"><strong>Cause de la mort :</strong>
+                                    {{poule.causeMort}}
+                                </div>
+                            </div>
+                            <form>
+                                <div class="form-row align-items-center"
+                                    *ngIf="!poule.poussin && poule.femelle && poule.causeMort==null && !CouveDeja(poule.id)">
+                                    <label>Mettre la poule à couver ?</label>
+                                    <input type="number" class="form-control" name="nbOeufsCouves" value="0" min="0"
+                                        max="8" step="1" [(ngModel)]="couveuseoeufs">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="ajouterCouveuse(poule.id)">Valider</button>
+                                </div>
+                                <div *ngIf="poule.causeMort==null" class="form-group">
+                                    <button (click)="enVoyage(poule.id)" type="button" id="enVoyage"
+                                        class="btn btn-warning">Envoyer en voyage (définitif)</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
         <div id="menuright">
             <recap-utilisateur></recap-utilisateur>
             <menu></menu>
-            <div id="recap">
-                récap saison
-            </div>
+            <choix-poulailler></choix-poulailler>
         </div>
     </div>
     <div id="footer">

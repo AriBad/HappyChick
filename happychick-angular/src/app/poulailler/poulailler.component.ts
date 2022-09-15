@@ -65,7 +65,7 @@ export class PoulaillerComponent implements OnInit {
       oeufsDispos-=20;
     }
     if(this.saisonService.saison.nourriture) {
-      oeufsDispos -= this.saisonService.saison.nourriture*50;
+      oeufsDispos -= this.saisonService.saison.nourriture*8;
     }
     this.submitDisabled = oeufsDispos < 0;
     return oeufsDispos; 
@@ -98,6 +98,13 @@ export class PoulaillerComponent implements OnInit {
 
   getPoulesLibres(): Array<Poule>{
     return this.getSessionPoulailler().listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte" && poule.poussin==false && poule.femelle==true && !this.saisonService.tempcouv.includes(poule.id));
+  }
+
+  coqsVivants(): boolean {
+    if (this.getSessionPoulailler().listePoules.filter(poule => poule.femelle == false && poule.poussin==false && poule.causeMort ==null).length>0){
+      return true;
+    }
+    return false;
   }
 
   reinitialiser(){
