@@ -42,9 +42,11 @@ export class Poulailler {
     nom: string;
     activiteSaison: string;
     listePoules: Array<Poule> = new Array<Poule>();
+    utilisateur:Utilisateur
 
-    constructor(nom:string, id?: number, securite?: number, taille?: number, nourriture?: number, oeufs?: number,annee?: number,saison? :string) {
+    constructor(nom:string, utilisateur: Utilisateur, id?: number, securite?: number, taille?: number, nourriture?: number, oeufs?: number,annee?: number,saison? :string) {
         this.nom=nom;
+        this.utilisateur = utilisateur;
         this.id = id;
         this.securite = securite;
 		this.taille = taille;

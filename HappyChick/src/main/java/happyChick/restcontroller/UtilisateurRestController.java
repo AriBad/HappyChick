@@ -59,6 +59,7 @@ public class UtilisateurRestController {
 	}
 	
 	@PostMapping("/login")
+	@JsonView(JsonViews.Base.class)
 	public Utilisateur login(@RequestBody LoginDTO loginDTO) {
 		Optional<Utilisateur> optionalUtilisateur = utilisateurRepo.findByLoginAndMotDePasse(loginDTO.getIdentifiant(), loginDTO.getMotDePasse());
 		

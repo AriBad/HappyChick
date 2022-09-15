@@ -15,20 +15,25 @@ export class PoulaillerHttpService {
   apiPath:string;
   
   constructor(private http: HttpClient, private appConfig: AppConfigService, private authService : AuthService) {
-    //this.apiPath = this.appConfig.apiBackEndUrl + "poulailler/utilisateur/" + this.authService.utilisateur.id;
+    //this.apiPath = this.appConfig.apiBackEndUrl + "poulailler;
     this.apiPath = this.appConfig.apiBackEndUrl + "poulailler/";
     this.load();
   }
 
   load() {
-    this.poulaillerId = 1;
-    this.http.get<Array<Poulailler>>(this.apiPath+"").subscribe(response => {
+    this.http.get<Array<Poulailler>>(this.apiPath+"utilisateur/" + this.authService.utilisateur.id).subscribe(response => {
       this.poulaillers = response;
+      if (this.poulaillers) {
+        this.poulaillerId = this.poulaillers[0].id;
+      }
     });
   }
 
   getPoulaillerActuel():Observable<Poulailler> {
-    return this.http.get<Poulailler>(this.apiPath+this.poulaillerId+"/poule");
+    if(this.poulaillerId) {
+      return this.http.get<Poulailler>(this.apiPath+this.poulaillerId+"/poule");
+    }
+    return new Observable<Poulailler>();
   }
 
   getAll(): Array<Poulailler> {

@@ -38,10 +38,6 @@ export class PoulaillerComponent implements OnInit {
     return this.poulaillerSessionService.poulailler;
   }
 
-  save():void {
-    this.poulaillerService.save(new Poulailler(this.nom));
-  }
-
   delete(id: number):void {
     this.poulaillerService.delete(id);
   }

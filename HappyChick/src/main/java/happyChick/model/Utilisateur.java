@@ -48,6 +48,7 @@ public class Utilisateur {
 	@JsonView(JsonViews.Base.class)
 	private boolean activated = true;
 
+	@ElementCollection(fetch = FetchType.LAZY)
 	@OneToMany(mappedBy = "utilisateur")
 	@JsonView(JsonViews.utilisateurWithPoulaillers.class)
 	private List<Poulailler> poulaillers;

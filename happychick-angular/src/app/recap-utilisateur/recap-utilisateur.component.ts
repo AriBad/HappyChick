@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'recap-utilisateur',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecapUtilisateurComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  getNom():string {
+    return this.authService.utilisateur.login;
+  }
+
+  getSucces() : string {
+    return "Pas encore prêt !";
   }
 
 }
