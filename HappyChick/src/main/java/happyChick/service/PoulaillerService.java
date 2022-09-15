@@ -135,7 +135,7 @@ public class PoulaillerService {
 		poulailler.setOeufs(poulailler.getOeufs()+nbOeufs);
 		poulailler.setCptSaisons(poulailler.getCptSaisons() + 1);
 		
-		String recapLongString = poulailler.getListeRecapLongs().toString().substring(1, 3 * poulailler.getListeRecapLongs().size() - 1).replaceAll(", ", "");
+		String recapLongString = String.join(" ", poulailler.getListeRecapLongs());
 		
 		Recap recap = new Recap(poulailler,cptRecap,"",recapLongString);
 		recapRepo.save(recap);

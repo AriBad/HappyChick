@@ -30,13 +30,13 @@ public class RecapService {
 		return recapRepo.save(recap);
 	}
 
-	public void delete(Recap recap) {
-		recapRepo.delete(recap);
+	public void delete(Integer id) {
+		recapRepo.deleteById(id);
 	}
 
 	public void deleteByPoulailler(Integer id) {
 		for (Recap recap : getAllByPoulailler(id)) {
-		delete(recap);
+			delete(recap.getId());
 		}
 	}
 	public List<Recap> getAllByPoulailler(Integer id) {
