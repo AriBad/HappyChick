@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { PoulaillerSessionService } from '../poulailler-session.service';
 import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 
 @Component({
@@ -9,7 +10,8 @@ import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 })
 export class RecapUtilisateurComponent implements OnInit {
 
-  constructor(private authService:AuthService, private poulaillerService : PoulaillerHttpService) { }
+  constructor(private authService:AuthService, private poulaillerService : PoulaillerHttpService,
+    private poulaillerSession : PoulaillerSessionService) { }
 
   ngOnInit(): void {
   }
@@ -25,5 +27,6 @@ export class RecapUtilisateurComponent implements OnInit {
   deconnexion():void {
     this.authService.utilisateur=null;
     this.poulaillerService.deconnexion();
+    this.poulaillerSession.deconnexion();
   }
 }

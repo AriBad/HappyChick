@@ -30,4 +30,8 @@ export class PoulaillerSessionService {
     }
     
   }
+
+  deconnexion() : void {
+    this.poulailler=null;
+  }
 }
