@@ -1,28 +1,22 @@
 <div id="choixPoulailler">
-<h1> Gestion de vos poulaillers </h1>
+    <h5> Gestion de vos poulaillers </h5>
 
-<table>
-    <tr>
-        <td>
-            <select (change)="changerPoulailler()" [(ngModel)]="poulaillerActuel" >
-            <option *ngFor="let poulailler of getAllPoulailler()" [value]="poulailler.id">{{poulailler.id}} {{poulailler.nom}}
+    <div>
+        <select (change)="changerPoulailler()" [(ngModel)]="poulaillerActuel">
+            <option *ngFor="let poulailler of getAllPoulailler()" [value]="poulailler.id">{{poulailler.id}}
+                {{poulailler.nom}}
             </option>
-            </select>
-        </td>
-        <td>
-            <button type="button" class="btn btn-danger" (click)="supprimerPoulailler()">Supprimer poulailler</button>
-        </td>
-    </tr>
-
-    <tr>
-        <td> <label> Nom du nouveau poulailler : <input name="nomPoulailler" type="text" min="0" max="8" step="1"
-            placeholder="Nom poulailler" [(ngModel)]="nomPoulailler"> </label> 
-        </td>
-        <td>
-            <input value="Créer poulailler" type="submit" class="btn btn-success" (click)="creerPoulailler()" [disabled]="nomPoulailler == null || nomPoulailler==''"> 
-        </td>
-    </tr>
-
-</table>
-
+        </select>
+    </div>
+    <div>
+        <button type="button" class="btn btn-danger" (click)="supprimerPoulailler()">Supprimer poulailler</button>
+    </div>
+    <div>
+        <label> Nom du nouveau poulailler : <input name="nomPoulailler" type="text" min="0" max="8" step="1"
+                placeholder="Nom poulailler" [(ngModel)]="nomPoulailler"> </label>
+    </div>
+    <div>
+        <input value="Créer poulailler" type="submit" class="btn btn-success" (click)="creerPoulailler()"
+            [disabled]="nomPoulailler == null || nomPoulailler==''">
+    </div>
 </div>

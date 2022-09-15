@@ -1,15 +1,26 @@
 #choixPoulailler
 {
-    display: inline-block;
-	background-color: rgb(110, 104, 104);
+    display:flex;
+	height:50%;
+	margin: 2%;
+	background-color: rgb(38, 32, 32);
 	color: rgb(205, 207, 189);
-	border: solid rgb(205, 207, 189) 3px;
-	border-radius: 2%;
-	width: 90%;
-	height: 100%;
-	padding: 4px;
-    margin: 5px;
+	border-radius: 3%;
+	padding: 2%;
+	font-family: Arial, Helvetica, sans-serif;
 	overflow: auto;
-    align-items:center;
+	flex-direction: column;
 	justify-content: center;
+}
+
+div input {
+	width: 80%;
+}
+
+div select {
+	width: 80%;
+}
+
+div button {
+	width: 80%;
 }
