@@ -20,4 +20,8 @@ public class JsonViews {
 	public class poulesVivantes extends Base {
 		
 	}
+	
+	public class utilisateurWithPoulaillers extends Base {
+		
+	}
 }

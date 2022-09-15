@@ -16,7 +16,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import happyChick.model.jsonview.JsonViews;
 
 @Entity
 @DiscriminatorValue("Utilisateur")
@@ -24,24 +28,35 @@ public class Utilisateur {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(JsonViews.Base.class)
 	protected Integer id;
 	
+	@Version
+	@JsonView(JsonViews.Base.class)
+	private int version;
+	
 	@Column(length = 20, nullable = false, unique = true)
+	@JsonView(JsonViews.Base.class)
 	protected String login;
+	
 	@Column(length = 120, nullable = false)
+	@JsonView(JsonViews.Base.class)
 	protected String motDePasse;
 	
 	@NotNull
 	@Column(nullable = false)
+	@JsonView(JsonViews.Base.class)
 	private boolean activated = true;
 
 	@OneToMany(mappedBy = "utilisateur")
+	@JsonView(JsonViews.utilisateurWithPoulaillers.class)
 	private List<Poulailler> poulaillers;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "utilisateur_roles", joinColumns = @JoinColumn(name = "utilisateur_id"))
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
+	@JsonView(JsonViews.Base.class)
     private Set<Role> roles = new HashSet<>();
 	
 	public Utilisateur(){}
@@ -107,6 +122,14 @@ public class Utilisateur {
 		this.activated = activated;
 	}
 	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	@Override
 	public String toString() {
 		return "Utilisateur [id=" + id + ", login=" + login + ", motDePasse=" + motDePasse + "]";
