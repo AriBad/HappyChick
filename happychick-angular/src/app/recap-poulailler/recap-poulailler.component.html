@@ -1,21 +1,16 @@
-<div id="poulailler">
-    <table *ngIf="getSessionPoulailler()" >
-        <tr align="center">
-            <td>
-                <img src="../../assets/img/poullailer_niveau_{{getSessionPoulailler().securite}}.png" width="120" height=auto>
-            </td>
-            <td  rowspan="2">
-                <b>Saison : </b>{{getSessionPoulailler().saison}} <br>
-                <b>Année : </b>{{getSessionPoulailler().annee}}<br>
-                <b>Oeufs : </b>{{getSessionPoulailler().oeufs}}<br>
-                <b>Poules : </b>{{getNbPoulesVivantes()}}<br>
-                <b>Sécurité :</b> {{getSessionPoulailler().securite}}<br>
-                <b>Taille : </b> {{getSessionPoulailler().taille}}<br>
-                <b>Nourriture :</b> {{getSessionPoulailler().nourriture}}<br>
-            </td>
-        </tr>
-        <tr align="center">
-            <td id="poulaillerNom">{{getSessionPoulailler().nom}}</td>
-        </tr>
-    </table>
+<div id="poulailler" *ngIf="getSessionPoulailler()">
+    <div id="gauche">
+        <div><img src="../../assets/img/poullailer_niveau_{{getSessionPoulailler().securite}}.png" width="200"
+                height=auto></div>
+        <div><br>{{getSessionPoulailler().nom}}</div>
+    </div>
+    <div id="droite">
+        <div><b>Saison : </b>{{getSessionPoulailler().saison}} <br></div>
+        <div><b>Année : </b>{{getSessionPoulailler().annee}}<br></div>
+        <div><b>Oeufs : </b>{{getSessionPoulailler().oeufs}}<br></div>
+        <div><b>Poules : </b>{{getNbPoulesVivantes()}}<br></div>
+        <div><b>Sécurité :</b> {{getSessionPoulailler().securite}}<br></div>
+        <div><b>Taille : </b> {{getSessionPoulailler().taille}}<br></div>
+        <div><b>Nourriture :</b> {{getSessionPoulailler().nourriture}}<br></div>
+    </div>
 </div>
