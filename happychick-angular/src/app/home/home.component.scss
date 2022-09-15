@@ -59,37 +59,14 @@ ul
 	color: rgb(205, 207, 189);
 	// padding: 2%;
 }
-#poulailler_et_recap
-{
-	display: inline-flex;
-	background-color: rgb(110, 104, 104);
-	color: rgb(205, 207, 189);
-	border: solid rgb(205, 207, 189) 3px;
-	border-radius: 2%;
-	height: 30%;
-	padding: 1%;
-	margin: 2%;
-	flex-direction: center;
-	justify-content: center;
-	align-items: center;
+
+poulailler{
+	margin: 1%;
+}
+recap-Historique{
+	margin: 1%;
 }
 
-#screen
-{
-	display:inline-flex;
-	align-items:center;
-	justify-content: center;
-	width: 100%;
-}
-
-#console
-{
-	display:inline-flex;
-	padding: 2%;
-	align-items:center;
-	justify-content: center;
-	overflow: auto;
-}
 
 /* Menu sur la droite */
 #menuright

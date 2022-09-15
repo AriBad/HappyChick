@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import happyChick.model.Poule;
 import happyChick.model.Recap;
 import happyChick.model.jsonview.JsonViews;
-import happyChick.service.PoulaillerService;
-import happyChick.service.PouleService;
 import happyChick.service.RecapService;
 
 @RestController
@@ -36,6 +35,12 @@ public class RecapRestController {
 	@GetMapping("")
 	public List<Recap> getAll() {
 		return recapService.getAll();
+	}
+	
+	@JsonView(JsonViews.Base.class)
+	@GetMapping("/{id}")
+	public Recap getById(@PathVariable Integer id) {
+		return recapService.getById(id);
 	}
 	
 	@JsonView(JsonViews.Base.class)

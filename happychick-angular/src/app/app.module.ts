@@ -18,6 +18,7 @@ import { GuideComponent } from './guide/guide.component';
 import { TropheeComponent } from './trophee/trophee.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ChoixPoulaillerComponent } from './choix-poulailler/choix-poulailler.component';
+import { RecapComponent } from './recap/recap.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ChoixPoulaillerComponent } from './choix-poulailler/choix-poulailler.co
     RecapSaisonComponent,
     GuideComponent,
     TropheeComponent,
-    ChoixPoulaillerComponent
+    ChoixPoulaillerComponent,
+    RecapComponent
   ],
   imports: [
     BrowserModule,

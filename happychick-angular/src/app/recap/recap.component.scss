@@ -1,0 +1,39 @@
+#poulailler_et_recap
+{
+	display: inline-flex;
+	background-color: rgb(110, 104, 104);
+	color: rgb(205, 207, 189);
+	border: solid rgb(205, 207, 189) 3px;
+	border-radius: 2%;
+	height: 100%;
+	padding: 1%;
+	margin: 2%;
+	flex-direction: center;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#screen
+{
+	display:flex;
+	align-items:center;
+	justify-content: center;
+    margin-left: 5%;
+	width: 50%;
+}
+
+#recap{
+    display:inline-block;
+	align-items:column;
+	justify-content: center;
+}
+
+#console
+{
+	display:inline-flex;
+	padding: 2%;
+    margin-right: 5%;
+	align-items:center;
+	justify-content: center;
+	// overflow-x: auto;
+}

@@ -241,7 +241,7 @@ public class Poulailler {
 	public void agrandir() {
 		taille += 10;
 		this.oeufs-=this.getPrixAgrandir();
-		listeRecapLongs.add("La taille du poulailler est "+taille+" vous avez maintenant"+oeufs+"oeufs"+"/n");
+		listeRecapLongs.add("La taille est monté de 10. /n");
 		System.out.println("La taille du poulailler est "+taille+" vous avez maintenant"+oeufs+"oeufs");
 	}
 	
@@ -252,7 +252,7 @@ public class Poulailler {
 	public void augmenterSecurite() {
 		securite += 1;
 		oeufs -= getPrixAugmenterSecurite();
-		listeRecapLongs.add("La securite du poulailler est monté au niveau "+securite+" vous avez maintenant"+oeufs+"oeufs"+"/n");
+		listeRecapLongs.add("La securite est monté d'un niveau /n");
 		System.out.println("La securite du poulailler est monté au niveau "+securite+" vous avez maintenant"+oeufs+"oeufs");
 	}
 	
