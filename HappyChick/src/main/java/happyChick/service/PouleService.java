@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import happyChick.dao.IDAOPoulailler;
 import happyChick.dao.IDAOPoule;
+import happyChick.dao.IDAORecap;
 import happyChick.exception.PouleException;
 import happyChick.model.Activite;
 import happyChick.model.CauseMort;
@@ -25,6 +26,9 @@ public class PouleService {
 	private IDAOPoule pouleRepo;
 	@Autowired
 	private IDAOPoulailler poulaillerRepo;
+	
+	@Autowired
+	private IDAORecap recapRepo;
 
 	public Poule getById(Integer id) {
 		// return poulaillerRepo.findById(id).orElseThrow(PoulaillerException::new);
@@ -87,14 +91,17 @@ public class PouleService {
 			oeufsEclos(poule, poule.getOeufsCouves());
 			poule.setOeufsCouves(0);
 			poule.setEtat(Etat.Maternage);
-			System.out.println("ICIIIIIIIIIII Couvaison");
+			poule.getPoulailler().getListeRecapLongs().add("La poule"+poule.getPrenom()+" est en maternage");
+			System.out.println("La poule"+poule.getPrenom()+" est en maternage");
 		} else if (poule.getEtat() == Etat.Liberte && oeufsCouves !=0) {
 			poule.setOeufsCouves(oeufsCouves);
 			poule.setEtat(Etat.Couvaison);
 			poule.setPonte(0);
+			poule.getPoulailler().getListeRecapLongs().add("La poule"+poule.getPrenom()+" est en couvaison");
 			System.out.println("ICIIIIIIIIIII Liberte");
 		} else if (poule.getEtat() == Etat.Maternage) {
 			poule.setEtat(Etat.Liberte);
+			poule.getPoulailler().getListeRecapLongs().add("La poule"+poule.getPrenom()+" est en liberté");
 			System.out.println("ICIIIIIIIIIII Maternage");
 		}
 
@@ -124,6 +131,7 @@ public class PouleService {
 	public void manger(Poule poule) {
 		poule.getPoulailler().setNourriture(poule.getPoulailler().getNourriture()-1);
 		poule.setSaisonSansManger(0);
+		poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id="+poule.getId()+") a mangé.");
 		System.out.println("La poule "+poule.getPrenom()+"(id="+poule.getId()+") a mangé.");
 	}
 
@@ -131,14 +139,17 @@ public class PouleService {
 		Random r = new Random();
 		if ( r.nextDouble() < poule.getMaladie()) {
 			poule.setCauseMort(CauseMort.Maladie);
+			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id="+poule.getId()+") est morte de maladie.");
 			System.out.println("La poule "+poule.getPrenom()+"(id="+poule.getId()+") est morte de maladie.");
 		} else if (r.nextDouble() < poule.getPredation()) {
 			if (r.nextDouble() < (poule.getPoulailler().getNbPsychopathe()*0.05)){
 				poule.setCauseMort(CauseMort.Predation);
+				poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id="+poule.getId()+") est morte à cause d'un prédateur.");
 				System.out.println("La poule "+poule.getPrenom()+"(id="+poule.getId()+") est morte à cause d'un prédateur.");
 			}
 		} else if (r.nextDouble() < 0.0025 * (poule.getAge() * poule.getAge()) && poule.getAge() > 10) {
 			poule.setCauseMort(CauseMort.Age);
+			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id="+poule.getId()+") est morte de Vieillesse.");
 			System.out.println("La poule "+poule.getPrenom()+"(id="+poule.getId()+") est morte de Vieillesse.");
 		} else if (r.nextDouble() < poule.getSaisonSansManger() * 0.334) {
 			poule.setCauseMort(CauseMort.Faim);
@@ -202,11 +213,13 @@ public class PouleService {
 		Poule p;
 		if (r.nextDouble()<0.1) {
 			p = create(new Poule(jsonNameParser.genererNomCoq(true), false, poule.getPoulailler()));
-			System.out.println(p.getPrenom() + " ca marche !");
+			poule.getPoulailler().getListeRecapLongs().add("Le coq "+p.getPrenom() + " est née !");
+			System.out.println(p.getPrenom() + " est née !");
 			poule.getPoulailler().indiquerNaissance(p);
 		} else {
 			p = create(new Poule(jsonNameParser.genererNomPoule(true), true, poule.getPoulailler()));
-			System.out.println(p.getPrenom() + " ca marche !");
+			poule.getPoulailler().getListeRecapLongs().add("La poule "+p.getPrenom() + " est née !");
+			System.out.println(p.getPrenom() + " est née !");
 			poule.getPoulailler().indiquerNaissance(p);
 		}
 		
@@ -339,7 +352,7 @@ public class PouleService {
 			int alea = r2.nextInt(poule.getPoulailler().getNbPoulesVivantes());
 
 			poule.getPoulailler().getPoulesVivantes().get(alea).setCauseMort(CauseMort.Meurtre);
-			
+			poule.getPoulailler().getListeRecapLongs().add("La poule psychopathe à tuer la poule "+poule.getPoulailler().getPoulesVivantes().get(alea));
 			System.out.println("La poule psychopathe à tuer la poule "+poule.getPoulailler().getPoulesVivantes().get(alea));
 		}
 

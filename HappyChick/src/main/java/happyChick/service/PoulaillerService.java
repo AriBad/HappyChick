@@ -11,12 +11,15 @@ import org.springframework.stereotype.Service;
 
 import happyChick.dao.IDAOPoulailler;
 import happyChick.dao.IDAOPoule;
+import happyChick.dao.IDAORecap;
 import happyChick.exception.PoulaillerException;
 import happyChick.exception.PouleException;
 import happyChick.model.Activite;
 import happyChick.model.Poulailler;
 import happyChick.model.Poule;
+import happyChick.model.Recap;
 import happyChick.model.Saison;
+
 
 @Service
 public class PoulaillerService {
@@ -27,8 +30,12 @@ public class PoulaillerService {
 	private IDAOPoule pouleRepo;
 	
 	@Autowired
+	private IDAORecap recapRepo;
+	
+	@Autowired
 	private PouleService pouleService;
 
+	private int cptRecap =1 ;
 	public Poulailler getById(Integer id) {
 		// return poulaillerRepo.findById(id).orElseThrow(PoulaillerException::new);
 		return poulaillerRepo.findById(id).orElseThrow(() -> {
@@ -95,10 +102,14 @@ public class PoulaillerService {
 	}
 	
 	public void step(Poulailler poulailler, Activite a, int portionNourriture, Map<Poule, Integer> poulesCouveuses, boolean agrandir, boolean securiser) {
+		
+
 		echangeNourriture(poulailler, portionNourriture);
 		poulailler.setSaison(Saison.saisonSuivante(poulailler.getSaison()));
+		cptRecap++;
 		if (poulailler.getSaison() == Saison.Printemps) {
-			poulailler.setAnnee(poulailler.getAnnee() + 1);;
+			poulailler.setAnnee(poulailler.getAnnee() + 1);
+
 		}
 		poulailler.setActiviteSaison(a);
 		if (agrandir) {poulailler.agrandir();}
@@ -124,6 +135,10 @@ public class PoulaillerService {
 		poulailler.setOeufs(poulailler.getOeufs()+nbOeufs);
 		poulailler.setCptSaisons(poulailler.getCptSaisons() + 1);
 		
+		String recapLongString = poulailler.getListeRecapLongs().toString().substring(1, 3 * poulailler.getListeRecapLongs().size() - 1).replaceAll(", ", "");
+		
+		Recap recap = new Recap(poulailler,cptRecap,"",recapLongString);
+		recapRepo.save(recap);
 		update(poulailler);
 		
 	}

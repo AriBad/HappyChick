@@ -95,3 +95,16 @@ export class CouveuseComplete {
         this.oeufs=oeufs;
     }
 }
+
+export class Recap {
+    poulailler:Poulailler;
+    saison:number;
+    recapCourt: string;
+    recapLong: string;
+    constructor(poulailler:Poulailler, saison:number, recapCourt: string, recapLong: string) {
+        this.poulailler=poulailler;
+        this.saison=saison;
+        this.recapCourt=recapCourt;
+        this.recapLong=recapLong;
+    }
+}

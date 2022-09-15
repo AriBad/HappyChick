@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -63,6 +64,12 @@ public class Poulailler {
 	@JsonView(JsonViews.PoulaillerWithPoules.class)
 	@OneToMany(mappedBy="poulailler")
 	List<Poule> listePoules = new ArrayList();
+	
+	@Transient
+	List<String> listeRecapLongs = new ArrayList();
+	
+	@Transient
+	List<String> listeRecapCourts = new ArrayList();
 	
 	@ManyToOne
 	@JoinColumn(name="id_user")
@@ -199,13 +206,21 @@ public class Poulailler {
 		return listePoules;
 	}
 
-
-
+	public List<String> getListeRecapLongs() {
+		return listeRecapLongs;
+	}
+	public void setListeRecapLongs(List<String> listeRecapLongs) {
+		this.listeRecapLongs = listeRecapLongs;
+	}
+	public List<String> getListeRecapCourts() {
+		return listeRecapCourts;
+	}
+	public void setListeRecapCourts(List<String> listeRecapCourts) {
+		this.listeRecapCourts = listeRecapCourts;
+	}
 	public void setListePoules(List<Poule> listePoules) {
 		this.listePoules = listePoules;
 	}
-
-
 
 	public int getNbMort() {
 		return nbMort;
@@ -226,6 +241,7 @@ public class Poulailler {
 	public void agrandir() {
 		taille += 10;
 		this.oeufs-=this.getPrixAgrandir();
+		listeRecapLongs.add("La taille du poulailler est "+taille+" vous avez maintenant"+oeufs+"oeufs"+"/n");
 		System.out.println("La taille du poulailler est "+taille+" vous avez maintenant"+oeufs+"oeufs");
 	}
 	
@@ -236,6 +252,7 @@ public class Poulailler {
 	public void augmenterSecurite() {
 		securite += 1;
 		oeufs -= getPrixAugmenterSecurite();
+		listeRecapLongs.add("La securite du poulailler est monté au niveau "+securite+" vous avez maintenant"+oeufs+"oeufs"+"/n");
 		System.out.println("La securite du poulailler est monté au niveau "+securite+" vous avez maintenant"+oeufs+"oeufs");
 	}
 	
