@@ -1,0 +1,21 @@
+<div id="play">
+    <div id="container">
+
+        <div id="form">
+            <h1>Connexion</h1>
+
+            <label><b>Login</b></label>
+            <input type="text" class="form-control" id="identifiant" name="identifiant" [(ngModel)]="identifiant" />
+
+            <label><b>Mot de passe</b></label>
+            <input type="password" class="form-control" id="motDePasse" name="motDePasse" [(ngModel)]="motDePasse" />
+
+            <div class="card-footer">
+                <div class="text-danger" *ngIf="loginError">Utilisateur / Mot de passe inconnu</div>
+                <button class="btn btn-success" (click)="valider()"> Valider </button>
+            </div>
+
+            <a href="GameCreateAccount.html">S'inscrire</a>
+        </div>
+    </div>
+</div>

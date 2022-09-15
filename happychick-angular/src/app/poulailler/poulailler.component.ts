@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, KeyValueDiffers, OnInit, Output } from '@angular/core';
+import { AuthService } from '../auth.service';
 import { Couveuse, CouveuseComplete, Poulailler, Poule, Saison } from '../model';
 import { PoulaillerSessionService } from '../poulailler-session.service';
 
@@ -20,7 +21,11 @@ export class PoulaillerComponent implements OnInit {
   messageAfficherCouveuses:string = "Afficher Les Couveuses";
   submitDisabled=false;
 
-  constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService,private poulaillerSessionService : PoulaillerSessionService, private saisonService : SaisonService) { }
+  constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService,
+    private poulaillerSessionService : PoulaillerSessionService, private saisonService : SaisonService,
+    private authService: AuthService) {
+      
+   }
 
  
   ngOnInit(): void {
@@ -32,10 +37,6 @@ export class PoulaillerComponent implements OnInit {
 
   getSessionPoulailler(): Poulailler {
     return this.poulaillerSessionService.poulailler;
-  }
-
-  save():void {
-    this.poulaillerService.save(new Poulailler(this.nom));
   }
 
   delete(id: number):void {

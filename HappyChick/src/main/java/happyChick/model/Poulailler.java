@@ -73,6 +73,7 @@ public class Poulailler {
 	
 	@ManyToOne
 	@JoinColumn(name="id_user")
+	@JsonView(JsonViews.Base.class)
 	private Utilisateur utilisateur;
 	
 	public Integer getId() {

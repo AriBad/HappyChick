@@ -42,9 +42,11 @@ export class Poulailler {
     nom: string;
     activiteSaison: string;
     listePoules: Array<Poule> = new Array<Poule>();
+    utilisateur:Utilisateur
 
-    constructor(nom:string, id?: number, securite?: number, taille?: number, nourriture?: number, oeufs?: number,annee?: number,saison? :string) {
+    constructor(nom:string, utilisateur: Utilisateur, id?: number, securite?: number, taille?: number, nourriture?: number, oeufs?: number,annee?: number,saison? :string) {
         this.nom=nom;
+        this.utilisateur = utilisateur;
         this.id = id;
         this.securite = securite;
 		this.taille = taille;
@@ -93,6 +95,23 @@ export class CouveuseComplete {
     constructor(poule:Poule, oeufs:number) {
         this.poule=poule;
         this.oeufs=oeufs;
+    }
+}
+
+export class Utilisateur {
+    id: number;
+    version: number;
+    login: string;
+    motDePasse: string;
+    activated: boolean;
+    roles: Set<string> = new Set<string>();
+
+    constructor(id?: number, version?: number, login? : string, motDePasse?: string, activated?: boolean) {
+        this.id = id;
+        this.version = version;
+        this.login = login;
+        this.motDePasse = motDePasse;
+        this.activated = activated;
     }
 }
 

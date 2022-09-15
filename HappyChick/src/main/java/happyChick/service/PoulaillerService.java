@@ -46,6 +46,14 @@ public class PoulaillerService {
 		return poulaillerRepo.findAllWithPoules();
 	}
 	
+	public List<Poulailler> getAllByUserWithPoules(Integer id) {
+		return poulaillerRepo.findAllByUserWithPoules(id);
+	}
+	
+	public List<Poulailler> getAllByUser(Integer id) {
+		return poulaillerRepo.findAllByUtilisateur(id);
+	}
+	
 	public List<Poulailler> getAll() {
 		// poulaillerRepo.findAll().forEach(System.out::println);
 //		poulaillerRepo.findAll().forEach((p) -> {
