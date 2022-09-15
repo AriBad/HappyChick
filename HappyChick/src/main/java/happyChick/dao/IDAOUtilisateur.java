@@ -8,7 +8,7 @@ import happyChick.model.Utilisateur;
 
 public interface IDAOUtilisateur extends JpaRepository<Utilisateur,Integer>{
 
-	public Utilisateur findByMotDePasseAndLogin(String login,String password);
+	public Optional<Utilisateur>findByLoginAndMotDePasse(String login,String password);
 
 	
 	public Optional<Utilisateur> findByLogin(String username);

@@ -16,8 +16,11 @@ import { MenuComponent } from './menu/menu.component';
 import { RecapSaisonComponent } from './recap-saison/recap-saison.component';
 import { GuideComponent } from './guide/guide.component';
 import { TropheeComponent } from './trophee/trophee.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ChoixPoulaillerComponent } from './choix-poulailler/choix-poulailler.component';
+import { LoginComponent } from './login/login.component';
+import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+import { APIInterceptor } from './api.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { ChoixPoulaillerComponent } from './choix-poulailler/choix-poulailler.co
     RecapSaisonComponent,
     GuideComponent,
     TropheeComponent,
-    ChoixPoulaillerComponent
+    ChoixPoulaillerComponent,
+    LoginComponent,
+    UtilisateurComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,9 @@ import { ChoixPoulaillerComponent } from './choix-poulailler/choix-poulailler.co
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: APIInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

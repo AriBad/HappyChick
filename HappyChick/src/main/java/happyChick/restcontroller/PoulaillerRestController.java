@@ -54,6 +54,12 @@ public class PoulaillerRestController {
 		return poulaillerService.getAllWithPoules();
 	}
 	
+	@GetMapping("/utilisateur/{id}")
+	@JsonView(JsonViews.PoulaillerWithPoules.class)
+	public List<Poulailler> getAllByUserWithPoules(@PathVariable Integer id) {
+		return poulaillerService.getAllByUserWithPoules(id);
+	}
+	
 	
 	@GetMapping("/{id}")
 	@JsonView(JsonViews.Base.class)

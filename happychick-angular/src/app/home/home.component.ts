@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 import { Poulailler, Saison } from '../model';
 import { PoulaillerSessionService } from '../poulailler-session.service';
 import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
@@ -12,12 +13,17 @@ export class HomeComponent implements OnInit {
 
  poulailler:Poulailler = this.poulaillerSessionService.poulailler;
  
-  constructor(private poulaillerService : PoulaillerHttpService, private poulaillerSessionService : PoulaillerSessionService  ) { 
+  constructor(private poulaillerService : PoulaillerHttpService, private poulaillerSessionService : PoulaillerSessionService,
+    private authService: AuthService  ) { 
 
   }
 
-  loadPoulailler(saison?:Saison) : void {
-    
+  isConnected() :boolean {
+    if(this.authService.utilisateur) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   ngOnInit(): void {

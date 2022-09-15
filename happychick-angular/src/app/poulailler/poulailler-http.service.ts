@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { AppConfigService } from '../app-config.service';
+import { AuthService } from '../auth.service';
 import { Poulailler, Poule, Saison } from '../model';
 
 @Injectable({
@@ -13,7 +14,8 @@ export class PoulaillerHttpService {
   poulaillers : Array<Poulailler>;
   apiPath:string;
   
-  constructor(private http: HttpClient, private appConfig: AppConfigService) {
+  constructor(private http: HttpClient, private appConfig: AppConfigService, private authService : AuthService) {
+    //this.apiPath = this.appConfig.apiBackEndUrl + "poulailler/utilisateur/" + this.authService.utilisateur.id;
     this.apiPath = this.appConfig.apiBackEndUrl + "poulailler/";
     this.load();
   }

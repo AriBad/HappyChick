@@ -95,3 +95,20 @@ export class CouveuseComplete {
         this.oeufs=oeufs;
     }
 }
+
+export class Utilisateur {
+    id: number;
+    version: number;
+    login: string;
+    motDePasse: string;
+    activated: boolean;
+    roles: Set<string> = new Set<string>();
+
+    constructor(id?: number, version?: number, login? : string, motDePasse?: string, activated?: boolean) {
+        this.id = id;
+        this.version = version;
+        this.login = login;
+        this.motDePasse = motDePasse;
+        this.activated = activated;
+    }
+}
