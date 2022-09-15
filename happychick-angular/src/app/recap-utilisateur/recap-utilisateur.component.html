@@ -6,9 +6,9 @@
             </td>
             <td>
                 <ul>
-                    <li>Id :</li>
-                    <li>Succés :</li>
-                    <li><a href="GameLogin.html">Se deconnecter</a></li>
+                    <li><b>Nom :</b> {{getNom()}}</li>
+                    <li><b>Succés</b> : {{getSucces()}}</li>
+                    <li><a [routerLink]="['/login']" (click)="deconnexion()">Se deconnecter</a></li>
                 </ul>
             </td>
         </tr>

@@ -13,7 +13,7 @@ export class ChoixPoulaillerComponent implements OnInit {
   poulaillerActuel:number;
   nomPoulailler:string;
   constructor(private poulaillerService : PoulaillerHttpService, private poulaillerSession : PoulaillerSessionService,
-    private authService:AuthService) { }
+    private authService:AuthService) {  }
 
   getAllPoulailler() : Array<Poulailler> {
     return this.poulaillerService.getAll();

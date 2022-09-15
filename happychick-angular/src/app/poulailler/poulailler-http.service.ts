@@ -17,7 +17,6 @@ export class PoulaillerHttpService {
   constructor(private http: HttpClient, private appConfig: AppConfigService, private authService : AuthService) {
     //this.apiPath = this.appConfig.apiBackEndUrl + "poulailler;
     this.apiPath = this.appConfig.apiBackEndUrl + "poulailler/";
-    this.load();
   }
 
   load() {
@@ -71,5 +70,10 @@ export class PoulaillerHttpService {
 
   saisonSuivante(saison:Saison) : Observable<void> {
     return this.http.put<void>(this.apiPath + this.poulaillerId + "/saison", saison);
+  }
+
+  deconnexion() : void {
+    this.poulaillerId=null;
+    this.poulaillers=null;
   }
 }
