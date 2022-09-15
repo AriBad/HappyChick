@@ -35,7 +35,6 @@ public class PoulaillerService {
 	@Autowired
 	private PouleService pouleService;
 
-	private int cptRecap =1 ;
 	public Poulailler getById(Integer id) {
 		// return poulaillerRepo.findById(id).orElseThrow(PoulaillerException::new);
 		return poulaillerRepo.findById(id).orElseThrow(() -> {
@@ -80,6 +79,12 @@ public class PoulaillerService {
         Poule p4 = pouleService.create(new Poule ("Luna",true,poulailler));
         Poule p5 = pouleService.create(new Poule ("Marc",false,poulailler));        
         //Collections.addAll(poulailler.getListePoules(),p1,p2,p3,p4,p5);
+        poulailler.getListeRecapLongs().add("Bienvenue dans votre poulailler dont vous allez être poule en chef. Vous avez découvert dans un fossé 5 oeufs qui viennent d'éclore, et qui ont donné naissance à 5 magnifiques poussins. Vous avez également reçu un un don anonyme de 10 portions de nourriture pour lancer votre activité.\n");
+        
+		String recapLongString = String.join(" ", poulailler.getListeRecapLongs());
+		
+		Recap recap = new Recap(poulailler,poulailler.getSaison(),poulailler.getAnnee(),"",recapLongString);
+		recapRepo.save(recap);
         
 		return poulaillerRepo.findById(poulailler.getId()).get();
 	}
@@ -106,7 +111,6 @@ public class PoulaillerService {
 
 		echangeNourriture(poulailler, portionNourriture);
 		poulailler.setSaison(Saison.saisonSuivante(poulailler.getSaison()));
-		cptRecap++;
 		if (poulailler.getSaison() == Saison.Printemps) {
 			poulailler.setAnnee(poulailler.getAnnee() + 1);
 
@@ -137,7 +141,7 @@ public class PoulaillerService {
 		
 		String recapLongString = String.join(" ", poulailler.getListeRecapLongs());
 		
-		Recap recap = new Recap(poulailler,cptRecap,"",recapLongString);
+		Recap recap = new Recap(poulailler,poulailler.getSaison(),poulailler.getAnnee(),"",recapLongString);
 		recapRepo.save(recap);
 		update(poulailler);
 		

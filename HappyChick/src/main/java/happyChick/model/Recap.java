@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +29,11 @@ public class Recap {
 	private Poulailler poulailler;
 	
 	@JsonView(JsonViews.Base.class)
-	private int saison;
+	@Enumerated(EnumType.STRING)
+	private Saison saison;
+	
+	@JsonView(JsonViews.Base.class)
+	private int annee;
 	
 	@JsonView(JsonViews.Base.class)
 	private String listeRecapCourts;
@@ -39,15 +45,13 @@ public class Recap {
 	public Recap() {
 	}
 
-	public Recap(Poulailler poulailler, int saison, String listeRecapCourts, String listeRecapLongs) {
-
+	public Recap(Poulailler poulailler, Saison saison, int annee, String listeRecapCourts, String listeRecapLongs) {
 		this.poulailler = poulailler;
 		this.saison = saison;
+		this.annee = annee;
 		this.listeRecapCourts = listeRecapCourts;
 		this.listeRecapLongs = listeRecapLongs;
 	}
-
-
 
 	public Poulailler getPoulailler() {
 		return poulailler;
@@ -65,15 +69,22 @@ public class Recap {
 		this.poulailler = poulailler;
 	}
 
-	public int getSaison() {
+	public Saison getSaison() {
 		return saison;
 	}
 
-	public void setSaison(int saison) {
+	public void setSaison(Saison saison) {
 		this.saison = saison;
 	}
 
-	
+	public int getAnnee() {
+		return annee;
+	}
+
+	public void setAnnee(int annee) {
+		this.annee = annee;
+	}
+
 	public String getListeRecapCourts() {
 		return listeRecapCourts;
 	}
