@@ -4,20 +4,20 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-/*import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import happyChick.dao.IDAOUtilisateur;
 import happyChick.model.Role;
 import happyChick.model.Utilisateur;
 
-public class DBUserDetailsService /*implements UserDetailsService*/ {
+public class DBUserDetailsService implements UserDetailsService {
 
-	/*private final IDAOUtilisateur utilisateurRepository;
+	private final IDAOUtilisateur utilisateurRepository;
 
 	public DBUserDetailsService(IDAOUtilisateur utilisateurRepository) {
 		super();
@@ -42,6 +42,6 @@ public class DBUserDetailsService /*implements UserDetailsService*/ {
 		User user = new User(utilisateur.getLogin(), utilisateur.getMotDePasse(), utilisateur.isActivated(), true, true, true, grantedAuthorities);
 
 		return user;
-	}*/
+	}
 
 }
