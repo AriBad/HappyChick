@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, KeyValueDiffers, OnInit, Output } from 
 import { Couveuse, CouveuseComplete, Poulailler, Poule, Saison } from '../model';
 import { PoulaillerSessionService } from '../poulailler-session.service';
 import { PouleHttpService } from '../poule-http.service';
+import { SaisonService } from '../saison.service';
 import { PoulaillerHttpService } from './poulailler-http.service';
 
 @Component({
@@ -11,21 +12,21 @@ import { PoulaillerHttpService } from './poulailler-http.service';
 })
 export class PoulaillerComponent implements OnInit {
   nom:string;
-  saison:Saison;
+  
   couveuseoeufs:number;
   couveuseId:number;
   affichePoulesCouveuses:boolean = false;
   messageAfficherCouveuses:string = "Afficher Les Couveuses";
-  tempcouv: Array<number> = new Array<number>;
   submitDisabled=false;
 
-  constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService,private poulaillerSessionService : PoulaillerSessionService) {
-    this.saison = new Saison();
-    this.saison.listeCouveuses = new Array<Couveuse>;
-  }
+  constructor(private poulaillerService: PoulaillerHttpService, private pouleService: PouleHttpService,private poulaillerSessionService : PoulaillerSessionService, private saisonService : SaisonService) { }
 
  
   ngOnInit(): void {
+  }
+
+  getSaison():Saison {
+    return this.saisonService.saison;
   }
 
   getSessionPoulailler(): Poulailler {
@@ -45,26 +46,26 @@ export class PoulaillerComponent implements OnInit {
   }
 
   saisonSuivante():void {
-    this.poulaillerSessionService.loadPoulailler(this.saison);
-    this.saison=new Saison();
-    this.saison.listeCouveuses = new Array<Couveuse>;
+    this.poulaillerSessionService.loadPoulailler(this.saisonService.saison);
+    this.saisonService.saison=new Saison();
+    this.saisonService.saison.listeCouveuses = new Array<Couveuse>;
     this.reinitialiser();
   }
 
   oeufsDispos():number {
     let oeufsDispos = this.getSessionPoulailler().oeufs;
-    this.saison.listeCouveuses.forEach((value) =>{
+    this.saisonService.saison.listeCouveuses.forEach((value) =>{
       oeufsDispos-= value.oeufs;
     });
 
-    if(this.saison.securite) {
+    if(this.saisonService.saison.securite) {
       oeufsDispos-=20;
     }
-    if(this.saison.taille) {
+    if(this.saisonService.saison.taille) {
       oeufsDispos-=20;
     }
-    if(this.saison.nourriture) {
-      oeufsDispos -= this.saison.nourriture*50;
+    if(this.saisonService.saison.nourriture) {
+      oeufsDispos -= this.saisonService.saison.nourriture*50;
     }
     this.submitDisabled = oeufsDispos < 0;
     return oeufsDispos; 
@@ -72,23 +73,23 @@ export class PoulaillerComponent implements OnInit {
 
   ajouterCouveuse():void {
     this.pouleService.findById(this.couveuseId).subscribe(resp=> {
-      this.saison.listeCouveuses.push(new Couveuse(resp, this.couveuseoeufs));
+      this.saisonService.saison.listeCouveuses.push(new Couveuse(resp, this.couveuseoeufs));
       this.couveuseoeufs=null;
-      this.tempcouv.push(resp.id);
+      this.saisonService.tempcouv.push(resp.id);
       this.couveuseId=null;
     });
     
   }
 
   supprimerCouveuse(id : number):void {
-    this.saison.listeCouveuses.forEach((value,index) =>{
+    this.saisonService.saison.listeCouveuses.forEach((value,index) =>{
       if(value.poule.id == id) {
-        this.saison.listeCouveuses.splice(index, 1);
+        this.saisonService.saison.listeCouveuses.splice(index, 1);
       }
     });
-    this.tempcouv.forEach((value,index) =>{
+    this.saisonService.tempcouv.forEach((value,index) =>{
       if(value == id) {
-        this.tempcouv.splice(index, 1);
+        this.saisonService.tempcouv.splice(index, 1);
       }
     });
   }
@@ -96,12 +97,12 @@ export class PoulaillerComponent implements OnInit {
 
 
   getPoulesLibres(): Array<Poule>{
-    return this.getSessionPoulailler().listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte" && poule.poussin==false && poule.femelle==true && !this.tempcouv.includes(poule.id));
+    return this.getSessionPoulailler().listePoules.filter(poule=> poule.causeMort==null && poule.etat=="Liberte" && poule.poussin==false && poule.femelle==true && !this.saisonService.tempcouv.includes(poule.id));
   }
 
   reinitialiser(){
-    this.saison =new Saison();
-    this.saison.listeCouveuses = new Array<Couveuse>;
+    this.saisonService.saison =new Saison();
+    this.saisonService.saison.listeCouveuses = new Array<Couveuse>;
     this.couveuseId=null;
     this.couveuseoeufs=null;
   }

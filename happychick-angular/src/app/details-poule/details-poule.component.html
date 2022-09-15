@@ -87,11 +87,11 @@
                                     </div>
                                 </div>
                                 <form>
-                                    <div class="form-row align-items-center" *ngIf="!poule.poussin && poule.femelle && poule.causeMort==null">
+                                    <div class="form-row align-items-center" *ngIf="!poule.poussin && poule.femelle && poule.causeMort==null && !CouveDeja(poule.id)">
                                         <label>Mettre la poule à couver ?</label>
                                         <input type="number" class="form-control" name="nbOeufsCouves" value="0" min="0"
-                                            max="8" step="1">
-                                        <button type="button" class="btn btn-primary">Valider</button>
+                                            max="8" step="1" [(ngModel)]="couveuseoeufs">
+                                        <button type="button" class="btn btn-primary" (click)="ajouterCouveuse(poule.id)">Valider</button>
                                     </div>
                                     <div *ngIf="poule.causeMort==null" class="form-group">
                                         <button (click)="enVoyage(poule.id)" type="button" id="enVoyage"

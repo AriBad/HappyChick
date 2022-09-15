@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Poulailler, Poule } from '../model';
+import { Couveuse, Poulailler, Poule } from '../model';
 import { PoulaillerSessionService } from '../poulailler-session.service';
 import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
 import { PouleHttpService } from '../poule-http.service';
+import { SaisonService } from '../saison.service';
 
 @Component({
   selector: 'app-details-poule',
@@ -14,13 +15,30 @@ export class DetailsPouleComponent implements OnInit {
   vivantes: boolean = true;
   mortes: boolean = false;
   filtre: string = null;
+  couveuseoeufs:number;
 
-  constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService, private poulaillerSessionService: PoulaillerSessionService) {
+  constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService, private poulaillerSessionService: PoulaillerSessionService, private saisonService: SaisonService) {
 
   }
 
   getSessionPoulailler(): Poulailler {
     return this.poulaillerSessionService.poulailler;
+  }
+
+  ajouterCouveuse(id : number):void {
+    this.pouleService.findById(id).subscribe(resp=> {
+      this.saisonService.saison.listeCouveuses.push(new Couveuse(resp, this.couveuseoeufs));
+      this.couveuseoeufs=null;
+      this.saisonService.tempcouv.push(resp.id);
+    });
+    
+  }
+
+  CouveDeja(id:number): boolean {
+    if (!this.saisonService.tempcouv.includes(id)) {
+      return false;
+    }
+      return true;
   }
 
   filterPoule(mortes: boolean, vivantes: boolean, filtre: string): Array<Poule> {

@@ -109,26 +109,26 @@
         <table>
             <tr>
                 <td>Achat de nourriture</td>
-                <td><input id="nourritureAchat" name="nourritureAchat" type="number" value="0" min="0" step="1" [(ngModel)]="saison.nourriture"></td>
+                <td><input id="nourritureAchat" name="nourritureAchat" type="number" value="0" min="0" step="1" [(ngModel)]="getSaison().nourriture"></td>
                 <td>Amélioration du poulailler</td>
             </tr>
 
             <tr>
                 <td></td>
                 <td></td>
-                <td><input name="securite" value="securite" id="securite" type="checkbox" [(ngModel)]="saison.securite"> <label
-                        for="securite">Sécurité</label> <input name="taille" value="taille" id="taille" type="checkbox" [(ngModel)]="saison.taille">
+                <td><input name="securite" value="securite" id="securite" type="checkbox" [(ngModel)]="getSaison().securite"> <label
+                        for="securite">Sécurité</label> <input name="taille" value="taille" id="taille" type="checkbox" [(ngModel)]="getSaison().taille">
                     <label for="taille">Taille</label></td>
             </tr>
             <tr>
                 <td>Choix de l'activité de la saison</td>
                 <td>
-                    <input name="activite" value="SortieGenerale" id="SortieGenerale" type="radio" checked [(ngModel)]="saison.activite"> 
+                    <input name="activite" value="SortieGenerale" id="SortieGenerale" type="radio" checked [(ngModel)]="getSaison().activite"> 
                     <label for="SortieG">Sortie Générale</label> 
-                    <input name="activite" value="Escrime" id="Escrime" type="radio" [(ngModel)]="saison.activite"> 
+                    <input name="activite" value="Escrime" id="Escrime" type="radio" [(ngModel)]="getSaison().activite"> 
                     <label for="Escrime">Escrime</label> 
-                    <input name="activite" value="Tricot" id="tricot" type="radio" [(ngModel)]="saison.activite"> 
-                    <label for="tricot">Tricot</label> <input name="activite" value="Danse" id="danse" type="radio" [(ngModel)]="saison.activite"> 
+                    <input name="activite" value="Tricot" id="tricot" type="radio" [(ngModel)]="getSaison().activite"> 
+                    <label for="tricot">Tricot</label> <input name="activite" value="Danse" id="danse" type="radio" [(ngModel)]="getSaison().activite"> 
                     <label for="danse">Danse</label>
                 </td>
             </tr>
@@ -164,7 +164,7 @@
                     <td>tempérament</td>
                     <td>nombre d'oeufs</td>
                 </tr>
-                <tr *ngFor="let couv of saison.listeCouveuses">
+                <tr *ngFor="let couv of getSaison().listeCouveuses">
                     <td>{{couv.poule.id}}</td>
                     <td>{{couv.poule.prenom}}</td>
                     <td>{{couv.poule.temperament}}</td>
