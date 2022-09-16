@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Poulailler } from '../model';
+import { Poulailler, Recap } from '../model';
 import { PoulaillerSessionService } from '../poulailler-session.service';
-import { PoulaillerHttpService } from '../poulailler/poulailler-http.service';
-import { PouleHttpService } from '../poule-http.service';
+import { RecapHttpService } from '../recap-http.service';
 import { SaisonService } from '../saison.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { SaisonService } from '../saison.service';
 })
 export class RecapSaisonComponent implements OnInit {
 
-  constructor(private pouleService: PouleHttpService, private poulaillerService: PoulaillerHttpService,private poulaillerSessionService : PoulaillerSessionService,private saisonService : SaisonService) { }
+  constructor(private recapService: RecapHttpService, private poulaillerSessionService: PoulaillerSessionService, private saisonService: SaisonService) { }
 
 
   getSessionPoulailler(): Poulailler {
@@ -25,10 +24,13 @@ export class RecapSaisonComponent implements OnInit {
   getNbPoulesVivantes() : number {
     return this.getSessionPoulailler().listePoules.filter(poule => poule.causeMort ==null ).length;
   }
-  recapSaisonDetaille(){
-    
+  getAllRecapByThisPoulailler(){
+    return this.recapService.getAllByPoulailler(this.poulaillerSessionService.poulailler.id);
   }
 
+  getNowByThisPoulailler(): Array<Recap>{
+    return this.recapService.getAllByPoulailler(this.poulaillerSessionService.poulailler.id).filter(recap => recap.saison==this.poulaillerSessionService.poulailler.saison && recap.annee == this.poulaillerSessionService.poulailler.annee);
+  }
   ngOnInit(): void {
   }
 

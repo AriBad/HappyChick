@@ -7,34 +7,23 @@
             <recap-poulailler></recap-poulailler>
             <recap-poules></recap-poules>
         </div>
-        <div id="main">
-            <div id="SaisonList">
-                <h1>Recap des saisons</h1>
+        <div id="main" >
+            <div id="poulailler_et_recap" >
+                <h3>Recap des saisons</h3>
                
-                    <table width="60%">
+                    <table width="60%" id="recap" *ngFor="let recap of getNowByThisPoulailler()">
                         <tr>
                             <th>Id Poulailler</th>
                             <th>Saison</th>
+                            <th>Année</th>
                             <th>Recap</th>
-                            <th>Recap détaillé</th>
                         </tr>
-                        <div id="menuAffichagePoulailler" >
                         <tr>
+                            <td>{{recap.saison}}</td>
                             <td></td>
-                            <td></td>
-                            <td> Afficher la recap</td>
-                            <td><strong>Etat du poulailler :</strong>
-                                <b>Saison : </b>{{getSessionPoulailler().saison}} <br>
-                                <b>Année : </b>{{getSessionPoulailler().annee}}<br>
-                                <b>Oeufs : </b>{{getSessionPoulailler().oeufs}}<br>
-                                <b>Poules : </b>{{getNbPoulesVivantes()}}<br>
-                                <b>Sécurité :</b> {{getSessionPoulailler().securite}}<br>
-                                <b>Taille : </b> {{getSessionPoulailler().taille}}<br>
-                                <b>Nourriture :</b> {{getSessionPoulailler().nourriture}}<br>
-                                <b>Afficher la recap détaillé</b>
-                            </td>
+                            <td> {{recap.annee}}</td>
+                            <td>{{recap.listeRecapLongs}}</td>
                         </tr>
-</div>
                     </table>
             </div>
         </div>
