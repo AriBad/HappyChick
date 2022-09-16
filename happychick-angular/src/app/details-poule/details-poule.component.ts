@@ -25,6 +25,13 @@ export class DetailsPouleComponent implements OnInit {
     return this.poulaillerSessionService.poulailler;
   }
 
+  coqsVivants(): boolean {
+    if (this.getSessionPoulailler().listePoules.filter(poule => poule.femelle == false && poule.poussin==false && poule.causeMort ==null).length>0){
+      return true;
+    }
+    return false;
+  }
+
   ajouterCouveuse(id : number):void {
     this.pouleService.findById(id).subscribe(resp=> {
       this.saisonService.saison.listeCouveuses.push(new Couveuse(resp, this.couveuseoeufs));

@@ -87,7 +87,7 @@
                             </div>
                             <form>
                                 <div class="form-row align-items-center"
-                                    *ngIf="!poule.poussin && poule.femelle && poule.causeMort==null && !CouveDeja(poule.id)">
+                                    *ngIf="!poule.poussin && poule.femelle && poule.causeMort==null && !CouveDeja(poule.id) && coqsVivants()">
                                     <label>Mettre la poule à couver ?</label>
                                     <input type="number" class="form-control" name="nbOeufsCouves" value="0" min="0"
                                         max="8" step="1" [(ngModel)]="couveuseoeufs">
