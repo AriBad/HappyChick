@@ -9,7 +9,7 @@
 	padding: 1%;
 	margin: 1%;
 	flex-direction: center;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 }
 
@@ -20,6 +20,7 @@
 	justify-content: center;
     margin-left: 5%;
 	width: 50%;
+	// float: right;
 }
 
 #recap{
@@ -30,10 +31,11 @@
 
 #console
 {
-	display:inline-flex;
+	display:inline-block;
 	padding: 2%;
     margin-right: 5%;
 	align-items:center;
 	justify-content: center;
 	// overflow-x: auto;
+	// float: left;
 }

@@ -91,17 +91,17 @@ public class PouleService {
 			oeufsEclos(poule, poule.getOeufsCouves());
 			poule.setOeufsCouves(0);
 			poule.setEtat(Etat.Maternage);
-			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+ "(id "+poule.getId()+") est en maternage \n");
+			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+ " (id "+poule.getId()+") est en maternage \n");
 			System.out.println("La poule "+poule.getPrenom()+" est en maternage");
 		} else if (poule.getEtat() == Etat.Liberte && oeufsCouves !=0) {
 			poule.setOeufsCouves(oeufsCouves);
 			poule.setEtat(Etat.Couvaison);
 			poule.setPonte(0);
-			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+ "(id "+poule.getId()+") est en couvaison \n");
+			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+ " (id "+poule.getId()+") est en couvaison \n");
 			System.out.println("ICIIIIIIIIIII Liberte");
 		} else if (poule.getEtat() == Etat.Maternage) {
 			poule.setEtat(Etat.Liberte);
-			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+ "(id "+poule.getId()+") est en liberté \n");
+			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+ " (id "+poule.getId()+") est en liberté \n");
 			System.out.println("ICIIIIIIIIIII Maternage");
 		}
 
@@ -131,7 +131,7 @@ public class PouleService {
 	public void manger(Poule poule) {
 		poule.getPoulailler().setNourriture(poule.getPoulailler().getNourriture()-1);
 		poule.setSaisonSansManger(0);
-		poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") a mangé. \n");
+		poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") a mangé. \n");
 		System.out.println("La poule "+poule.getPrenom()+"(id "+poule.getId()+") a mangé.");
 	}
 
@@ -139,21 +139,21 @@ public class PouleService {
 		Random r = new Random();
 		if ( r.nextDouble() < poule.getMaladie()) {
 			poule.setCauseMort(CauseMort.Maladie);
-			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est morte de maladie. \n");
+			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est morte de maladie. \n");
 			System.out.println("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est morte de maladie.");
 		} else if (r.nextDouble() < poule.getPredation()) {
 			if (r.nextDouble() < (poule.getPoulailler().getNbPsychopathe()*0.05)){
 				poule.setCauseMort(CauseMort.Predation);
-				poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est morte à cause d'un prédateur. \n");
+				poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est morte à cause d'un prédateur. \n");
 				System.out.println("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est morte à cause d'un prédateur.");
 			}
 		} else if (r.nextDouble() < 0.0025 * (poule.getAge() * poule.getAge()) && poule.getAge() > 10) {
 			poule.setCauseMort(CauseMort.Age);
-			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est morte de Vieillesse. \n");
+			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est morte de Vieillesse. \n");
 			System.out.println("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est morte de Vieillesse.");
 		} else if (r.nextDouble() < poule.getSaisonSansManger() * 0.334) {
 			poule.setCauseMort(CauseMort.Faim);
-			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est morte de faim. \n");
+			poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est morte de faim. \n");
 		}
 	}
 
@@ -165,35 +165,35 @@ public class PouleService {
 				int alea = r.nextInt(11); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
 				if (alea==0 || alea==1 || alea==2) {
 					poule.setTemperament(Temperament.serieuse);
-					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est devenue sérieuse. \n");
+					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est devenue sérieuse. \n");
 				} else if (alea==3 || alea==4 || alea==5) {
 					poule.setTemperament(Temperament.mamanPoule);
-					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est devenue maman poule. \n");
+					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est devenue maman poule. \n");
 				} else if (alea==6 || alea==7 || alea==8) {
 					poule.setTemperament(Temperament.insouciante);
-					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est devenue insouciante. \n");
+					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est devenue insouciante. \n");
 				} else if (alea==9) {
 					poule.setTemperament(Temperament.psychopathe);
-					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est devenue psychopathe. \n");
+					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est devenue psychopathe. \n");
 				} else if (alea==10) {
 					poule.setTemperament(Temperament.pyromane);
-					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est devenue pyromane. \n");
+					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est devenue pyromane. \n");
 				}
 			} else {
 				Random r = new Random();
 				int alea = r.nextInt(10); // FAIRE UNE MAJ DES STATS DES POULES --> MAJ MATERNAGE, MAJ PONTE etc...
 				if (alea==0 || alea==1 || alea==2) {
 					poule.setTemperament(Temperament.serieuse);
-					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est devenue sérieuse. \n");
+					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est devenue sérieuse. \n");
 				} else if (alea==3 || alea==4 || alea==5) {
 					poule.setTemperament(Temperament.mamanPoule);
-					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est devenue maman poule. \n");
+					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est devenue maman poule. \n");
 				} else if (alea==6 || alea==7 || alea==8) {
 					poule.setTemperament(Temperament.insouciante);
-					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est devenue insouciante. \n");
+					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est devenue insouciante. \n");
 				} else if (alea==9) {
 					poule.setTemperament(Temperament.psychopathe);
-					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+"(id "+poule.getId()+") est devenue psychopathe. \n");
+					poule.getPoulailler().getListeRecapLongs().add("La poule "+poule.getPrenom()+" (id "+poule.getId()+") est devenue psychopathe. \n");
 				}
 			}
 			genererVariablesBase(poule);
@@ -363,7 +363,7 @@ public class PouleService {
 			int alea = r2.nextInt(poule.getPoulailler().getNbPoulesVivantes());
 
 			poule.getPoulailler().getPoulesVivantes().get(alea).setCauseMort(CauseMort.Meurtre);
-			poule.getPoulailler().getListeRecapLongs().add("La poule psychopathe "+poule.getPrenom()+" a tué la poule "+poule.getPoulailler().getPoulesVivantes().get(alea)+". \n");
+			poule.getPoulailler().getListeRecapLongs().add("La poule psychopathe "+poule.getPrenom()+" a tué la poule "+poule.getPoulailler().getPoulesVivantes().get(alea).getPrenom()+". \n");
 			System.out.println("La poule psychopathe à tuer la poule "+poule.getPoulailler().getPoulesVivantes().get(alea));
 		}
 
