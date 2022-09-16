@@ -7,26 +7,14 @@
             <recap-poulailler></recap-poulailler>
             <recap-poules></recap-poules>
         </div>
-        <div id="main" >
-            <div id="poulailler_et_recap" >
-                <h3>Recap des saisons</h3>
-               
-                    <table width="60%" id="recap" *ngFor="let recap of getNowByThisPoulailler()">
-                        <tr>
-                            <th>Id Poulailler</th>
-                            <th>Saison</th>
-                            <th>Année</th>
-                            <th>Recap</th>
-                        </tr>
-                        <tr>
-                            <td>{{recap.saison}}</td>
-                            <td></td>
-                            <td> {{recap.annee}}</td>
-                            <td>{{recap.listeRecapLongs}}</td>
-                        </tr>
-                    </table>
+        <div id="poulailler_et_recap" *ngIf=" getSessionPoulailler()">
+            <div id="console">
+                <div id="recap" *ngFor="let recap of getAllRecapByThisPoulailler()">
+                <h6>Année : {{recap.annee}}, Saison : {{recap.saison}}</h6>
+                <pre>{{recap.listeRecapLongs}}</pre>
             </div>
         </div>
+    </div>
         <div id="menuright">
             <recap-utilisateur></recap-utilisateur>
             <menu></menu>
@@ -34,7 +22,8 @@
                 récap saison
             </div>
         </div>
-    </div>
+
+</div>
     <div id="footer">
         <img src="../../assets/img/footer.png" width=100% height=100%><img src="../../assets/img/footer.png" width=100%
             height=100%>
