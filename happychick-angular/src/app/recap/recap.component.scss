@@ -1,11 +1,12 @@
 #poulailler_et_recap
 {
-	display: inline-flex;
+	display: inline-block;
+	overflow:auto;
 	background-color: rgb(110, 104, 104);
 	color: rgb(205, 207, 189);
 	border: solid rgb(205, 207, 189) 3px;
 	border-radius: 2%;
-	height: 100%;
+	height: 400px;
 	padding: 1%;
 	margin: 1%;
 	flex-direction: center;
