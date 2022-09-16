@@ -14,7 +14,6 @@ export class UtilisateurHttpService {
 
   constructor(private http: HttpClient, private appConfig: AppConfigService) {
     this.apiPath = this.appConfig.apiBackEndUrl + "utilisateur/";
-    this.load();
   }
 
   load() {

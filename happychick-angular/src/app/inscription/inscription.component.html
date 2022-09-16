@@ -1,0 +1,17 @@
+
+<body>
+    <div id="container">
+
+        <h1>Créer un compte</h1>
+
+        <label><b>Choisissez votre login</b></label>
+        <input type="text" placeholder="Entrez votre login" name="username" required [(ngModel)]="login">
+
+        <label><b>Choisissez un mot de passe</b></label>
+        <input type="password" placeholder="Entrer un mot de passe de 8 caractères minimum" name="password" required [(ngModel)]="motDePasse">
+
+        <input type="submit" id='submit' value='Valider' (click)="validerInscription()"> <br><br>
+
+        <a [routerLink]="['/login']">Retour</a>
+    </div>
+</body>

@@ -4,6 +4,7 @@ import { DetailsPouleComponent } from './details-poule/details-poule.component';
 import { GuideComponent } from './guide/guide.component';
 import { HomeComponent } from './home/home.component';
 import { InitComponent } from './init/init.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 import { LoginComponent } from './login/login.component';
 import { RecapSaisonComponent } from './recap-saison/recap-saison.component';
 import { TropheeComponent } from './trophee/trophee.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:"detailsPoule", component: DetailsPouleComponent},
   {path:"historique", component: RecapSaisonComponent},
   {path:"guide", component: GuideComponent},
-  {path:"trophees", component: TropheeComponent}
+  {path:"trophees", component: TropheeComponent},
+  {path:"inscription", component:InscriptionComponent}
 ];
 
 @NgModule({
