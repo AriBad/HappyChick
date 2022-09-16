@@ -104,9 +104,9 @@ export class Utilisateur {
     login: string;
     motDePasse: string;
     activated: boolean;
-    roles: Set<string> = new Set<string>();
+    roles: Set<string>;
 
-    constructor(id?: number, version?: number, login? : string, motDePasse?: string, activated?: boolean) {
+    constructor(login : string, motDePasse: string,id?: number, version?: number, activated?: boolean) {
         this.id = id;
         this.version = version;
         this.login = login;

@@ -28,6 +28,7 @@ export class ChoixPoulaillerComponent implements OnInit {
 
   supprimerPoulailler() : void {
     this.poulaillerService.delete(this.poulaillerActuel);
+    this.poulaillerActuel=null;
     this.poulaillerSession.poulailler=null;
   }
 

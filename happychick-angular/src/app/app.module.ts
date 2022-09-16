@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { APIInterceptor } from './api.interceptor';
 import { RecapComponent } from './recap/recap.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RecapComponent } from './recap/recap.component';
     ChoixPoulaillerComponent,
     LoginComponent,
     UtilisateurComponent,
-    RecapComponent
+    RecapComponent,
+    InscriptionComponent
   ],
   imports: [
     BrowserModule,

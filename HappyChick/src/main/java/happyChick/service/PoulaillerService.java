@@ -107,6 +107,7 @@ public class PoulaillerService {
 
 	public void delete(Poulailler poulailler) {
 		pouleRepo.deleteByPoulailler(poulailler);
+		recapRepo.deleteByPoulailler(poulailler);
 		poulaillerRepo.delete(poulailler);
 	}
 
